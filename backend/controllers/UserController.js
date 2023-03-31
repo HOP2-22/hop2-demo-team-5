@@ -29,14 +29,14 @@ exports.createUser = async (request, response) => {
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await Users.findOne({ email });
+    const user = await Users.findOne({ username });
     const match = await bcrypt.compare(password, user.password);
     if (match) {
       const token = jwt.sign(
         {
-          email: user.email,
+          username: user.username,
         },
         process.env.ACCESS_TOKEN_KEY,
         { expiresIn: "30m" }

@@ -15,6 +15,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/router";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Header = () => {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const logo = "https://pinecone.mn/logo.ee78cc1a.svg";
@@ -126,13 +128,21 @@ export const Header = () => {
         </IconButton>
         <p>Browse</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem
+        onClick={() => {
+          router.push("/login");
+        }}
+      >
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <LoginIcon />
         </IconButton>
         <p>Log In</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem
+        onClick={() => {
+          router.push("/signup");
+        }}
+      >
         <IconButton size="large" color="inherit">
           <AddIcon />
         </IconButton>
@@ -182,7 +192,13 @@ export const Header = () => {
       >
         <Toolbar>
           <Box sx={styles.Box}>
-            <img src={logo} alt="pice" width={120} height={20} />
+            <Box
+              onClick={() => {
+                router.push("/");
+              }}
+            >
+              <img src={logo} alt="pice" width={120} height={20} />
+            </Box>
             <Typography
               variant="h6"
               noWrap
@@ -210,11 +226,23 @@ export const Header = () => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button sx={styles.textTrans} variant="contained">
+            <Button
+              sx={styles.textTrans}
+              variant="contained"
+              onClick={() => {
+                router.push("/signup");
+              }}
+            >
               Sign Up
             </Button>
-            <Button sx={styles.textTrans} variant="contained">
-              Sign in
+            <Button
+              sx={styles.textTrans}
+              variant="contained"
+              onClick={() => {
+                router.push("/login");
+              }}
+            >
+              Log in
             </Button>
             {/* <IconButton
               size="large"
