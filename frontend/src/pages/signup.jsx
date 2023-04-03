@@ -5,12 +5,10 @@ import Space from "../assets//images/Space.jpg";
 import Input from "@mui/joy/Input";
 import { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { ColorModeContext } from "@/context/Context";
 
 const styles = {
-  family: {
-    fontFamily: "Mulish",
-    marginBottom: "10px",
-  },
   input: {
     width: "340px",
     height: "35px",
@@ -20,6 +18,7 @@ const styles = {
 };
 
 export const SignUp = () => {
+  const { theme } = useContext(ColorModeContext);
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -109,7 +108,7 @@ export const SignUp = () => {
           style={{
             width: "370px",
             height: "480px",
-            backgroundColor: " #FFFFFF80",
+            backgroundColor: theme === "black" ? " #FFFFFF80" : "#00000080",
             borderRadius: "50px",
             display: "flex",
             flexDirection: "column",
@@ -119,10 +118,25 @@ export const SignUp = () => {
           }}
         >
           <Box>
-            <Typography sx={styles.family} variant="h4">
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+              variant="h4"
+            >
               Бүртгүүлэх
             </Typography>
-            <Typography sx={styles.family}>Хэрэглэгчийн нэр</Typography>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
+              Хэрэглэгчийн нэр
+            </Typography>
             <Input
               placeholder="username"
               required
@@ -134,7 +148,15 @@ export const SignUp = () => {
                 setUser({ ...user, username: e.target.value });
               }}
             />
-            <Typography sx={styles.family}>Цахим хаяг</Typography>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
+              Цахим хаяг
+            </Typography>
             <Input
               placeholder="name@mail.domain"
               type="email"
@@ -147,7 +169,15 @@ export const SignUp = () => {
                 setUser({ ...user, email: e.target.value });
               }}
             />
-            <Typography sx={styles.family}>Нууц үг</Typography>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
+              Нууц үг
+            </Typography>
 
             <Input
               placeholder="••••••••••"
@@ -161,7 +191,15 @@ export const SignUp = () => {
                 setUser({ ...user, password: e.target.value });
               }}
             />
-            <Typography sx={styles.family}>Нууц үг давтах </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
+              Нууц үг давтах{" "}
+            </Typography>
             <Input
               placeholder="••••••••••"
               required
@@ -178,7 +216,11 @@ export const SignUp = () => {
               <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
                 <input type="checkbox" name="" id="" className="checkbox" />
                 <Typography
-                  style={{ fontFamily: "Mulish", marginBottom: "10px" }}
+                  style={{
+                    fontFamily: "Mulish",
+                    marginBottom: "10px",
+                    color: theme === "white" ? "white" : "black",
+                  }}
                 >
                   Намайг сана
                 </Typography>
