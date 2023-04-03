@@ -21,21 +21,21 @@ export const Carousel = () => {
       >
         <SwiperSlide>
           <img
-            src="/_next/static/media/Pinecone.2a901883.jpeg"
+            src="/_next/static/media/Pinecone.jpeg"
             alt="pine"
             style={{ width: "100%", height: "100%" }}
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="/_next/static/media/Stream.994a7063.png"
+            src="/_next/static/media/Stream.png"
             alt="st"
             style={{ width: "100%", height: "100%" }}
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="/_next/static/media/Live.ec2de115.png"
+            src="/_next/static/media/Live.png"
             alt="st"
             style={{ width: "100%", height: "100%" }}
           />
