@@ -5,6 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { ColorModeContext } from "@/context/Context";
 // import { useNavigate } from "react-router-dom";
 
 const styles = {
@@ -23,6 +25,7 @@ const styles = {
 // const navigate = useNavigate();
 
 export const Login = () => {
+  const { theme } = useContext(ColorModeContext);
   const router = useRouter();
   const [user, setUser] = useState({
     username: "",
@@ -37,6 +40,7 @@ export const Login = () => {
       console.log(res);
       if (res.data.match === true) {
         Cookies.set("token", res.data.token);
+        Cookies.set("username", res.data.username);
         // setUser(res.data.email);
         router.push("/");
       }
@@ -110,7 +114,7 @@ export const Login = () => {
           style={{
             width: "370px",
             height: "400px",
-            backgroundColor: " #FFFFFF80",
+            backgroundColor: theme === "black" ? " #FFFFFF80" : "#00000080",
             borderRadius: "50px",
             display: "flex",
             flexDirection: "column",
@@ -120,10 +124,25 @@ export const Login = () => {
           }}
         >
           <Box>
-            <Typography sx={styles.family} variant="h4">
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+              variant="h4"
+            >
               Нэвтрэх
             </Typography>
-            <Typography sx={styles.family}>Хэрэглэгчийн нэр</Typography>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
+              Хэрэглэгчийн нэр
+            </Typography>
             <Input
               placeholder="username"
               required
@@ -135,7 +154,15 @@ export const Login = () => {
                 setUser({ ...user, username: e.target.value });
               }}
             />
-            <Typography sx={styles.family}>Нууц үг</Typography>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
+              Нууц үг
+            </Typography>
 
             <Input
               placeholder="••••••••••"
@@ -152,12 +179,26 @@ export const Login = () => {
             <Box>
               <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
                 <input type="checkbox" name="" id="" className="checkbox" />
-                <Typography style={{ fontFamily: "Mulish" }}>
+                <Typography
+                  style={{
+                    fontFamily: "Mulish",
+                    color: theme === "white" ? "white" : "black",
+                  }}
+                >
                   Намайг сана
                 </Typography>
               </Box>
-              <Typography sx={styles.family}>
-                <a href="/" style={{ color: "white" }}>
+              <Typography
+                sx={{
+                  fontFamily: "Mulish",
+                  marginBottom: "10px",
+                  color: theme === "white" ? "white" : "black",
+                }}
+              >
+                <a
+                  href="/"
+                  style={{ color: theme === "white" ? "white" : "black" }}
+                >
                   Нууц үг мартсан
                 </a>
               </Typography>
@@ -177,10 +218,19 @@ export const Login = () => {
             >
               Нэвтрэх
             </button>
-            <Typography sx={styles.family}>
+            <Typography
+              sx={{
+                fontFamily: "Mulish",
+                marginBottom: "10px",
+                color: theme === "white" ? "white" : "black",
+              }}
+            >
               <a
                 href="/signup"
-                style={{ color: "white", textDecoration: "underline" }}
+                style={{
+                  color: theme === "white" ? "white" : "black",
+                  textDecoration: "underline",
+                }}
               >
                 Шинэ хэрэглэгч бол энд дарна уу
               </a>
