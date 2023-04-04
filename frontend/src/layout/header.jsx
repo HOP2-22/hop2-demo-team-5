@@ -24,6 +24,22 @@ import { useState } from "react";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
+const styles = {
+  textTrans: {
+    textTransform: "capitalize",
+    color: "white",
+    backgroundColor: "blue",
+    fontFamily: "Mulish",
+    marginLeft: "10px",
+  },
+  Box: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+};
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -137,66 +153,67 @@ export const Header = () => {
         vertical: "top",
         horizontal: "right",
       }}
-      sx={{ backgroundColor: theme === "white" ? "black" : "white" }}
+      sx={{
+        backgroundColor: theme === "white" ? "black" : "white",
+        color: theme === "white" ? "white" : "black",
+      }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" color="inherit">
           <SearchIcon />
         </IconButton>
         <p>Browse</p>
       </MenuItem>
-      <MenuItem
-        onClick={() => {
-          router.push("/login");
-        }}
-      >
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LoginIcon />
-        </IconButton>
-        <p>Log In</p>
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
-          router.push("/signup");
-        }}
-      >
-        <IconButton size="large" color="inherit">
-          <AddIcon />
-        </IconButton>
-        <p>Sign Up</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {username ? (
+        <Box>
+          <MenuItem>
+            <p>Create Room</p>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <p>Profile</p>
+          </MenuItem>
+        </Box>
+      ) : (
+        <>
+          <MenuItem
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <LoginIcon />
+            </IconButton>
+            <p>Log In</p>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              router.push("/signup");
+            }}
+          >
+            <IconButton size="large" color="inherit">
+              <AddIcon />
+            </IconButton>
+            <p>Sign Up</p>
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
-
-  const styles = {
-    textTrans: {
-      textTransform: "capitalize",
-      color: "white",
-      backgroundColor: "blue",
-      fontFamily: "Mulish",
-      marginLeft: "10px",
-    },
-    Box: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
-  };
 
   return (
     <Box
@@ -278,7 +295,20 @@ export const Header = () => {
           />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {username ? (
-              <Typography>{username}</Typography>
+              <Box
+                sx={{
+                  height: "64px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "20px",
+                  marginLeft: "20px ",
+                }}
+              >
+                <Typography>{username}</Typography>
+                <Button sx={styles.textTrans} variant="contained">
+                  Create Room
+                </Button>
+              </Box>
             ) : (
               <>
                 <Button
@@ -320,7 +350,9 @@ export const Header = () => {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              sx={{
+                color: theme === "black" ? "black" : "white",
+              }}
             >
               <MoreIcon />
             </IconButton>
