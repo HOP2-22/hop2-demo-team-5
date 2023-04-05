@@ -16,10 +16,12 @@
     "@mui/styled-engine-sc": "^5.11.11",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "firebase": "^9.19.1",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.9",
-    "swiper": "^9.1.1"
+    "swiper": "^9.1.1",
+    "universal-cookie": "^4.0.4"
   }
 }

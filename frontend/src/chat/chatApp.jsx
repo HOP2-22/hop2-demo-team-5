@@ -1,9 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { Auth } from "./comps/Auth";
 import { Chat } from "./comps/Chat";
 import Cookies from "universal-cookie";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebaseConfig";
+// import { Context } from "@/context/context";
 
 import {
   Box,
@@ -23,7 +24,7 @@ import {
 const cookies = new Cookies();
 
 export const ChatApp = () => {
-  const [isAuth, setIsAuth] = useState(cookies.get("auth-token"));
+  const [isAuth, setIsAuth] = useState(null);
   const [room, setRoom] = useState(null);
 
   const roomInputRef = useRef(null);
@@ -34,6 +35,9 @@ export const ChatApp = () => {
     setIsAuth(false);
     setRoom(null);
   };
+  useEffect(() => {
+    setIsAuth(cookies.get("auth-token"));
+  }, []);
 
   if (!isAuth) {
     return (
@@ -57,10 +61,13 @@ export const ChatApp = () => {
           }}
         >
           <Typography>Enter Room Name</Typography>
-          <Input ref={roomInputRef} sx={{ color: "white" }} />
+          <input ref={roomInputRef} sx={{ color: "white" }} />
           <Button
             variant="primary"
-            onClick={() => setRoom(roomInputRef.current.value)}
+            onClick={() => {
+              setRoom(roomInputRef.current.value);
+              console.log(room);
+            }}
           >
             Enter Chat
           </Button>

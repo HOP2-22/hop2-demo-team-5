@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import {
   addDoc,
   collection,
@@ -8,24 +8,21 @@ import {
   where,
   orderBy,
 } from "firebase/firestore";
-import { auth, provider } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import {
   Box,
   Typography,
   Button,
-  Container,
-  createTheme,
-  ThemeProvider,
-  Card,
-  CardMedia,
-  CardContent,
-  Stack,
-  Paper,
   Input,
   TextField,
+  Stack,
+  Paper,
+  Card,
 } from "@mui/material";
+// import { Context } from "@/context/context";
 
 export const Chat = (props) => {
+  // const { room } = useContext(Context);
   const { room } = props;
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -46,6 +43,13 @@ export const Chat = (props) => {
     });
     return () => unscribe();
   }, []);
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    container.scrollTop = container.scrollHeight;
+  }, [messages]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +73,7 @@ export const Chat = (props) => {
         sx={{
           width: "150px",
           height: "100px",
-          backgroundColor: "red",
+          bgcolor: "blue",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -77,24 +81,84 @@ export const Chat = (props) => {
       >
         {room}
       </Typography>
-      <Box>
-        {messages.map((message) => (
-          <Box key={message.id}>
-            <Typography>{message.user}====</Typography>
 
-            {message.text}
+      {/* <Box>
+        {messages.map((message) => (
+          <Box key={message.id} sx={{ display: "flex" }}>
+            <Stack spacing={3} direction="row">
+              <Typography>{message.user}: </Typography>
+              <Typography> {message.text}</Typography>
+            </Stack>
           </Box>
         ))}
-      </Box>
+      </Box> */}
 
-      <TextField onSubmit={handleSubmit}>
-        <Input
-          placeholder="Type your message here..."
-          onChange={(e) => setNewMessage(e.target.value)}
-          value={newMessage}
-        />
-        <Button type="submit">Send</Button>
-      </TextField>
+      <Box sx={{ maxWidth: 350 }}>
+        <Paper
+          elevation={3}
+          sx={{ p: 1, bgcolor: "rgb(24,24,27)", color: "white" }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{ fontWeight: "bold", color: "white", textAlign: "center" }}
+          >
+            Live Chat
+          </Typography>
+          <Box
+            ref={containerRef}
+            sx={{
+              maxHeight: 700,
+              height: 700,
+              overflowY: "scroll",
+              p: 1,
+              mb: 1,
+              borderRadius: 1,
+              color: "white",
+              bgcolor: "rgb(24,24,27)",
+            }}
+          >
+            {messages.map((message) => (
+              <Card
+                key={message.id}
+                sx={{
+                  mb: 1,
+                  bgcolor: "rgb(24,24,27)",
+                  color: "white",
+                  boxShadow: "none",
+                }}
+              >
+                <Stack spacing={1} direction="row">
+                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                    {message.user}:
+                  </Typography>
+                  <Typography variant="body2">{message.text}</Typography>
+                </Stack>
+              </Card>
+            ))}
+          </Box>
+        </Paper>
+
+        <form onSubmit={handleSubmit}>
+          <Stack>
+            <TextField
+              placeholder="Send a message"
+              onChange={(e) => setNewMessage(e.target.value)}
+              value={newMessage}
+              inputProps={{
+                style: { color: "white", height: "10px", width: 322 },
+              }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              sx={{ size: "small" }}
+            >
+              Send
+            </Button>
+          </Stack>
+        </form>
+      </Box>
     </Box>
   );
 };
