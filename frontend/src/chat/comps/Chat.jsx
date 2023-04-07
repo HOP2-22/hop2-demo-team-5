@@ -9,6 +9,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
+import Picker from "emoji-picker-react";
 import {
   Box,
   Typography,
@@ -19,14 +20,43 @@ import {
   Paper,
   Card,
 } from "@mui/material";
-// import { Context } from "@/context/context";
+import StartIcon from "@mui/icons-material/Start";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+
+const rm = {
+  width: "150px",
+  height: "100px",
+  bgcolor: "blue",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const ch = {
+  maxHeight: 700,
+  height: 700,
+  overflowY: "scroll",
+  px: 2,
+  mb: 1,
+  borderRadius: 1,
+  color: "white",
+  bgcolor: "rgb(24,24,27)",
+};
 
 export const Chat = (props) => {
-  // const { room } = useContext(Context);
   const { room } = props;
+  const [exist, setExist] = useState(true);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const messagesRef = collection(db, "messages");
+  const containerRef = useRef(null);
+  const [inputStr, setInputStr] = useState("");
+  const [showPicker, setShowPicker] = useState(false);
+
+  const onEmojiClick = (event, emojiObject) => {
+    setInputStr((prevInput) => prevInput + emojiObject.emoji);
+    setShowPicker(false);
+  };
 
   useEffect(() => {
     const queryMessages = query(
@@ -44,12 +74,12 @@ export const Chat = (props) => {
     return () => unscribe();
   }, []);
 
-  const containerRef = useRef(null);
-
   useEffect(() => {
     const container = containerRef.current;
-    container.scrollTop = container.scrollHeight;
-  }, [messages]);
+    if (container !== null) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }, [messages, exist]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,97 +98,110 @@ export const Chat = (props) => {
   };
 
   return (
-    <Box>
-      <Typography
-        sx={{
-          width: "150px",
-          height: "100px",
-          bgcolor: "blue",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {room}
-      </Typography>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+    >
+      <Typography sx={rm}>{room}</Typography>
 
-      {/* <Box>
-        {messages.map((message) => (
-          <Box key={message.id} sx={{ display: "flex" }}>
-            <Stack spacing={3} direction="row">
-              <Typography>{message.user}: </Typography>
-              <Typography> {message.text}</Typography>
-            </Stack>
-          </Box>
-        ))}
-      </Box> */}
-
-      <Box sx={{ maxWidth: 350 }}>
-        <Paper
-          elevation={3}
-          sx={{ p: 1, bgcolor: "rgb(24,24,27)", color: "white" }}
-        >
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: "bold", color: "white", textAlign: "center" }}
+      {exist ? (
+        <Box sx={{ maxWidth: 350 }}>
+          <Paper
+            elevation={3}
+            sx={{ bgcolor: "rgb(24,24,27)", color: "white" }}
           >
-            Live Chat
-          </Typography>
-          <Box
-            ref={containerRef}
-            sx={{
-              maxHeight: 700,
-              height: 700,
-              overflowY: "scroll",
-              p: 1,
-              mb: 1,
-              borderRadius: 1,
-              color: "white",
-              bgcolor: "rgb(24,24,27)",
-            }}
-          >
-            {messages.map((message) => (
-              <Card
-                key={message.id}
-                sx={{
-                  mb: 1,
-                  bgcolor: "rgb(24,24,27)",
-                  color: "white",
-                  boxShadow: "none",
-                }}
-              >
-                <Stack spacing={1} direction="row">
-                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-                    {message.user}:
-                  </Typography>
-                  <Typography variant="body2">{message.text}</Typography>
-                </Stack>
-              </Card>
-            ))}
-          </Box>
-        </Paper>
-
-        <form onSubmit={handleSubmit}>
-          <Stack>
-            <TextField
-              placeholder="Send a message"
-              onChange={(e) => setNewMessage(e.target.value)}
-              value={newMessage}
-              inputProps={{
-                style: { color: "white", height: "10px", width: 322 },
+            <Box
+              sx={{
+                display: "flex",
+                p: 2,
+                justifyContent: "space-between",
               }}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              sx={{ size: "small" }}
             >
-              Send
-            </Button>
-          </Stack>
-        </form>
-      </Box>
+              <StartIcon
+                onClick={() => {
+                  setExist(false);
+                }}
+                sx={{
+                  "&:hover": { bgcolor: "rgb(47,47,53)" },
+                  borderRadius: "5px",
+                }}
+              />
+              <Typography sx={{ fontWeight: "bold", color: "white" }}>
+                Live Chat
+              </Typography>
+            </Box>
+            <Box
+              sx={{ width: "100%", height: "2px", bgcolor: "rgb(38,38,43)" }}
+            />
+            <Box ref={containerRef} sx={ch}>
+              {messages.map((message) => (
+                <Card
+                  key={message.id}
+                  sx={{
+                    mb: 1,
+                    bgcolor: "rgb(24,24,27)",
+                    color: "white",
+                    boxShadow: "none",
+                  }}
+                >
+                  <Stack spacing={1} direction="row">
+                    <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                      {message.user}:
+                    </Typography>
+                    <Typography variant="body2">{message.text}</Typography>
+                  </Stack>
+                </Card>
+              ))}
+            </Box>
+
+            <form onSubmit={handleSubmit}>
+              <Stack>
+                <TextField
+                  placeholder="Send a message"
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  value={newMessage}
+                  inputProps={{
+                    style: { color: "white", height: "10px", width: 322 },
+                  }}
+                />
+                <img
+                  className="emoji-icon"
+                  src="https://icons.getbootstrap.com/assets/icons/emoji-smile.svg"
+                  onClick={() => setShowPicker((val) => !val)}
+                  style={{ width: "20px", height: "20px" }}
+                />
+                {showPicker && (
+                  <Picker
+                    pickerStyle={{ width: "100%" }}
+                    onEmojiClick={onEmojiClick}
+                  />
+                )}
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  sx={{ size: "small" }}
+                >
+                  Send
+                </Button>
+              </Stack>
+            </form>
+          </Paper>
+        </Box>
+      ) : (
+        <KeyboardReturnIcon
+          onClick={() => {
+            setExist(true);
+          }}
+          sx={{
+            "&:hover": { bgcolor: "rgb(47,47,53)" },
+            borderRadius: "5px",
+          }}
+        />
+      )}
     </Box>
   );
 };
