@@ -9,39 +9,23 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
-import Picker from "emoji-picker-react";
 import {
   Box,
   Typography,
   Button,
-  Input,
   TextField,
   Stack,
   Paper,
   Card,
+  InputAdornment,
+  Input,
 } from "@mui/material";
 import StartIcon from "@mui/icons-material/Start";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-
-const rm = {
-  width: "150px",
-  height: "100px",
-  bgcolor: "blue",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const ch = {
-  maxHeight: 700,
-  height: 700,
-  overflowY: "scroll",
-  px: 2,
-  mb: 1,
-  borderRadius: 1,
-  color: "white",
-  bgcolor: "rgb(24,24,27)",
-};
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { useOutsideClick } from "../../hook/useOutsideClick";
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 
 export const Chat = (props) => {
   const { room } = props;
@@ -50,13 +34,12 @@ export const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const messagesRef = collection(db, "messages");
   const containerRef = useRef(null);
-  const [inputStr, setInputStr] = useState("");
-  const [showPicker, setShowPicker] = useState(false);
+  const [showEmojis, setShowEmojis] = useState(false);
 
-  const onEmojiClick = (event, emojiObject) => {
-    setInputStr((prevInput) => prevInput + emojiObject.emoji);
-    setShowPicker(false);
+  const outsideClick = () => {
+    setShowEmojis(false);
   };
+  const emojiRef = useOutsideClick(() => outsideClick);
 
   useEffect(() => {
     const queryMessages = query(
@@ -86,7 +69,6 @@ export const Chat = (props) => {
     if (newMessage === "") {
       return;
     }
-
     addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
@@ -97,6 +79,14 @@ export const Chat = (props) => {
     setNewMessage("");
   };
 
+  const addEmoji = (e) => {
+    const sym = e.unified.split("_");
+    const codeArray = [];
+    sym.forEach((el) => codeArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codeArray);
+    setNewMessage(newMessage + emoji);
+  };
+
   return (
     <Box
       sx={{
@@ -104,7 +94,7 @@ export const Chat = (props) => {
         justifyContent: "flex-end",
       }}
     >
-      <Typography sx={rm}>{room}</Typography>
+      <Typography sx={NameOfRoom}>{room}</Typography>
 
       {exist ? (
         <Box sx={{ maxWidth: 350 }}>
@@ -135,7 +125,7 @@ export const Chat = (props) => {
             <Box
               sx={{ width: "100%", height: "2px", bgcolor: "rgb(38,38,43)" }}
             />
-            <Box ref={containerRef} sx={ch}>
+            <Box ref={containerRef} sx={ChatMessage}>
               {messages.map((message) => (
                 <Card
                   key={message.id}
@@ -156,26 +146,48 @@ export const Chat = (props) => {
               ))}
             </Box>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} ref={emojiRef}>
               <Stack>
                 <TextField
                   placeholder="Send a message"
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
-                  inputProps={{
-                    style: { color: "white", height: "10px", width: 322 },
+                  InputProps={{
+                    style: { color: "white", height: "44px", width: "100%" },
+                    endAdornment: (
+                      <InputAdornment disableTypography position="end">
+                        <Box
+                          sx={{
+                            "&:hover": {
+                              bgcolor: "rgb(47,47,53)",
+                            },
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: 34,
+                            height: 32,
+                            borderRadius: 1,
+                          }}
+                        >
+                          <InsertEmoticonIcon
+                            sx={{
+                              color: "white",
+                            }}
+                            onClick={() => setShowEmojis(!showEmojis)}
+                          />
+                        </Box>
+                      </InputAdornment>
+                    ),
                   }}
                 />
-                <img
-                  className="emoji-icon"
-                  src="https://icons.getbootstrap.com/assets/icons/emoji-smile.svg"
-                  onClick={() => setShowPicker((val) => !val)}
-                  style={{ width: "20px", height: "20px" }}
-                />
-                {showPicker && (
+
+                {showEmojis && (
                   <Picker
-                    pickerStyle={{ width: "100%" }}
-                    onEmojiClick={onEmojiClick}
+                    data={data}
+                    emojiSize={20}
+                    emojiButtonSize={28}
+                    onEmojiSelect={addEmoji}
+                    maxFrequentRows={0}
                   />
                 )}
 
@@ -204,4 +216,24 @@ export const Chat = (props) => {
       )}
     </Box>
   );
+};
+
+const NameOfRoom = {
+  width: "150px",
+  height: "100px",
+  bgcolor: "blue",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const ChatMessage = {
+  maxHeight: 700,
+  height: 700,
+  overflowY: "scroll",
+  px: 2,
+  mb: 1,
+  borderRadius: 1,
+  color: "white",
+  bgcolor: "rgb(24,24,27)",
 };
