@@ -14,14 +14,14 @@ import {
   Paper,
   Input,
 } from "@mui/material";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import Cookies from "js-cookie";
+
 export const Auth = (props) => {
   const { setIsAuth } = props;
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      cookies.set("auth-token", result.user.refreshToken);
+      Cookies.set("auth-token", result.user.refreshToken);
       setIsAuth(true);
     } catch (err) {
       console.log(err);
@@ -33,3 +33,5 @@ export const Auth = (props) => {
     </Box>
   );
 };
+
+export default Auth;

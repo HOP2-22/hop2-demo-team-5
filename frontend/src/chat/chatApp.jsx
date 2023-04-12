@@ -1,8 +1,8 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { Auth } from "./comps/Auth";
 import { Chat } from "./comps/Chat";
-import Cookies from "universal-cookie";
-import { signOut } from "firebase/auth";
+import Cookies from "js-cookie";
+// import { signOut } from "firebase/auth";
 import { auth } from "./firebaseConfig";
 // import { Context } from "@/context/context";
 
@@ -21,22 +21,20 @@ import {
   Input,
 } from "@mui/material";
 
-const cookies = new Cookies();
-
 export const ChatApp = () => {
   const [isAuth, setIsAuth] = useState(null);
   const [room, setRoom] = useState(null);
 
   const roomInputRef = useRef(null);
 
-  const signUserOut = async () => {
-    await signOut(auth);
-    cookies.remove("auth-token");
-    setIsAuth(false);
-    setRoom(null);
-  };
+  // const signUserOut = async () => {
+  //   await signOut(auth);
+  //   Cookies.remove("auth-token");
+  //   setIsAuth(false);
+  //   setRoom(null);
+  // };
   useEffect(() => {
-    setIsAuth(cookies.get("auth-token"));
+    setIsAuth(Cookies.get("auth-token"));
   }, []);
 
   if (!isAuth) {
@@ -60,7 +58,7 @@ export const ChatApp = () => {
             height: "20%",
           }}
         >
-          <Typography>Enter Room Name</Typography>
+          <Typography>Enter Stream Name</Typography>
           <input ref={roomInputRef} sx={{ color: "white" }} />
           <Button
             variant="primary"
@@ -69,13 +67,12 @@ export const ChatApp = () => {
               console.log(room);
             }}
           >
-            Enter Chat
+            Enter Stream
           </Button>
         </Box>
       )}
-      <Button variant="primary" onClick={signUserOut}>
-        sign out
-      </Button>
     </Box>
   );
 };
+
+export default ChatApp;

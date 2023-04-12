@@ -33,6 +33,7 @@ exports.login = async (req, res) => {
   try {
     const user = await Users.findOne({ username });
     const match = await bcrypt.compare(password, user.password);
+    console.log(user);
     if (match) {
       const token = jwt.sign(
         {
@@ -43,7 +44,7 @@ exports.login = async (req, res) => {
       );
       return res
         .status(200)
-        .json({ email: user.email, match: match, token: token });
+        .json({ username: user.username, match: match, token: token });
     } else {
       return res.status(400).json({ message: match });
     }

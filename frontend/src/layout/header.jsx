@@ -95,6 +95,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const Header = () => {
   const router = useRouter();
+  const EnterRoom = async () => {
+    try {
+    } catch (error) {}
+  };
   const [username, setUsername] = useState("");
   useEffect(() => {
     const getUsername = () => {
@@ -333,6 +337,13 @@ export const Header = () => {
                 >
                   Create Room
                 </Button>
+                <Button
+                  sx={styles.textTrans}
+                  variant="contained"
+                  onClick={() => {
+                    EnterRoom();
+                  }}
+                ></Button>
               </Box>
             ) : (
               <Box>

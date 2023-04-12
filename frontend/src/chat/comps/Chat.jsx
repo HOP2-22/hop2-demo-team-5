@@ -251,3 +251,5 @@ const ChatMessage = {
   color: "white",
   bgcolor: "rgb(24,24,27)",
 };
+
+export default Chat;
