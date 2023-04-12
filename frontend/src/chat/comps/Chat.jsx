@@ -19,6 +19,8 @@ import {
   Card,
   InputAdornment,
   Input,
+  createStyles,
+  styled,
 } from "@mui/material";
 import StartIcon from "@mui/icons-material/Start";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
@@ -94,7 +96,7 @@ export const Chat = (props) => {
         justifyContent: "flex-end",
       }}
     >
-      <Typography sx={NameOfRoom}>{room}</Typography>
+      {/* <Typography sx={NameOfRoom}>{room}</Typography> */}
 
       {exist ? (
         <Box sx={{ maxWidth: 350 }}>
@@ -125,7 +127,22 @@ export const Chat = (props) => {
             <Box
               sx={{ width: "100%", height: "2px", bgcolor: "rgb(38,38,43)" }}
             />
+
             <Box ref={containerRef} sx={ChatMessage}>
+              {showEmojis && (
+                <Box sx={{ position: "absolute", mt: 32 }}>
+                  <Picker
+                    data={data}
+                    emojiSize={22}
+                    emojiButtonSize={28}
+                    onEmojiSelect={addEmoji}
+                    maxFrequentRows={0}
+                    width={100}
+                    height={100}
+                    noCountryFlags={true}
+                  />
+                </Box>
+              )}
               {messages.map((message) => (
                 <Card
                   key={message.id}
@@ -149,17 +166,23 @@ export const Chat = (props) => {
             <form onSubmit={handleSubmit} ref={emojiRef}>
               <Stack>
                 <TextField
+                  color="secondary"
                   placeholder="Send a message"
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
                   InputProps={{
-                    style: { color: "white", height: "44px", width: "100%" },
+                    style: {
+                      color: "white",
+                      height: "44px",
+                      width: "100%",
+                      backgroundColor: "rgb(50,50,52)",
+                    },
                     endAdornment: (
                       <InputAdornment disableTypography position="end">
                         <Box
                           sx={{
                             "&:hover": {
-                              bgcolor: "rgb(47,47,53)",
+                              bgcolor: "red",
                             },
                             display: "flex",
                             justifyContent: "center",
@@ -179,17 +202,8 @@ export const Chat = (props) => {
                       </InputAdornment>
                     ),
                   }}
+                  OutlinedInput={{}}
                 />
-
-                {showEmojis && (
-                  <Picker
-                    data={data}
-                    emojiSize={20}
-                    emojiButtonSize={28}
-                    onEmojiSelect={addEmoji}
-                    maxFrequentRows={0}
-                  />
-                )}
 
                 <Button
                   variant="contained"
