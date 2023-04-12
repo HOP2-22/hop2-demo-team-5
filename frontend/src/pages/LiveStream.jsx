@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useContext } from "react";
-import { ColorModeContext } from "@/context/Context";
+import { ColorModeContext } from "@/context/context";
 import { Box, Button } from "@mui/material";
 
 export const LiveStream = () => {

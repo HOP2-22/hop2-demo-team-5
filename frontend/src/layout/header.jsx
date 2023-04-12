@@ -17,7 +17,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/router";
 import Switch from "@mui/material/Switch";
-import { ColorModeContext } from "@/context/Context";
+import { ColorModeContext } from "@/context/context";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";

@@ -6,7 +6,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
-import { ColorModeContext } from "@/context/Context";
+import { ColorModeContext } from "@/context/context";
 // import { useNavigate } from "react-router-dom";
 
 const styles = {

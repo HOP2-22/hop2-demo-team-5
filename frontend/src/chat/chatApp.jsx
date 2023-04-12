@@ -4,7 +4,6 @@ import { Chat } from "./comps/Chat";
 import Cookies from "js-cookie";
 // import { signOut } from "firebase/auth";
 import { auth } from "./firebaseConfig";
-// import { Context } from "@/context/context";
 
 import {
   Box,

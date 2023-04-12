@@ -6,7 +6,7 @@ import Input from "@mui/joy/Input";
 import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
-import { ColorModeContext } from "@/context/Context";
+import { ColorModeContext } from "@/context/context";
 
 const styles = {
   input: {

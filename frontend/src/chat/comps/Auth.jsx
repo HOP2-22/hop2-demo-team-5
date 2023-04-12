@@ -1,19 +1,6 @@
 import { auth, provider } from "../firebaseConfig";
 import { signInWithPopup } from "firebase/auth";
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  createTheme,
-  ThemeProvider,
-  Card,
-  CardMedia,
-  CardContent,
-  Stack,
-  Paper,
-  Input,
-} from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Cookies from "js-cookie";
 
 export const Auth = (props) => {

@@ -1,6 +1,6 @@
 import { Header } from "@/layout/header";
 import "@/styles/globals.css";
-import ThemeContext from "@/context/Context";
+import { ThemeContext } from "@/context/context";
 
 export default function App({ Component, pageProps }) {
   return (
