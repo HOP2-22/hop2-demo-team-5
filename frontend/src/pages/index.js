@@ -3,14 +3,21 @@ import { Inter } from "next/font/google";
 import { Box, Typography } from "@mui/material";
 import { SideBar } from "@/components/SideBar";
 import Carousel from "@/components/Carousel";
+
 import { ChatApp } from "@/chat/chatApp";
 import { Auth } from "@/chat/comps/Auth";
 import { useState } from "react";
 import { Provider } from "@/context/context";
 import { Chat } from "@/chat/comps/Chat";
+
+import { useContext } from "react";
+import { ColorModeContext } from "@/context/Context";
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Index() {
+  const { theme } = useContext(ColorModeContext);
   return (
     <>
       {/* <Head>
@@ -25,6 +32,7 @@ export default function Index() {
           flexDirection: "row",
           height: "90vh",
           width: "100vw",
+          backgroundColor: theme === "white" ? "black" : "white",
         }}
       >
         <SideBar />

@@ -15,6 +15,30 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/router";
+import Switch from "@mui/material/Switch";
+import { ColorModeContext } from "@/context/Context";
+import { useContext, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useState } from "react";
+
+const label = { inputProps: { "aria-label": "Switch demo" } };
+
+const styles = {
+  textTrans: {
+    textTransform: "capitalize",
+    color: "white",
+    backgroundColor: "blue",
+    fontFamily: "Mulish",
+    marginLeft: "10px",
+  },
+  Box: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+};
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,6 +81,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Header = () => {
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const getUsername = () => {
+      const user = Cookies.get("username");
+      setUsername(user);
+    };
+    getUsername();
+  }, []);
+
+  const { theme, changeTheme } = useContext(ColorModeContext);
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const logo = "https://pinecone.mn/logo.ee78cc1a.svg";
@@ -97,6 +132,7 @@ export const Header = () => {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      sx={{ backgroundColor: theme === "white" ? "black" : "white" }}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
@@ -117,60 +153,75 @@ export const Header = () => {
         vertical: "top",
         horizontal: "right",
       }}
+      sx={{
+        backgroundColor: theme === "white" ? "black" : "white",
+        color: theme === "white" ? "white" : "black",
+      }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" color="inherit">
           <SearchIcon />
         </IconButton>
         <p>Browse</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LoginIcon />
-        </IconButton>
-        <p>Log In</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <AddIcon />
-        </IconButton>
-        <p>Sign Up</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {username ? (
+        <Box>
+          <MenuItem>
+            <p>Create Room</p>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <p>Profile</p>
+          </MenuItem>
+        </Box>
+      ) : (
+        <>
+          <MenuItem
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <LoginIcon />
+            </IconButton>
+            <p>Log In</p>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              router.push("/signup");
+            }}
+          >
+            <IconButton size="large" color="inherit">
+              <AddIcon />
+            </IconButton>
+            <p>Sign Up</p>
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
 
-  const styles = {
-    textTrans: {
-      textTransform: "capitalize",
-      color: "white",
-      backgroundColor: "blue",
-      fontFamily: "Mulish",
-      marginLeft: "10px",
-    },
-    Box: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
-  };
-
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        backgroundColor: theme === "white" ? "black" : "white",
+      }}
+    >
       <AppBar
         position="static"
         sx={{
@@ -182,7 +233,26 @@ export const Header = () => {
       >
         <Toolbar>
           <Box sx={styles.Box}>
-            <img src={logo} alt="pice" width={120} height={20} />
+            <Box
+              onClick={() => {
+                router.push("/");
+              }}
+            >
+              {theme === "black" ? (
+                <Typography
+                  sx={{
+                    color: "black",
+                    fontFamily: "Mulish",
+                    fontWeight: "800",
+                    fontSize: "20px",
+                  }}
+                >
+                  Pinecone
+                </Typography>
+              ) : (
+                <img src={logo} alt="pice" width={120} height={20} />
+              )}
+            </Box>
             <Typography
               variant="h6"
               noWrap
@@ -192,13 +262,20 @@ export const Header = () => {
                 fontFamily: "Mulish",
                 marginLeft: "20px",
                 marginRight: "10px",
+                color: theme === "white" ? "white" : "black",
               }}
             >
               Browse
             </Typography>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
-          <Search sx={{ marginLeft: "20px" }}>
+          <Search
+            sx={{
+              marginLeft: "20px",
+              backgroundColor: theme === "white" ? "black" : "white",
+              color: theme === "white" ? "white" : "black",
+            }}
+          >
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -209,13 +286,51 @@ export const Header = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          <Switch
+            {...label}
+            defaultChecked
+            onClick={() => {
+              changeTheme();
+            }}
+          />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button sx={styles.textTrans} variant="contained">
-              Sign Up
-            </Button>
-            <Button sx={styles.textTrans} variant="contained">
-              Sign in
-            </Button>
+            {username ? (
+              <Box
+                sx={{
+                  height: "64px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "20px",
+                  marginLeft: "20px ",
+                }}
+              >
+                <Typography>{username}</Typography>
+                <Button sx={styles.textTrans} variant="contained">
+                  Create Room
+                </Button>
+              </Box>
+            ) : (
+              <>
+                <Button
+                  sx={styles.textTrans}
+                  variant="contained"
+                  onClick={() => {
+                    router.push("/signup");
+                  }}
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  sx={styles.textTrans}
+                  variant="contained"
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
+                  Log in
+                </Button>
+              </>
+            )}
             {/* <IconButton
               size="large"
               edge="end"
@@ -235,7 +350,9 @@ export const Header = () => {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              sx={{
+                color: theme === "black" ? "black" : "white",
+              }}
             >
               <MoreIcon />
             </IconButton>
