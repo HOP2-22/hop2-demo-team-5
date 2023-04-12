@@ -21,6 +21,7 @@ import { ColorModeContext } from "@/context/Context";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import axios from "axios";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -56,6 +57,18 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
+const CreateRoom = async () => {
+  try {
+    const username = Cookies.get("username");
+    const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
+      username: username,
+    });
+    console.log(res);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -81,6 +94,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Header = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   useEffect(() => {
     const getUsername = () => {
@@ -91,7 +105,6 @@ export const Header = () => {
   }, []);
 
   const { theme, changeTheme } = useContext(ColorModeContext);
-  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const logo = "https://pinecone.mn/logo.ee78cc1a.svg";
@@ -168,7 +181,12 @@ export const Header = () => {
       </MenuItem>
       {username ? (
         <Box>
-          <MenuItem>
+          <MenuItem
+            onClick={() => {
+              CreateRoom();
+              router.push("/LiveStream");
+            }}
+          >
             <p>Create Room</p>
           </MenuItem>
           <MenuItem onClick={handleProfileMenuOpen}>
@@ -185,7 +203,7 @@ export const Header = () => {
           </MenuItem>
         </Box>
       ) : (
-        <>
+        <Box>
           <MenuItem
             onClick={() => {
               router.push("/login");
@@ -210,7 +228,7 @@ export const Header = () => {
             </IconButton>
             <p>Sign Up</p>
           </MenuItem>
-        </>
+        </Box>
       )}
     </Menu>
   );
@@ -305,12 +323,19 @@ export const Header = () => {
                 }}
               >
                 <Typography>{username}</Typography>
-                <Button sx={styles.textTrans} variant="contained">
+                <Button
+                  sx={styles.textTrans}
+                  variant="contained"
+                  onClick={() => {
+                    CreateRoom();
+                    router.push("/LiveStream");
+                  }}
+                >
                   Create Room
                 </Button>
               </Box>
             ) : (
-              <>
+              <Box>
                 <Button
                   sx={styles.textTrans}
                   variant="contained"
@@ -329,7 +354,7 @@ export const Header = () => {
                 >
                   Log in
                 </Button>
-              </>
+              </Box>
             )}
             {/* <IconButton
               size="large"
