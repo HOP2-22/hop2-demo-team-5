@@ -1,30 +1,79 @@
-import { Box, Typography, Stack } from "@mui/material";
+import { Box, Typography, Stack, Popover } from "@mui/material";
 import StartIcon from "@mui/icons-material/Start";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import { Card } from "./card";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useState } from "react";
 export const SideBar = () => {
-  return (
+  const [appear, setAppear] = useState(true);
+
+  return appear ? (
     <Box
       sx={{
         height: "100%",
-        backgroundColor: "rgb(31,31,35)",
+        bgcolor: "rgb(31,31,35)",
         color: "white",
         padding: 2,
         width: "240px",
       }}
     >
       <Stack spacing={1}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+
+            alignItems: "center",
+          }}
+        >
           <Typography sx={{ fontSize: "18px" }}>For You</Typography>
-          <KeyboardReturnIcon sx={{ fontSize: "21px" }} />
+
+          <Box
+            sx={{
+              "&:hover": {
+                bgcolor: "rgb(47,47,53)",
+              },
+              borderRadius: "4px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 35,
+              height: 35,
+            }}
+          >
+            <KeyboardReturnIcon
+              sx={{ fontSize: "21px" }}
+              onClick={() => {
+                setAppear(false);
+              }}
+            />
+          </Box>
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+
+            alignItems: "center",
+          }}
+        >
           <Typography sx={{ fontSize: "13px", fontWeight: "bold" }}>
             FOLLOWED CHANNELS
           </Typography>
-          <ImportExportIcon sx={{ fontSize: "21px" }} />
+          <Box
+            sx={{
+              width: 35,
+              height: 35,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "4px",
+            }}
+          >
+            <ImportExportIcon sx={{ fontSize: "21px" }} />
+          </Box>
         </Box>
         <Stack spacing={1}>
           <Card />
@@ -42,6 +91,67 @@ export const SideBar = () => {
         <Card />
         <Card />
         <Card />
+      </Stack>
+    </Box>
+  ) : (
+    <Box
+      sx={{
+        bgcolor: "rgb(31,31,35)",
+        height: "100%",
+        width: "55px",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column  ",
+        borderRadius: "4px",
+      }}
+    >
+      <Box
+        sx={{
+          "&:hover": {
+            bgcolor: "rgb(47,47,53)",
+          },
+          borderRadius: "5px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: 35,
+          height: 35,
+          my: 2,
+        }}
+      >
+        <StartIcon
+          onClick={() => {
+            setAppear(true);
+          }}
+        />
+      </Box>
+
+      <FavoriteBorderIcon sx={{ mb: 1 }} />
+      <Stack direction="column" spacing={1}>
+        <Box
+          sx={{
+            borderRadius: "50%",
+            bgcolor: "red",
+            height: "30px",
+            width: "30px",
+          }}
+        />
+        <Box
+          sx={{
+            borderRadius: "50%",
+            bgcolor: "white",
+            height: "30px",
+            width: "30px",
+          }}
+        />
+        <Box
+          sx={{
+            borderRadius: "50%",
+            bgcolor: "blue",
+            height: "30px",
+            width: "30px",
+          }}
+        />
       </Stack>
     </Box>
   );
