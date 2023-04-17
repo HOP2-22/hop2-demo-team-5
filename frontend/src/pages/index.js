@@ -11,6 +11,7 @@ import { UserCard } from "@/layout/userCard";
 import { VideoPage } from "./videoPage";
 import { About } from "@/layout/about";
 const inter = Inter({ subsets: ["latin"] });
+import Footer from "../layout/footer";
 
 export default function Index() {
   const { theme } = useContext(ColorModeContext);
@@ -46,9 +47,10 @@ export default function Index() {
           <Carousel />
         </Box>
       </Box>
-    <Box>
-      <VideoPage />
-    </Box>
+      <Box>
+        <VideoPage />
+      </Box>
+      <Footer />
     </Box>
   );
 }
