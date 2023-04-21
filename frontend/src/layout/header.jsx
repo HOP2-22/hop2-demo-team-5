@@ -342,6 +342,7 @@ export const Header = () => {
                   variant="contained"
                   onClick={() => {
                     EnterRoom();
+                    router.push("StartStream");
                   }}
                 ></Button>
               </Box>

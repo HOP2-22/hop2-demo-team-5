@@ -25,6 +25,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { useOutsideClick } from "../../hook/useOutsideClick";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import Cookies from "js-cookie";
 
 export const Chat = (props) => {
   const { room } = props;
@@ -41,6 +42,8 @@ export const Chat = (props) => {
   const emojiRef = useOutsideClick(() => outsideClick);
 
   useEffect(() => {
+    console.log(room);
+    if (!room) return;
     const queryMessages = query(
       messagesRef,
       where("room", "==", room),
@@ -64,6 +67,7 @@ export const Chat = (props) => {
   }, [messages, exist]);
 
   const handleSubmit = (e) => {
+    const username = Cookies.get("username");
     e.preventDefault();
     if (newMessage === "") {
       return;
@@ -71,7 +75,7 @@ export const Chat = (props) => {
     addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
-      user: auth.currentUser.displayName,
+      user: username,
       room,
     });
 
