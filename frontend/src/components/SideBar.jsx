@@ -15,7 +15,7 @@ export const SideBar = () => {
         bgcolor: "rgb(31,31,35)",
         color: "white",
         padding: 2,
-        width: "240px",
+        width: "245px",
       }}
     >
       <Stack spacing={1}>
@@ -23,7 +23,6 @@ export const SideBar = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-
             alignItems: "center",
           }}
         >
@@ -59,7 +58,13 @@ export const SideBar = () => {
             alignItems: "center",
           }}
         >
-          <Typography sx={{ fontSize: "13px", fontWeight: "bold" }}>
+          <Typography
+            sx={{
+              fontSize: "13px",
+              fontWeight: "bold",
+              color: "rgb(135,135,138)",
+            }}
+          >
             FOLLOWED CHANNELS
           </Typography>
           <Box
@@ -72,7 +77,9 @@ export const SideBar = () => {
               borderRadius: "4px",
             }}
           >
-            <ImportExportIcon sx={{ fontSize: "21px" }} />
+            <ImportExportIcon
+              sx={{ fontSize: "23px", color: "rgb(135,135,138)" }}
+            />
           </Box>
         </Box>
         <Stack spacing={1}>
@@ -87,7 +94,7 @@ export const SideBar = () => {
         </Typography>
       </Box>
 
-      <Stack sx={{ mt: 1 }}>
+      <Stack sx={{ mt: 1 }} spacing={1}>
         <Card />
         <Card />
         <Card />
@@ -98,7 +105,7 @@ export const SideBar = () => {
       sx={{
         bgcolor: "rgb(31,31,35)",
         height: "100%",
-        width: "55px",
+        width: "50px",
         display: "flex",
         alignItems: "center",
         flexDirection: "column  ",
@@ -116,10 +123,11 @@ export const SideBar = () => {
           alignItems: "center",
           width: 35,
           height: 35,
-          my: 2,
+          my: 1,
         }}
       >
         <StartIcon
+          fontSize="small"
           onClick={() => {
             setAppear(true);
           }}
