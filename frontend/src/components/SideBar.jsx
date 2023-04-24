@@ -5,10 +5,12 @@ import ImportExportIcon from "@mui/icons-material/ImportExport";
 import { Card } from "./card";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 export const SideBar = () => {
   const [appear, setAppear] = useState(true);
+  const matches = useMediaQuery("(min-width:1750px)");
 
-  return appear ? (
+  return appear && matches ? (
     <Box
       sx={{
         height: "100%",
@@ -126,12 +128,16 @@ export const SideBar = () => {
           my: 1,
         }}
       >
-        <StartIcon
-          fontSize="small"
-          onClick={() => {
-            setAppear(true);
-          }}
-        />
+        {matches ? (
+          <StartIcon
+            fontSize="small"
+            onClick={() => {
+              setAppear(true);
+            }}
+          />
+        ) : (
+          <Box />
+        )}
       </Box>
 
       <FavoriteBorderIcon sx={{ mb: 1 }} />
@@ -140,24 +146,24 @@ export const SideBar = () => {
           sx={{
             borderRadius: "50%",
             bgcolor: "red",
-            height: "30px",
-            width: "30px",
+            height: "27px",
+            width: "27px",
           }}
         />
         <Box
           sx={{
             borderRadius: "50%",
             bgcolor: "white",
-            height: "30px",
-            width: "30px",
+            height: "27px",
+            width: "27px",
           }}
         />
         <Box
           sx={{
             borderRadius: "50%",
             bgcolor: "blue",
-            height: "30px",
-            width: "30px",
+            height: "27px",
+            width: "27px",
           }}
         />
       </Stack>

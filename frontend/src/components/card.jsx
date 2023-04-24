@@ -22,8 +22,12 @@ export const Card = () => {
         />
 
         <Stack spacing={-0.3}>
-          <Typography sx={{ fontSize: "14px" }}>Channel</Typography>
-          <Typography sx={{ fontSize: "13px" }}>Game</Typography>
+          <Typography sx={{ fontSize: "15px", fontWeight: "bold" }}>
+            Channel
+          </Typography>
+          <Typography sx={{ fontSize: "13px", color: "rgb(163,163,183)" }}>
+            Game
+          </Typography>
         </Stack>
       </Stack>
 
