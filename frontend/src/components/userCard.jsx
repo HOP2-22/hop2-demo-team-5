@@ -13,7 +13,7 @@ import {
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Notifications from "@mui/icons-material/Notifications";
 import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
@@ -26,7 +26,6 @@ const customTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-
       sm: 600,
       md: 960,
       lg: 1250,
@@ -37,29 +36,7 @@ const customTheme = createTheme({
   },
 });
 
-const but = {
-  px: 1,
-  py: 0,
-  bgcolor: "pink",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  borderRadius: "7px",
-};
 export const UserCard = () => {
-  const random = () => Math.floor(Math.random() * 255);
-
-  const st = {
-    width: "72px",
-    height: "72px",
-    borderRadius: "50%",
-    border: "2px solid",
-    borderColor: `rgb(${random()}, ${random()}, ${random()})`,
-    "&:hover": {
-      bgcolor: "red",
-    },
-  };
-
   const [isLiked, setIsLiked] = useState(false);
   const [isNot, setIsNot] = useState(false);
 
@@ -76,6 +53,13 @@ export const UserCard = () => {
   const handleNotLeave = () => {
     setIsNot(false);
   };
+  const random = () => Math.floor(Math.random() * 255);
+  const [col, setCol] = useState("red");
+
+  useEffect(() => {
+    const initialRandom = `rgb(${random()}, ${random()}, ${random()})`;
+    setCol(initialRandom);
+  }, []);
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -92,14 +76,14 @@ export const UserCard = () => {
             <Box
               component="img"
               sx={{
-                width: "72px",
-                height: "72px",
+                width: { xs: "65px", sm: "72px" },
+                height: { xs: "65px", sm: "72px" },
                 borderRadius: "50%",
                 border: "2px solid",
-                borderColor: `rgb(${random()}, ${random()}, ${random()})`,
+                borderColor: `${col}`,
                 "&:hover": {
                   border: "4px solid",
-                  borderColor: `rgb(${random()}, ${random()}, ${random()})`,
+                  borderColor: `${col}`,
                 },
               }}
               alt="img"
@@ -108,12 +92,26 @@ export const UserCard = () => {
             <Card sx={{ maxWidth: "300px", bgcolor: "black", color: "white" }}>
               <CardContent sx={{ padding: 0 }}>
                 <Box>
-                  <Typography variant="h6">Streamer</Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "17px", sm: "20px" },
+                      fontWeight: "medium",
+                    }}
+                  >
+                    Streamer
+                  </Typography>
                 </Box>
                 <Typography sx={{ display: { xs: "none", sm: "block" } }}>
                   Name
                 </Typography>
-                <Typography>Category</Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "15px", sm: "17px" },
+                    fontWeight: "medium",
+                  }}
+                >
+                  Category
+                </Typography>
               </CardContent>
             </Card>
           </Stack>
@@ -142,7 +140,7 @@ export const UserCard = () => {
               <Box
                 sx={{
                   bgcolor: "rgb(47,47,53)",
-                  width: "90px",
+                  width: { xs: "80px", sm: "90px" },
                   height: "34px",
                   borderRadius: "7px",
                   "&: hover": {
@@ -202,7 +200,13 @@ export const UserCard = () => {
               </Box> */}
             </Stack>
 
-            <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
+            <Box
+              sx={{
+                mt: { xs: 1, sm: 2 },
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
               <Stack direction="row" spacing={1}>
                 <Box>
                   <Typography sx={{ display: { xs: "none", sm: "block" } }}>
@@ -214,8 +218,11 @@ export const UserCard = () => {
                     Time
                   </Typography>
                 </Box>
-                <IosShareIcon fontSize="medium" />
-                <MoreVertIcon fontSize="medium" />
+                <Box>
+                  {" "}
+                  <IosShareIcon fontSize="small" />
+                </Box>
+                <Box> {/* <MoreVertIcon fontSize="small" /> */}</Box>
               </Stack>
             </Box>
           </Box>
