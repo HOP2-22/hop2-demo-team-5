@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import { Box } from "@mui/material";
-import Live from "../assets/images/Live.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -17,11 +16,11 @@ export const Carousel = () => {
           dynamicBullets: true,
         }}
         modules={[Pagination]}
-        style={{ width: "60vw", height: "35vh", backgroundColor: "aqua" }}
+        style={{ width: "60vw", height: "40vh", backgroundColor: "aqua" }}
       >
         <SwiperSlide>
           <img
-            src="/_next/static/media/Pinecone.jpeg"
+            src="https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/livestream.jpeg?alt=media&token=b263dcff-208c-48a7-bd48-edc549e5899b"
             alt="pine"
             style={{ width: "100%", height: "100%" }}
           />

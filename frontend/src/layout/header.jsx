@@ -17,7 +17,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/router";
 import Switch from "@mui/material/Switch";
-import { ColorModeContext } from "@/context/context";
+import { useTheme } from "@/context/ThemeProvider";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -57,17 +57,17 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const CreateRoom = async () => {
-  try {
-    const username = Cookies.get("username");
-    const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
-      username: username,
-    });
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
+// const CreateRoom = async () => {
+//   try {
+//     const username = Cookies.get("username");
+//     const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
+//       username: username,
+//     });
+//     console.log(res);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -108,10 +108,13 @@ export const Header = () => {
     getUsername();
   }, []);
 
-  const { theme, changeTheme } = useContext(ColorModeContext);
+  const { theme, changeTheme } = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const logo = "https://pinecone.mn/logo.ee78cc1a.svg";
+  const logo =
+    "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Screen%20Shot%202023-04-21%20at%2017.51.35.png?alt=media&token=a050a1d0-a4af-4527-af11-e0ea2474ed94";
+  const logoWhite =
+    "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Screen%20Shot%202023-04-21%20at%2017.53.30_auto_x2.jpg?alt=media&token=fbe70ac0-3908-43ec-a6b7-267c3200f220";
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -187,8 +190,8 @@ export const Header = () => {
         <Box>
           <MenuItem
             onClick={() => {
-              CreateRoom();
-              router.push("/LiveStream");
+              // CreateRoom();
+              router.push("/StartStream");
             }}
           >
             <p>Create Room</p>
@@ -261,18 +264,9 @@ export const Header = () => {
               }}
             >
               {theme === "black" ? (
-                <Typography
-                  sx={{
-                    color: "black",
-                    fontFamily: "Mulish",
-                    fontWeight: "800",
-                    fontSize: "20px",
-                  }}
-                >
-                  Pinecone
-                </Typography>
+                <img src={logoWhite} alt="pice" width={120} height={25} />
               ) : (
-                <img src={logo} alt="pice" width={120} height={20} />
+                <img src={logo} alt="pice" width={120} height={30} />
               )}
             </Box>
             <Typography
@@ -331,20 +325,19 @@ export const Header = () => {
                   sx={styles.textTrans}
                   variant="contained"
                   onClick={() => {
-                    CreateRoom();
-                    router.push("/LiveStream");
+                    router.push("/StartStream");
                   }}
                 >
                   Create Room
                 </Button>
-                <Button
+                {/* <Button
                   sx={styles.textTrans}
                   variant="contained"
                   onClick={() => {
                     EnterRoom();
                     router.push("StartStream");
                   }}
-                ></Button>
+                ></Button> */}
               </Box>
             ) : (
               <Box>
@@ -368,17 +361,6 @@ export const Header = () => {
                 </Button>
               </Box>
             )}
-            {/* <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton> */}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
