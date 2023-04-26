@@ -36,6 +36,7 @@ export const About = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
+          mt: 5,
         }}
       >
         <Card
