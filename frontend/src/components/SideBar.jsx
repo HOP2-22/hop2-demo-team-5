@@ -15,11 +15,18 @@ export const SideBar = () => {
   return appear && matches ? (
     <Box
       sx={{
-        height: "100%",
+        height: "100vh",
         bgcolor: "rgb(31,31,35)",
         color: "white",
         padding: 2,
         width: "245px",
+        display: {
+          xl: "block",
+          lg: "block",
+          md: "block",
+          s: "block",
+          xs: "none",
+        },
       }}
     >
       <Stack spacing={1}>
@@ -108,19 +115,27 @@ export const SideBar = () => {
   ) : (
     <Box
       sx={{
-        bgcolor: "rgb(31,31,35)",
-        height: "100%",
+        backgroundColor: "rgb(31,31,35)",
+        height: "100vh",
         width: "50px",
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
         flexDirection: "column  ",
         borderRadius: "4px",
+        display: {
+          xl: "block",
+          lg: "block",
+          md: "block",
+          s: "block",
+          xs: "none",
+        },
       }}
     >
       <Box
         sx={{
           "&:hover": {
-            bgcolor: "rgb(47,47,53)",
+            backgroundColor: "rgb(47,47,53)",
           },
           borderRadius: "5px",
           display: "flex",

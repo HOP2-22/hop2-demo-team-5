@@ -38,9 +38,19 @@ export default function Index() {
               sm: "95vw",
               xs: "95vw",
             },
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row",
           }}
         >
           <Carousel />
+          {/* <Typography>
+            Live streaming is the broadcasting of live video and audio content
+            over the internet in real-time. This technology has become
+            increasingly popular in recent years, especially with the growth of
+            social media platforms and the availability of high-speed internet
+            connections.
+          </Typography> */}
         </Box>
       </Box>
       {/* <Box>

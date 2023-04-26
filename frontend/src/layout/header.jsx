@@ -184,7 +184,6 @@ export const Header = () => {
         <IconButton size="large" color="inherit">
           <SearchIcon />
         </IconButton>
-        <p>Browse</p>
       </MenuItem>
       {username ? (
         <Box>
@@ -269,20 +268,6 @@ export const Header = () => {
                 <img src={logo} alt="pice" width={120} height={30} />
               )}
             </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                fontFamily: "Mulish",
-                marginLeft: "20px",
-                marginRight: "10px",
-                color: theme === "white" ? "white" : "black",
-              }}
-            >
-              Browse
-            </Typography>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Search

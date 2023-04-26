@@ -61,17 +61,18 @@ export const ShareScreen = () => {
   return (
     <Box
       sx={{
-        width: "70vw",
+        width: "80vw",
         backgroundColor: theme === "black" ? "white" : "black",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
       }}
     >
       <video
         ref={videoRef}
+        controls
         style={{
-          width: "1000px",
-          height: "524px",
+          width: "100%",
+          height: "auto",
           transform: startCam ? "scaleX(-1)" : "none",
         }}
       />
@@ -79,7 +80,7 @@ export const ShareScreen = () => {
         sx={{
           height: "100%",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           justifyContent: "space-around",
           alignItems: "center",
         }}
