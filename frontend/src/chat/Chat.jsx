@@ -101,7 +101,12 @@ export const Chat = () => {
       }}
     >
       {exist ? (
-        <Box sx={{ width: 340 }}>
+        <Card
+          sx={{
+            width: 320,
+            bgcolor: "rgb(24,24,27)",
+          }}
+        >
           <Paper
             elevation={3}
             sx={{ bgcolor: "rgb(24,24,27)", color: "white" }}
@@ -111,7 +116,6 @@ export const Chat = () => {
                 display: "flex",
                 p: 2,
                 justifyContent: "space-between",
-                bgcolor: "red",
               }}
             >
               <StartIcon
@@ -137,11 +141,9 @@ export const Chat = () => {
                   <Picker
                     data={data}
                     emojiSize={22}
-                    emojiButtonSize={28}
+                    emojiButtonSize={25}
                     onEmojiSelect={addEmoji}
                     maxFrequentRows={0}
-                    width={100}
-                    height={100}
                     noCountryFlags={true}
                   />
                 </Box>
@@ -185,7 +187,7 @@ export const Chat = () => {
                         <Box
                           sx={{
                             "&:hover": {
-                              bgcolor: "red",
+                              bgcolor: "rgb(24,24,27)",
                             },
                             display: "flex",
                             justifyContent: "center",
@@ -218,7 +220,7 @@ export const Chat = () => {
               </Stack>
             </form>
           </Paper>
-        </Box>
+        </Card>
       ) : (
         <KeyboardReturnIcon
           onClick={() => {

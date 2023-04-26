@@ -22,11 +22,18 @@ const customTheme = createTheme({
 export const VideoPage = () => {
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <SideBar />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        {/* <SideBar /> */}
         <Box
           sx={{
             display: "flex",
+            justifyContent: "center",
             flexDirection: {
               xl: "row",
               lg: "row",
@@ -42,14 +49,13 @@ export const VideoPage = () => {
               justifyContent: "center",
               flexDirection: "column",
               width: "70vw",
-              bgcolor: "red",
             }}
           >
             <ShareScreen />
             <UserCard />
             <About />
           </Box>
-          <Box>
+          <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
             <Chat />
           </Box>
         </Box>
