@@ -1,8 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-export const ColorModeContext = createContext();
+export const ThemeContext = createContext();
 
-export function ThemeContext({ children }) {
+export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("white");
 
   const [username, setUsername] = useState("");
@@ -11,7 +11,7 @@ export function ThemeContext({ children }) {
     setTheme((prev) => (prev === "white" ? "black" : "white"));
   };
   return (
-    <ColorModeContext.Provider
+    <ThemeContext.Provider
       value={{
         theme: theme,
         changeTheme: colorModeHander,
@@ -20,8 +20,9 @@ export function ThemeContext({ children }) {
       }}
     >
       {children}
-    </ColorModeContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 
-export default ThemeContext;
+export const useTheme = () => useContext(ThemeContext);
+export default ThemeProvider;

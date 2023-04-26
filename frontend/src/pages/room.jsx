@@ -1,22 +1,60 @@
-import { LiveStream } from "../components/LiveStream";
-import { Chat } from "../chat/comps/Chat";
-import { Box } from "@mui/material";
+import { Box, createTheme, ThemeProvider } from "@mui/material";
+import UserCard from "@/components/userCard";
+import { About } from "@/components/about";
+import Chat from "@/chat/Chat";
+import ShareScreen from "@/components/sharescreen";
+import { SideBar } from "@/components/SideBar";
 
-export const Room = () => {
+const customTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1250,
+      xl: 1750,
+      customLg: 1400,
+      customXl: 1980,
+    },
+  },
+});
+
+export const VideoPage = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100vw",
-        height: "90vh",
-        flexDirection: "row",
-      }}
-    >
-      <LiveStream />
-      <Chat />
-      hiiii
-    </Box>
+    <ThemeProvider theme={customTheme}>
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <SideBar />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: {
+              xl: "row",
+              lg: "row",
+              md: "column",
+              s: "column",
+              xs: "column",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              width: "80vw",
+            }}
+          >
+            <ShareScreen />
+            <UserCard />
+            <About />
+          </Box>
+          <Box>
+            <Chat />
+          </Box>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 };
 
-export default Room;
+export default VideoPage;

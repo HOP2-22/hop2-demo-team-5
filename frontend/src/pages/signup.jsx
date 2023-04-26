@@ -1,12 +1,11 @@
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
-import Space from "../assets//images/Space.jpg";
-import Input from "@mui/joy/Input";
+import Input from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
-import { ColorModeContext } from "@/context/context";
+import { useTheme } from "@/context/ThemeProvider";
 
 const styles = {
   input: {
@@ -16,9 +15,11 @@ const styles = {
     fontFamily: "Mulish",
   },
 };
+const pic =
+  "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/andre-benz-wkhyXI5hRbo-unsplash.jpg?alt=media&token=cbcbfc83-5023-44b0-84e1-50f1c1c2c2ba";
 
 export const SignUp = () => {
-  const { theme } = useContext(ColorModeContext);
+  const { theme } = useTheme();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -49,7 +50,7 @@ export const SignUp = () => {
   return (
     <Box
       sx={{
-        backgroundImage: `url(/_next/static/media/Space.d992ea78.jpg)`,
+        backgroundImage: `url(${pic})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -137,7 +138,7 @@ export const SignUp = () => {
             >
               Хэрэглэгчийн нэр
             </Typography>
-            <Input
+            <input
               placeholder="username"
               required
               style={styles.input}
@@ -157,7 +158,7 @@ export const SignUp = () => {
             >
               Цахим хаяг
             </Typography>
-            <Input
+            <input
               placeholder="name@mail.domain"
               type="email"
               required
@@ -179,7 +180,7 @@ export const SignUp = () => {
               Нууц үг
             </Typography>
 
-            <Input
+            <input
               placeholder="••••••••••"
               required
               type="password"
@@ -200,7 +201,7 @@ export const SignUp = () => {
             >
               Нууц үг давтах{" "}
             </Typography>
-            <Input
+            <input
               placeholder="••••••••••"
               required
               type="password"

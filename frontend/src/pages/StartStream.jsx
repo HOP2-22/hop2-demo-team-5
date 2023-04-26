@@ -5,8 +5,7 @@ import { useRouter } from "next/router";
 
 import { Box, Typography, Button } from "@mui/material";
 
-export const ChatApp = () => {
-  // const [room, setRoom] = useState(null);
+export const StartStream = () => {
   const router = useRouter();
   const [roomName, setRoomName] = useState("");
 
@@ -16,12 +15,11 @@ export const ChatApp = () => {
         roomName: roomName,
       });
       console.log(res);
+      Cookies.set("room", res?.data?.data?.roomName);
     } catch (error) {
       console.log(error.message);
     }
   };
-
-  // const roomInputRef = useRef(null);
 
   return (
     <Box>
@@ -34,35 +32,33 @@ export const ChatApp = () => {
         }}
       >
         <Typography>Create Stream</Typography>
-        {/* <form
+        <form
           onSubmit={(e) => {
             e.preventDefault();
             CreateStream();
-          }}
-        > */}
-        <input
-          // ref={roomInputRef}
-          sx={{ color: "white" }}
-          value={roomName}
-          onChange={(e) => {
-            setRoomName(e.target.value);
-          }}
-        />
-        <Button
-          variant="primary"
-          onClick={() => {
-            // setRoom(roomInputRef.current.value);
-            // console.log(room);
-            // router.push("/Chat");
-            CreateStream();
+            router.push("/room");
           }}
         >
-          Start Stream
-        </Button>
-        {/* </form> */}
+          <input
+            sx={{ color: "white" }}
+            value={roomName}
+            onChange={(e) => {
+              setRoomName(e.target.value);
+            }}
+          />
+          <Button
+            variant="primary"
+            onClick={() => {
+              router.push("/room");
+              CreateStream();
+            }}
+          >
+            Start Stream
+          </Button>
+        </form>
       </Box>
     </Box>
   );
 };
 
-export default ChatApp;
+export default StartStream;

@@ -11,8 +11,8 @@ import {
   Stack,
   Paper,
 } from "@mui/material";
-import { UserCard } from "@/layout/userCard";
-import { About } from "@/layout/about";
+import { UserCard } from "@/components/userCard";
+import { About } from "@/components/about";
 
 const customTheme = createTheme({
   breakpoints: {

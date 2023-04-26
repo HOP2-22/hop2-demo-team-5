@@ -1,13 +1,10 @@
 import { Box } from "@mui/material";
-import { Typography } from "@mui/material";
-import Input from "@mui/joy/Input";
+import { Typography, TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
-import { ColorModeContext } from "@/context/context";
-// import { useNavigate } from "react-router-dom";
+import { useTheme } from "@/context/ThemeProvider";
 
 const styles = {
   family: {
@@ -22,10 +19,8 @@ const styles = {
   },
 };
 
-// const navigate = useNavigate();
-
 export const Login = () => {
-  const { theme } = useContext(ColorModeContext);
+  const { theme } = useTheme();
   const router = useRouter();
   const [user, setUser] = useState({
     username: "",
@@ -49,13 +44,11 @@ export const Login = () => {
       alert("Password or Email is invalid");
     }
   };
-  //   const navigate = useNavigate();
 
-  //   const { user, setUser, LoginFunc } = useContext(User);
   return (
     <Box
       sx={{
-        backgroundImage: `url(/_next/static/media/Space.d992ea78.jpg)`,
+        backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/andre-benz-wkhyXI5hRbo-unsplash.jpg?alt=media&token=cbcbfc83-5023-44b0-84e1-50f1c1c2c2ba)`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -143,15 +136,15 @@ export const Login = () => {
             >
               Хэрэглэгчийн нэр
             </Typography>
-            <Input
+            <input
               placeholder="username"
               required
               style={styles.input}
               variant="outlined"
               color="neutral"
               value={user.username}
-              onChange={(e) => {
-                setUser({ ...user, username: e.target.value });
+              onChange={(event) => {
+                setUser({ ...user, username: event.target.value });
               }}
             />
             <Typography
@@ -163,8 +156,7 @@ export const Login = () => {
             >
               Нууц үг
             </Typography>
-
-            <Input
+            <input
               placeholder="••••••••••"
               required
               type="password"

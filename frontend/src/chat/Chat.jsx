@@ -8,31 +8,31 @@ import {
   where,
   orderBy,
 } from "firebase/firestore";
-import { auth, db } from "../firebaseConfig";
+import { auth, db } from "./firebaseConfig";
 import {
   Box,
   Typography,
   Button,
-  TextField,
   Stack,
   Paper,
   Card,
   InputAdornment,
 } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import StartIcon from "@mui/icons-material/Start";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import { useOutsideClick } from "../../hook/useOutsideClick";
+import { useOutsideClick } from "@/hook/useOutsideClick";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import Cookies from "js-cookie";
 
-export const Chat = (props) => {
-  const { room } = props;
+export const Chat = () => {
   const [exist, setExist] = useState(true);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const messagesRef = collection(db, "messages");
+  const [room, setRoom] = useState("");
   const containerRef = useRef(null);
   const [showEmojis, setShowEmojis] = useState(false);
 
@@ -42,11 +42,12 @@ export const Chat = (props) => {
   const emojiRef = useOutsideClick(() => outsideClick);
 
   useEffect(() => {
-    console.log(room);
-    if (!room) return;
+    const roomName = Cookies.get("room");
+    setRoom(roomName);
+    if (!roomName) return;
     const queryMessages = query(
       messagesRef,
-      where("room", "==", room),
+      where("room", "==", roomName),
       orderBy("createdAt")
     );
     const unscribe = onSnapshot(queryMessages, (snapshot) => {
@@ -54,6 +55,7 @@ export const Chat = (props) => {
       snapshot.forEach((doc) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
+      console.log(messages);
       setMessages(messages);
     });
     return () => unscribe();
@@ -76,7 +78,7 @@ export const Chat = (props) => {
       text: newMessage,
       createdAt: serverTimestamp(),
       user: username,
-      room,
+      room: room,
     });
 
     setNewMessage("");
@@ -203,7 +205,6 @@ export const Chat = (props) => {
                       </InputAdornment>
                     ),
                   }}
-                  OutlinedInput={{}}
                 />
 
                 <Button
