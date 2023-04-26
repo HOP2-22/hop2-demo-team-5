@@ -6,6 +6,8 @@ import { Card } from "./card";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { styled } from "@mui/system";
+
 export const SideBar = () => {
   const [appear, setAppear] = useState(true);
   const matches = useMediaQuery("(min-width:1750px)");
@@ -28,7 +30,9 @@ export const SideBar = () => {
             alignItems: "center",
           }}
         >
-          <Typography sx={{ fontSize: "18px" }}>For You</Typography>
+          <Typography sx={{ fontSize: "18px", fontWeight: "bold" }}>
+            For You
+          </Typography>
 
           <Box
             sx={{
@@ -56,7 +60,6 @@ export const SideBar = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-
             alignItems: "center",
           }}
         >
