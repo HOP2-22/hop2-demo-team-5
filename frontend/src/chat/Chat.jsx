@@ -55,7 +55,7 @@ export const Chat = () => {
       snapshot.forEach((doc) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
-      console.log(messages);
+
       setMessages(messages);
     });
     return () => unscribe();
@@ -70,6 +70,7 @@ export const Chat = () => {
 
   const handleSubmit = (e) => {
     const username = Cookies.get("username");
+
     e.preventDefault();
     if (newMessage === "") {
       return;
@@ -99,10 +100,8 @@ export const Chat = () => {
         justifyContent: "flex-end",
       }}
     >
-      {/* <Typography sx={NameOfRoom}>{room}</Typography> */}
-
       {exist ? (
-        <Box sx={{ maxWidth: 350 }}>
+        <Box sx={{ width: 340 }}>
           <Paper
             elevation={3}
             sx={{ bgcolor: "rgb(24,24,27)", color: "white" }}
@@ -112,6 +111,7 @@ export const Chat = () => {
                 display: "flex",
                 p: 2,
                 justifyContent: "space-between",
+                bgcolor: "red",
               }}
             >
               <StartIcon
@@ -232,15 +232,6 @@ export const Chat = () => {
       )}
     </Box>
   );
-};
-
-const NameOfRoom = {
-  width: "150px",
-  height: "100px",
-  bgcolor: "blue",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
 };
 
 const ChatMessage = {

@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { useTheme } from "@/context/ThemeProvider";
+import { useRouter } from "next/router";
 
 const styles = {
   input: {
@@ -20,6 +21,7 @@ const pic =
 
 export const SignUp = () => {
   const { theme } = useTheme();
+  const router = useRouter();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -36,7 +38,7 @@ export const SignUp = () => {
           password: user.password,
         });
         console.log(res);
-        navigate(`/login`);
+        router.push("/login");
       } catch (error) {
         console.log(error);
       }

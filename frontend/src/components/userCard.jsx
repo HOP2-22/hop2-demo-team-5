@@ -26,10 +26,10 @@ const customTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-
       sm: 600,
       md: 960,
       lg: 1250,
+      gp: 1550,
       xl: 1750,
       customLg: 1400,
       customXl: 1980,
@@ -81,7 +81,7 @@ export const UserCard = () => {
     <ThemeProvider theme={customTheme}>
       <Box>
         <Container
-          maxWidth="xl"
+          maxWidth="gp"
           sx={{
             display: "flex",
             justifyContent: "space-between",

@@ -41,7 +41,8 @@ export const VideoPage = () => {
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
-              width: "80vw",
+              width: "70vw",
+              bgcolor: "red",
             }}
           >
             <ShareScreen />
