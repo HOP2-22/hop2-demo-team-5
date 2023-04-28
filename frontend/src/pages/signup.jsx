@@ -30,11 +30,14 @@ export const SignUp = () => {
     if (check === user.password) {
       console.log(user.username);
       try {
-        const res = await axios.post("http://localhost:5555/user/create", {
-          username: user.username,
-          email: user.email,
-          password: user.password,
-        });
+        const res = await axios.post(
+          "https://live-stream-backend.onrender.com/user/create",
+          {
+            username: user.username,
+            email: user.email,
+            password: user.password,
+          }
+        );
         console.log(res);
         navigate(`/login`);
       } catch (error) {

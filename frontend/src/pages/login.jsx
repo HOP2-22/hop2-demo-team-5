@@ -28,10 +28,13 @@ export const Login = () => {
   });
   const LoginFunc = async () => {
     try {
-      const res = await axios.post(`http://localhost:5555/user/login`, {
-        username: user.username,
-        password: user.password,
-      });
+      const res = await axios.post(
+        `https://live-stream-backend.onrender.com/user/login`,
+        {
+          username: user.username,
+          password: user.password,
+        }
+      );
       console.log(res);
       if (res.data.match === true) {
         Cookies.set("token", res.data.token);

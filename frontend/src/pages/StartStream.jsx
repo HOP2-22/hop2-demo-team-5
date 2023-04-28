@@ -11,9 +11,12 @@ export const StartStream = () => {
 
   const CreateStream = async () => {
     try {
-      const res = await axios.post("http://localhost:5555/stream/createRoom", {
-        roomName: roomName,
-      });
+      const res = await axios.post(
+        "https://live-stream-backend.onrender.com/stream/createRoom",
+        {
+          roomName: roomName,
+        }
+      );
       console.log(res);
       Cookies.set("room", res?.data?.data?.roomName);
     } catch (error) {
