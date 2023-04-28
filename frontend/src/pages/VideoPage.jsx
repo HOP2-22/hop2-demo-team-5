@@ -53,3 +53,5 @@ export const VideoPage = () => {
     </ThemeProvider>
   );
 };
+
+export default VideoPage;

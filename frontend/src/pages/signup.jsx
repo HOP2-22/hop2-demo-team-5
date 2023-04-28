@@ -93,7 +93,7 @@ export const SignUp = () => {
             fontFamily: "Mulish",
           }}
         >
-          Welcome to Streamer's world!
+          {`Welcome to Streamer's world!`}
         </Box>
       </Box>
       <Box
