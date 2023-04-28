@@ -9,6 +9,7 @@ const customTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
+      ls: 450,
       sm: 600,
       md: 960,
       lg: 1250,
@@ -22,11 +23,18 @@ const customTheme = createTheme({
 export const VideoPage = () => {
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <SideBar />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        {/* <SideBar /> */}
         <Box
           sx={{
             display: "flex",
+            justifyContent: "center",
             flexDirection: {
               xl: "row",
               lg: "row",
@@ -41,14 +49,14 @@ export const VideoPage = () => {
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
-              width: "80vw",
+              width: "70vw",
             }}
           >
             <ShareScreen />
             <UserCard />
             <About />
           </Box>
-          <Box>
+          <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
             <Chat />
           </Box>
         </Box>

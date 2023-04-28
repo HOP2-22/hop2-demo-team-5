@@ -55,7 +55,7 @@ export const Chat = () => {
       snapshot.forEach((doc) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
-      console.log(messages);
+
       setMessages(messages);
     });
     return () => unscribe();
@@ -70,6 +70,7 @@ export const Chat = () => {
 
   const handleSubmit = (e) => {
     const username = Cookies.get("username");
+
     e.preventDefault();
     if (newMessage === "") {
       return;
@@ -99,10 +100,13 @@ export const Chat = () => {
         justifyContent: "flex-end",
       }}
     >
-      {/* <Typography sx={NameOfRoom}>{room}</Typography> */}
-
       {exist ? (
-        <Box sx={{ maxWidth: 350 }}>
+        <Card
+          sx={{
+            width: 320,
+            bgcolor: "rgb(24,24,27)",
+          }}
+        >
           <Paper
             elevation={3}
             sx={{ bgcolor: "rgb(24,24,27)", color: "white" }}
@@ -137,11 +141,9 @@ export const Chat = () => {
                   <Picker
                     data={data}
                     emojiSize={22}
-                    emojiButtonSize={28}
+                    emojiButtonSize={25}
                     onEmojiSelect={addEmoji}
                     maxFrequentRows={0}
-                    width={100}
-                    height={100}
                     noCountryFlags={true}
                   />
                 </Box>
@@ -185,7 +187,7 @@ export const Chat = () => {
                         <Box
                           sx={{
                             "&:hover": {
-                              bgcolor: "red",
+                              bgcolor: "rgb(24,24,27)",
                             },
                             display: "flex",
                             justifyContent: "center",
@@ -218,7 +220,7 @@ export const Chat = () => {
               </Stack>
             </form>
           </Paper>
-        </Box>
+        </Card>
       ) : (
         <KeyboardReturnIcon
           onClick={() => {
@@ -234,15 +236,6 @@ export const Chat = () => {
   );
 };
 
-const NameOfRoom = {
-  width: "150px",
-  height: "100px",
-  bgcolor: "blue",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
 const ChatMessage = {
   maxHeight: 700,
   height: 700,
@@ -255,3 +248,6 @@ const ChatMessage = {
 };
 
 export default Chat;
+
+//git rebase main
+// git push -f

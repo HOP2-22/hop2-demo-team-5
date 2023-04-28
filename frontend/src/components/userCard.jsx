@@ -6,7 +6,6 @@ import {
   createTheme,
   ThemeProvider,
   Card,
-  CardMedia,
   CardContent,
   Stack,
 } from "@mui/material";
@@ -72,7 +71,7 @@ export const UserCard = () => {
             marginTop: "10px",
           }}
         >
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} sx={{ bgcolor: "blue" }}>
             <Box
               component="img"
               sx={{
@@ -116,7 +115,7 @@ export const UserCard = () => {
             </Card>
           </Stack>
 
-          <Box>
+          <Box sx={{ bgcolor: "red" }}>
             <Stack direction="row" spacing={1}>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 <Box
@@ -131,10 +130,7 @@ export const UserCard = () => {
                     height: "34px",
                     px: 1,
                   }}
-                >
-                  <AddReactionIcon />
-                  <Typography sx={{ ml: 1 }}>React</Typography>
-                </Box>
+                />
               </Box>
 
               <Box
@@ -192,12 +188,6 @@ export const UserCard = () => {
                   )}
                 </Box>
               </Box>
-
-              {/* <Box sx={but}>
-                <StarBorderIcon fontSize="small" />
-                <Typography sx={{ fontSize: "15px" }}>Subscribe</Typography>
-                <KeyboardArrowDownIcon fontSize="small" />
-              </Box> */}
             </Stack>
 
             <Box
@@ -219,10 +209,8 @@ export const UserCard = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  {" "}
                   <IosShareIcon fontSize="small" />
                 </Box>
-                <Box> {/* <MoreVertIcon fontSize="small" /> */}</Box>
               </Stack>
             </Box>
           </Box>
