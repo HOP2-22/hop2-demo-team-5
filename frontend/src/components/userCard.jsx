@@ -71,7 +71,7 @@ export const UserCard = () => {
             marginTop: "10px",
           }}
         >
-          <Stack direction="row" spacing={2} sx={{ bgcolor: "blue" }}>
+          <Stack direction="row" spacing={2}>
             <Box
               component="img"
               sx={{
@@ -115,7 +115,7 @@ export const UserCard = () => {
             </Card>
           </Stack>
 
-          <Box sx={{ bgcolor: "red" }}>
+          <Box>
             <Stack direction="row" spacing={1}>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 <Box
@@ -146,6 +146,7 @@ export const UserCard = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  ml: 4,
                 }}
                 onMouseEnter={handleLikeToggle}
                 onMouseLeave={handleMouseLeave}
@@ -162,7 +163,7 @@ export const UserCard = () => {
                   Follow
                 </Typography>
               </Box>
-
+              {/* 
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 <Box
                   sx={{
@@ -187,7 +188,7 @@ export const UserCard = () => {
                     <Notifications fontSize="small" />
                   )}
                 </Box>
-              </Box>
+              </Box> */}
             </Stack>
 
             <Box
@@ -203,14 +204,14 @@ export const UserCard = () => {
                     Viewer
                   </Typography>
                 </Box>
-                <Box>
+                {/* <Box>
                   <Typography sx={{ display: { xs: "none", sm: "block" } }}>
                     Time
                   </Typography>
-                </Box>
-                <Box>
+                </Box> */}
+                {/* <Box>
                   <IosShareIcon fontSize="small" />
-                </Box>
+                </Box> */}
               </Stack>
             </Box>
           </Box>

@@ -97,13 +97,26 @@ export const Chat = () => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "center",
+        width: {
+          xl: "100%",
+          lg: "100%",
+          md: "100vw",
+          xs: "100vw",
+          sm: "100vw",
+        },
       }}
     >
       {exist ? (
         <Card
           sx={{
-            width: 320,
+            width: {
+              xl: 320,
+              lg: 320,
+              md: "100vw",
+              xs: "100vw",
+              sm: "100vw",
+            },
             bgcolor: "rgb(24,24,27)",
           }}
         >
@@ -159,10 +172,19 @@ export const Chat = () => {
                   }}
                 >
                   <Stack spacing={1} direction="row">
-                    <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                        fontSize: {
+                          xl: "15px",
+                        },
+                      }}
+                    >
                       {message.user}:
                     </Typography>
-                    <Typography variant="body2">{message.text}</Typography>
+                    <Typography sx={{ fontSize: { xl: "15px" } }}>
+                      {message.text}
+                    </Typography>
                   </Stack>
                 </Card>
               ))}

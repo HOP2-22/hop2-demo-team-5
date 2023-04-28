@@ -61,27 +61,48 @@ export const ShareScreen = () => {
   return (
     <Box
       sx={{
-        width: "70vw",
+        width: {
+          xl: "70vw",
+          lg: "70vw",
+          md: "100vw",
+          xs: "100vw",
+          sm: "100vw",
+        },
         backgroundColor: theme === "black" ? "white" : "black",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
       }}
     >
-      <video
-        ref={videoRef}
-        style={{
-          width: "1000px",
-          height: "524px",
-          transform: startCam ? "scaleX(-1)" : "none",
+      <Box
+        sx={{
+          width: {
+            xl: "70vw",
+            lg: "70vw",
+            md: "100vw",
+            xs: "100vw",
+            sm: "100vw",
+          },
         }}
-      />
+      >
+        <video
+          ref={videoRef}
+          style={{
+            width: "100%",
+            height: "auto",
+            transform: startCam ? "scaleX(-1)" : "none",
+          }}
+        />
+      </Box>
       <Box
         sx={{
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-around",
+          justifyContent: "center",
+          paddingLeft: "20px",
+          gap: "20px",
           alignItems: "center",
+          flexDirection: "row",
         }}
       >
         {startScreen ? (

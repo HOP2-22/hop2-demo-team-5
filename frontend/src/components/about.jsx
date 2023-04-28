@@ -16,6 +16,7 @@ const customTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
+      ls: 500,
       sm: 600,
       md: 960,
       lg: 1250,
@@ -32,48 +33,54 @@ const st = {
 export const About = () => {
   return (
     <ThemeProvider theme={customTheme}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          mt: 5,
-        }}
-      >
-        <Card
+      <Box sx={{ display: { xs: "none", ls: "block" } }}>
+        <Box
           sx={{
-            bgcolor: "rgb(24,24,27)",
-            width: "861px",
-            color: "white",
-            padding: 5,
             display: "flex",
-            flexDirection: { xs: "column", lg: "column", xl: "row" },
-            justifyContent: "space-between",
+            justifyContent: "center",
           }}
         >
-          <Stack spacing={1}>
-            <Typography variant="h5">About User</Typography>
-            <Typography>followers</Typography>
-            <Typography>About</Typography>
-          </Stack>
-
-          <Box sx={{ display: { xs: "block", lg: "block", xl: "none" } }}>
-            <Box
-              sx={{ width: "100%", height: "1px", bgcolor: "grey", mt: "14px" }}
-            ></Box>
-          </Box>
-
-          <Stack
-            direction={{ md: "row", xl: "column" }}
-            sx={{ mt: "14px" }}
-            spacing={{ xs: 2, lg: 2, xl: 0 }}
+          <Card
+            sx={{
+              bgcolor: "rgb(24,24,27)",
+              width: "861px",
+              color: "white",
+              padding: 5,
+              display: "flex",
+              flexDirection: { xs: "column", lg: "column", xl: "row" },
+              justifyContent: "space-between",
+            }}
           >
-            <Typography sx={st}>@ESLCS</Typography>
-            <Typography sx={st}>@ESLCS</Typography>
-            <Typography sx={st}>@eslcounterstrike</Typography>
-            <Typography sx={st}>/ESLCS</Typography>
-            <Typography sx={st}>pro.eslgaming.com</Typography>
-          </Stack>
-        </Card>
+            <Stack spacing={1}>
+              <Typography variant="h5">About User</Typography>
+              <Typography>followers</Typography>
+              <Typography>About</Typography>
+            </Stack>
+
+            <Box sx={{ display: { xs: "block", lg: "block", xl: "none" } }}>
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "1px",
+                  bgcolor: "grey",
+                  mt: "14px",
+                }}
+              ></Box>
+            </Box>
+
+            <Stack
+              direction={{ md: "row", xl: "column" }}
+              sx={{ mt: "14px" }}
+              spacing={{ xs: 2, lg: 2, xl: 0 }}
+            >
+              <Typography sx={st}>@ESLCS</Typography>
+              <Typography sx={st}>@ESLCS</Typography>
+              <Typography sx={st}>@eslcounterstrike</Typography>
+              <Typography sx={st}>/ESLCS</Typography>
+              <Typography sx={st}>pro.eslgaming.com</Typography>
+            </Stack>
+          </Card>
+        </Box>
       </Box>
     </ThemeProvider>
   );

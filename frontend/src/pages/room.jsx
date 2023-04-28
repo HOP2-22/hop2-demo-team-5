@@ -30,34 +30,37 @@ export const VideoPage = () => {
           justifyContent: "center",
         }}
       >
-        {/* <SideBar /> */}
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
-            flexDirection: {
-              xl: "row",
-              lg: "row",
-              md: "column",
-              s: "column",
-              xs: "column",
-            },
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              width: "70vw",
-            }}
-          >
-            <ShareScreen />
-            <UserCard />
-            <About />
-          </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
-            <Chat />
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: {
+                  xl: "row",
+                  lg: "row",
+                  md: "column",
+                  s: "column",
+                  xs: "column",
+                },
+                bgcolor: "blue",
+                width: "100vw",
+              }}
+            >
+              <Box>
+                <ShareScreen />
+                <UserCard />
+                <About />
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+                <Chat />
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>
