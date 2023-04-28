@@ -120,28 +120,13 @@ export const Footer = () => {
   return (
     <Container maxWidth={"xl"}>
       <Box>
-        <Grid container spacing={6} sx={{ gap: "100px" }}>
-          <svg width={48} height={53} viewBox="0 0 30 34">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M27.4994 15.3919L22.5006 20.1262H17.4994L13.1233 24.2708V20.1262H7.49939V2.36833H27.4994V15.3919ZM6.24909 0L0 5.91853V27.2289H7.49939V33.1475L13.7485 27.2289H18.7497L30 16.5737V0H6.24909ZM23.7509 6.69873H21.2502V13.8008H23.7509V6.69873ZM14.3766 6.6709H16.8773V13.7739H14.3766V6.6709Z"
-              fill="#FFFFFF"
-            ></path>
-          </svg>
+        <Grid container spacing={6}>
           {Object.keys(footerData).map((footerHeader, i) => (
-            <Grid
-              item
-              xs
-              key={footerHeader}
-              sx={{
-                padding: "0 !important",
-              }}
-            >
+            <Grid item xs key={footerHeader}>
               <Typography
                 fontFamily={"'Roboto', sans-serif"}
-                fontSize={"14px"}
-                fontWeight={600}
+                sx={{ fontSize: { xs: "8px", md: "12px" } }}
+                fontWeight={400}
               >
                 {footerHeader}
               </Typography>
@@ -149,8 +134,8 @@ export const Footer = () => {
                 {footerData[footerHeader].map(({ label, link }) => (
                   <Typography
                     fontFamily={"'Roboto', sans-serif"}
-                    fontSize={"22px"}
-                    fontWeight={600}
+                    sx={{ fontSize: { xs: "14px", md: "21px" } }}
+                    fontWeight={450}
                   >
                     {label}
                   </Typography>
@@ -160,65 +145,68 @@ export const Footer = () => {
           ))}
         </Grid>
         <Box
-          fontFamily={"'Roboto', sans-serif"}
-          fontSize={"12px"}
-          fontWeight={600}
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            marginTop: "210px",
+            marginTop: {
+              xl: "210px",
+              md: "210px",
+              s: "10px",
+              xs: "5px",
+            },
           }}
         >
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
-              gap: "24px",
             }}
           >
-            <Typography
-              fontFamily={"'Roboto', sans-serif"}
-              fontSize={"12px"}
-              fontWeight={600}
-            >
-              Terms of Service
-            </Typography>
-            <Typography
-              fontFamily={"'Roboto', sans-serif"}
-              fontSize={"12px"}
-              fontWeight={600}
-            >
-              Privacy Policy
-            </Typography>
-            <Typography
-              fontFamily={"'Roboto', sans-serif"}
-              fontSize={"12px"}
-              fontWeight={600}
-            >
-              Ad Choices
-            </Typography>
-            <Typography
-              fontFamily={"'Roboto', sans-serif"}
-              fontSize={"12px"}
-              fontWeight={600}
-            >
-              Cookie Policy
-            </Typography>
-            <Typography
-              fontFamily={"'Roboto', sans-serif"}
-              fontSize={"12px"}
-              fontWeight={600}
-            >
-              Partners
-            </Typography>
-            <Typography
-              fontFamily={"'Roboto', sans-serif"}
-              fontSize={"12px"}
-              fontWeight={600}
-            >
-              Affiliates
-            </Typography>
+            <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+              <Typography
+                fontFamily={"'Roboto', sans-serif"}
+                fontSize={"12px"}
+                fontWeight={450}
+              >
+                Terms of Service
+              </Typography>
+              <Typography
+                fontFamily={"'Roboto', sans-serif"}
+                fontSize={"12px"}
+                fontWeight={450}
+              >
+                Privacy Policy
+              </Typography>
+              <Typography
+                fontFamily={"'Roboto', sans-serif"}
+                fontSize={"12px"}
+                fontWeight={450}
+              >
+                Ad Choices
+              </Typography>
+              <Typography
+                fontFamily={"'Roboto', sans-serif"}
+                fontSize={"12px"}
+                fontWeight={450}
+              >
+                Cookie Policy
+              </Typography>
+              <Typography
+                fontFamily={"'Roboto', sans-serif"}
+                fontSize={"12px"}
+                fontWeight={450}
+              >
+                Partners
+              </Typography>
+              <Typography
+                fontFamily={"'Roboto', sans-serif"}
+                fontSize={"12px"}
+                fontWeight={450}
+              >
+                Affiliates
+              </Typography>
+            </Stack>
           </Box>
           <Box
             sx={{
@@ -229,7 +217,7 @@ export const Footer = () => {
             <Typography
               fontFamily={"'Roboto', sans-serif"}
               fontSize={"12px"}
-              fontWeight={600}
+              fontWeight={450}
             >
               © 2022 Pinecone Interactive, Inc.
             </Typography>
