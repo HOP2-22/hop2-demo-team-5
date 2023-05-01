@@ -62,7 +62,7 @@ export const UserCard = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Box>
+      <Box sx={{ bgcolor: { xs: "rgb(24,24,27)", lg: "black" } }}>
         <Container
           maxWidth="xl"
           sx={{
@@ -71,7 +71,11 @@ export const UserCard = () => {
             marginTop: "10px",
           }}
         >
-          <Stack direction="row" spacing={2}>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{ display: "flex", alignItems: { xs: "center", lg: "start" } }}
+          >
             <Box
               component="img"
               sx={{
@@ -88,18 +92,31 @@ export const UserCard = () => {
               alt="img"
               src="https://i0.wp.com/www.alphr.com/wp-content/uploads/2021/06/How-Valorant-Ranking-System-Works-Rankings-Explained.png?resize=302%2C190&ssl=1"
             />
-            <Card sx={{ maxWidth: "300px", bgcolor: "black", color: "white" }}>
-              <CardContent sx={{ padding: 0 }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: "17px", sm: "20px" },
-                      fontWeight: "medium",
-                    }}
-                  >
-                    Streamer
-                  </Typography>
-                </Box>
+            <Card
+              sx={{
+                maxWidth: "300px",
+                bgcolor: { xs: "rgb(24,24,27)", lg: "black" },
+                color: "white",
+                boxShadow: "none",
+              }}
+            >
+              <CardContent
+                sx={{
+                  padding: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: { xs: "17px", sm: "20px" },
+                    mt: { xs: 2, lg: 0 },
+                    fontWeight: "medium",
+                  }}
+                >
+                  Streamer
+                </Typography>
+
                 <Typography sx={{ display: { xs: "none", sm: "block" } }}>
                   Name
                 </Typography>
@@ -115,24 +132,10 @@ export const UserCard = () => {
             </Card>
           </Stack>
 
-          <Box>
-            <Stack direction="row" spacing={1}>
-              <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                <Box
-                  sx={{
-                    "&:hover": {
-                      bgcolor: "rgb(47,47,53)",
-                    },
-                    borderRadius: "7px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "34px",
-                    px: 1,
-                  }}
-                />
-              </Box>
-
+          <Box
+            sx={{ display: "flex", alignItems: { xs: "center", lg: "start" } }}
+          >
+            <Stack direction="column">
               <Box
                 sx={{
                   bgcolor: "rgb(47,47,53)",
@@ -146,7 +149,6 @@ export const UserCard = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  ml: 4,
                 }}
                 onMouseEnter={handleLikeToggle}
                 onMouseLeave={handleMouseLeave}
@@ -163,6 +165,24 @@ export const UserCard = () => {
                   Follow
                 </Typography>
               </Box>
+
+              <Box
+                sx={{
+                  width: { xs: "80px", sm: "90px" },
+                  height: "34px",
+                  borderRadius: "7px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{ ml: 4, fontSize: { xs: "13px", sm: "15px" } }}
+                >
+                  Viewer
+                </Typography>
+              </Box>
+
               {/* 
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 <Box
@@ -190,30 +210,6 @@ export const UserCard = () => {
                 </Box>
               </Box> */}
             </Stack>
-
-            <Box
-              sx={{
-                mt: { xs: 1, sm: 2 },
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Stack direction="row" spacing={1}>
-                <Box>
-                  <Typography sx={{ display: { xs: "none", sm: "block" } }}>
-                    Viewer
-                  </Typography>
-                </Box>
-                {/* <Box>
-                  <Typography sx={{ display: { xs: "none", sm: "block" } }}>
-                    Time
-                  </Typography>
-                </Box> */}
-                {/* <Box>
-                  <IosShareIcon fontSize="small" />
-                </Box> */}
-              </Stack>
-            </Box>
           </Box>
         </Container>
       </Box>

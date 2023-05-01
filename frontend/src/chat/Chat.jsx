@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, React, useRef } from "react";
 import {
   addDoc,
   collection,
@@ -17,6 +17,8 @@ import {
   Paper,
   Card,
   InputAdornment,
+  ThemeProvider,
+  createTheme,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import StartIcon from "@mui/icons-material/Start";
@@ -124,7 +126,7 @@ export const Chat = () => {
             elevation={3}
             sx={{ color: "white", bgcolor: "rgb(24,24,27)" }}
           >
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Box sx={{ display: { xs: "none", lg: "block" } }}>
               <Box
                 sx={{
                   display: "flex",
@@ -192,7 +194,11 @@ export const Chat = () => {
               ))}
             </Box>
 
-            <form onSubmit={handleSubmit} ref={emojiRef}>
+            <form
+              onSubmit={handleSubmit}
+              ref={emojiRef}
+              sx={{ position: "fixed" }}
+            >
               <Stack>
                 <TextField
                   color="secondary"
@@ -224,23 +230,24 @@ export const Chat = () => {
                           <InsertEmoticonIcon
                             sx={{
                               color: "white",
+                              mr: 1,
                             }}
                             onClick={() => setShowEmojis(!showEmojis)}
                           />
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            type="submit"
+                            sx={{ size: "small", mr: 6 }}
+                          >
+                            Send
+                          </Button>
                         </Box>
                       </InputAdornment>
                     ),
                   }}
                 />
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  sx={{ size: "small" }}
-                >
-                  Send
-                </Button>
               </Stack>
             </form>
           </Paper>
@@ -261,8 +268,8 @@ export const Chat = () => {
 };
 
 const ChatMessage = {
-  maxHeight: 700,
-  height: 700,
+  maxHeight: 800,
+  height: { xs: 500, sm: 310, xl: 800 },
   overflowY: "scroll",
   px: 2,
   mb: 1,
