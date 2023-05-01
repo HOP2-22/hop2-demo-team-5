@@ -122,27 +122,29 @@ export const Chat = () => {
         >
           <Paper
             elevation={3}
-            sx={{ bgcolor: "rgb(24,24,27)", color: "white" }}
+            sx={{ color: "white", bgcolor: "rgb(24,24,27)" }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                p: 2,
-                justifyContent: "space-between",
-              }}
-            >
-              <StartIcon
-                onClick={() => {
-                  setExist(false);
-                }}
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
+              <Box
                 sx={{
-                  "&:hover": { bgcolor: "rgb(47,47,53)" },
-                  borderRadius: "5px",
+                  display: "flex",
+                  p: 2,
+                  justifyContent: "space-between",
                 }}
-              />
-              <Typography sx={{ fontWeight: "bold", color: "white" }}>
-                Live Chat
-              </Typography>
+              >
+                <StartIcon
+                  onClick={() => {
+                    setExist(false);
+                  }}
+                  sx={{
+                    "&:hover": { bgcolor: "rgb(47,47,53)" },
+                    borderRadius: "5px",
+                  }}
+                />
+                <Typography sx={{ fontWeight: "bold", color: "white" }}>
+                  Live Chat
+                </Typography>
+              </Box>
             </Box>
             <Box
               sx={{ width: "100%", height: "2px", bgcolor: "rgb(38,38,43)" }}

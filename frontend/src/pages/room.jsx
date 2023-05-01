@@ -45,10 +45,10 @@ export const VideoPage = () => {
                   xl: "row",
                   lg: "row",
                   md: "column",
-                  s: "column",
+                  ls: "column",
                   xs: "column",
                 },
-                bgcolor: "blue",
+
                 width: "100vw",
               }}
             >
@@ -57,7 +57,7 @@ export const VideoPage = () => {
                 <UserCard />
                 <About />
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+              <Box>
                 <Chat />
               </Box>
             </Box>

@@ -33,7 +33,7 @@ const st = {
 export const About = () => {
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{ display: { xs: "none", ls: "block" } }}>
+      <Box sx={{ display: { xs: "none", lg: "block" } }}>
         <Box
           sx={{
             display: "flex",
