@@ -20,6 +20,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IosShareIcon from "@mui/icons-material/IosShare";
+import { About } from "./about";
 
 const customTheme = createTheme({
   breakpoints: {
@@ -62,19 +63,25 @@ export const UserCard = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{ bgcolor: { xs: "rgb(24,24,27)", lg: "black" } }}>
+      <Box
+        sx={{
+          bgcolor: { xs: "rgb(24,24,27)", lg: "rgb(14,14,16)" },
+          height: { xs: "0", xl: "40vh" },
+        }}
+      >
         <Container
           maxWidth="xl"
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "start",
             marginTop: "10px",
           }}
         >
           <Stack
             direction="row"
             spacing={2}
-            sx={{ display: "flex", alignItems: { xs: "center", lg: "start" } }}
+            sx={{ display: "flex", alignItems: "center" }}
           >
             <Box
               component="img"
@@ -95,7 +102,11 @@ export const UserCard = () => {
             <Card
               sx={{
                 maxWidth: "300px",
-                bgcolor: { xs: "rgb(24,24,27)", lg: "black" },
+                bgcolor: {
+                  xs: "rgb(24,24,27)",
+                  lg: "black",
+                  xl: "rgb(14,14,16)",
+                },
                 color: "white",
                 boxShadow: "none",
               }}
@@ -110,7 +121,7 @@ export const UserCard = () => {
                 <Typography
                   sx={{
                     fontSize: { xs: "17px", sm: "20px" },
-                    mt: { xs: 2, lg: 0 },
+                    mt: 3,
                     fontWeight: "medium",
                   }}
                 >
@@ -132,9 +143,7 @@ export const UserCard = () => {
             </Card>
           </Stack>
 
-          <Box
-            sx={{ display: "flex", alignItems: { xs: "center", lg: "start" } }}
-          >
+          <Box sx={{ display: "flex", mt: 3 }}>
             <Stack direction="column">
               <Box
                 sx={{
@@ -212,6 +221,7 @@ export const UserCard = () => {
             </Stack>
           </Box>
         </Container>
+        <About />
       </Box>
     </ThemeProvider>
   );

@@ -245,6 +245,7 @@ export const Header = () => {
       sx={{
         flexGrow: 1,
         backgroundColor: theme === "white" ? "black" : "white",
+        position: "fixed",
       }}
     >
       <AppBar

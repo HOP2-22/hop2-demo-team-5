@@ -1,15 +1,10 @@
 import {
   Box,
   Typography,
-  Button,
-  Container,
   createTheme,
   ThemeProvider,
   Card,
-  CardMedia,
-  CardContent,
   Stack,
-  Grid,
 } from "@mui/material";
 
 const customTheme = createTheme({
@@ -33,7 +28,7 @@ const st = {
 export const About = () => {
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{ display: { xs: "none", lg: "block" } }}>
+      <Box sx={{ display: { xs: "none", lg: "block" }, mt: 2 }}>
         <Box
           sx={{
             display: "flex",

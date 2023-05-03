@@ -10,7 +10,7 @@ import { styled } from "@mui/system";
 
 export const SideBar = () => {
   const [appear, setAppear] = useState(true);
-  const matches = useMediaQuery("(min-width:1750px)");
+  const matches = useMediaQuery("(max-width:900px)");
 
   return appear && matches ? (
     <Box
@@ -20,6 +20,9 @@ export const SideBar = () => {
         color: "white",
         padding: 2,
         width: "245px",
+        display: "none",
+        // position: "fixed",
+        // left: "0",
       }}
     >
       <Stack spacing={1}>

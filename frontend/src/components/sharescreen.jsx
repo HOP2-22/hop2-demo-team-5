@@ -77,7 +77,7 @@ export const ShareScreen = () => {
         sx={{
           width: {
             xl: "70vw",
-            lg: "70vw",
+            lg: "50vw",
             md: "100vw",
             xs: "100vw",
             sm: "100vw",

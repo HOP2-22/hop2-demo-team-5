@@ -100,26 +100,45 @@ export const Chat = () => {
       sx={{
         display: "flex",
         justifyContent: "center",
+        flexDirection: "column",
+        // position: "fixed",
+        position: {
+          xl: "fixed",
+          lg: "fixed",
+          md: "none",
+          xs: "none",
+          sm: "none",
+        },
         width: {
-          xl: "100%",
-          lg: "100%",
+          xl: "400px",
+          lg: "400px",
           md: "100vw",
           xs: "100vw",
           sm: "100vw",
         },
+        height: {
+          xl: "95vh",
+          lg: "95vh",
+          md: "30vh",
+          xs: "52vh",
+          sm: "50vh",
+        },
+
+        right: 0,
       }}
     >
       {exist ? (
         <Card
           sx={{
-            width: {
-              xl: 320,
-              lg: 320,
-              md: "100vw",
-              xs: "100vw",
-              sm: "100vw",
-            },
-            bgcolor: "rgb(24,24,27)",
+            // width: {
+            //   xl: "500px",
+            //   lg: "400px",
+            //   md: "100vw",
+            //   xs: "100vw",
+            //   sm: "100vw",
+            // },
+            marginBottom: "50px",
+            bgcolor: "rgb(24,24,27s)",
           }}
         >
           <Paper
@@ -154,15 +173,17 @@ export const Chat = () => {
 
             <Box ref={containerRef} sx={ChatMessage}>
               {showEmojis && (
-                <Box sx={{ position: "absolute", mt: 32 }}>
-                  <Picker
-                    data={data}
-                    emojiSize={22}
-                    emojiButtonSize={25}
-                    onEmojiSelect={addEmoji}
-                    maxFrequentRows={0}
-                    noCountryFlags={true}
-                  />
+                <Box>
+                  <Box sx={{ position: "absolute", mt: 32 }}>
+                    <Picker
+                      data={data}
+                      emojiSize={22}
+                      emojiButtonSize={25}
+                      onEmojiSelect={addEmoji}
+                      maxFrequentRows={0}
+                      noCountryFlags={true}
+                    />
+                  </Box>
                 </Box>
               )}
               {messages.map((message) => (
@@ -193,63 +214,6 @@ export const Chat = () => {
                 </Card>
               ))}
             </Box>
-
-            <form
-              onSubmit={handleSubmit}
-              ref={emojiRef}
-              sx={{ position: "fixed" }}
-            >
-              <Stack>
-                <TextField
-                  color="secondary"
-                  placeholder="Send a message"
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  value={newMessage}
-                  InputProps={{
-                    style: {
-                      color: "white",
-                      height: "44px",
-                      width: "100%",
-                      backgroundColor: "rgb(50,50,52)",
-                    },
-                    endAdornment: (
-                      <InputAdornment disableTypography position="end">
-                        <Box
-                          sx={{
-                            "&:hover": {
-                              bgcolor: "rgb(24,24,27)",
-                            },
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: 34,
-                            height: 32,
-                            borderRadius: 1,
-                          }}
-                        >
-                          <InsertEmoticonIcon
-                            sx={{
-                              color: "white",
-                              mr: 1,
-                            }}
-                            onClick={() => setShowEmojis(!showEmojis)}
-                          />
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            size="small"
-                            type="submit"
-                            sx={{ size: "small", mr: 6 }}
-                          >
-                            Send
-                          </Button>
-                        </Box>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Stack>
-            </form>
           </Paper>
         </Card>
       ) : (
@@ -263,16 +227,75 @@ export const Chat = () => {
           }}
         />
       )}
+      <form
+        onSubmit={handleSubmit}
+        ref={emojiRef}
+        style={{ position: "fixed", bottom: "0", width: { xl: "200px" } }}
+      >
+        <Stack>
+          <TextField
+            color="secondary"
+            placeholder="Send a message"
+            onChange={(e) => setNewMessage(e.target.value)}
+            value={newMessage}
+            InputProps={{
+              style: {
+                color: "white",
+                height: "44px",
+                // width: "100%",
+                border: "1px grey solid",
+                backgroundColor: "black",
+              },
+              backgroundColor: "rgb(50,50,52)",
+
+              endAdornment: (
+                <InputAdornment disableTypography position="end">
+                  <Box
+                    sx={{
+                      "&:hover": {
+                        bgcolor: "rgb(24,24,27)",
+                      },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      // width: "100%",
+                      width: 34,
+                      height: 32,
+                      borderRadius: 1,
+                    }}
+                  >
+                    <InsertEmoticonIcon
+                      sx={{
+                        color: "white",
+                        mr: 1,
+                      }}
+                      onClick={() => setShowEmojis(!showEmojis)}
+                    />
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      type="submit"
+                      sx={{ size: "small", mr: 6 }}
+                    >
+                      Send
+                    </Button>
+                  </Box>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Stack>
+      </form>
     </Box>
   );
 };
 
 const ChatMessage = {
-  maxHeight: 800,
-  height: { xs: 500, sm: 310, xl: 800 },
-  overflowY: "scroll",
+  height: "100%",
+  maxHeight: "85vh",
+  overflow: "scroll",
   px: 2,
-  mb: 1,
   borderRadius: 1,
   color: "white",
   bgcolor: "rgb(24,24,27)",
