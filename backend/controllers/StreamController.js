@@ -11,7 +11,7 @@ exports.getStreams = async (request, response) => {
 exports.createRoom = async (request, response) => {
   try {
     const room = await Streams.create({
-      username: request.body.username,
+      roomName: request.body.roomName,
     });
     response.status(200).json({
       message: "room created",
