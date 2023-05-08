@@ -227,11 +227,7 @@ export const Chat = () => {
           }}
         />
       )}
-      <form
-        onSubmit={handleSubmit}
-        ref={emojiRef}
-        style={{ position: "fixed", bottom: "0", width: { xl: "200px" } }}
-      >
+      <form onSubmit={handleSubmit} ref={emojiRef} style={{ bottom: "0" }}>
         <Stack>
           <TextField
             color="secondary"

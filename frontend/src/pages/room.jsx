@@ -56,7 +56,7 @@ export const VideoPage = () => {
               width: "100vw",
             }}
           >
-            <SideBar />
+            <SideBar /> 
             <Box
               sx={{
                 display: "flex",
