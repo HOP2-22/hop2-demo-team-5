@@ -5,11 +5,13 @@ const {
   create,
   deleteById,
   update,
+  updateImg,
 } = require("../controllers/CategoryController");
 
 router.get("/", get);
 router.post("/post", create);
-router.put("/:id", update);
+// router.put("/:id", update);
 router.delete("/:id", deleteById);
+router.put("/:id", updateImg);
 
 module.exports = router;

@@ -16,6 +16,7 @@ exports.create = function (req, res) {
     name: req.body.name,
     description: req.body.description,
     rules: req.body.rules,
+    image: req.body.image,
   });
 
   newCategory
@@ -52,6 +53,26 @@ exports.deleteById = function (req, res) {
         return res.status(404).send("Category not found.");
       }
       res.send(deletedCategory);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+};
+
+exports.updateImg = function (req, res) {
+  const categoryId = req.params.id;
+  const imageData = req.body.image;
+
+  Category.findByIdAndUpdate(
+    categoryId,
+    { image: imageData }, // update only the image field
+    { new: true }
+  )
+    .then((updatedCategory) => {
+      if (!updatedCategory) {
+        return res.status(404).send("Category not found.");
+      }
+      res.send(updatedCategory);
     })
     .catch((err) => {
       res.status(500).send(err);
