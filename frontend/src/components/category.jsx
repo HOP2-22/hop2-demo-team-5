@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Box,
   Typography,
@@ -10,7 +12,9 @@ import {
   createTheme,
 } from "@mui/material";
 import styles from "../styles/stream.module.css";
+
 export default function Categorylist() {
+  const router = useRouter();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -19,14 +23,13 @@ export default function Categorylist() {
     });
   }, []);
 
-  console.log(categories[0]);
-
   const customTheme = createTheme({
     breakpoints: {
       values: {
-        xs: 0,
-        sm: 600,
-        md: 960,
+        lw: 0,
+        xs: 578,
+        sm: 880,
+        md: 1115,
         lg: 1625,
         xl: 1750,
       },
@@ -35,22 +38,40 @@ export default function Categorylist() {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Box sx={{ p: 3 }}>
-        <Box sx={{ mt: 5 }}>
+      <Box>
+        <Typography
+          variant="h4"
+          sx={{
+            color: "#9147ff",
+            display: "flex",
+            justifyContent: "center",
+            fontWeight: "bold",
+          }}
+        >
+          Categories
+        </Typography>
+        <Box sx={{ mt: 5, width: "100vw", height: "100vh" }}>
           <Grid container spacing={3}>
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <Grid
                 item
-                xs={12}
-                sm={6}
-                md={4}
+                lw={12}
+                xs={6}
+                sm={4}
+                md={3}
                 lg={2}
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                 }}
+                key={category.id}
               >
-                <Card sx={{ bgcolor: "black", width: { xs: 265, md: 285 } }}>
+                <Card
+                  sx={{ bgcolor: "black" }}
+                  onClick={() => {
+                    router.push(`/category/${category.name}`);
+                  }}
+                >
                   <div className={styles.stream}>
                     <img
                       src={category.image}
