@@ -46,11 +46,14 @@ export default function Categorylist() {
             display: "flex",
             justifyContent: "center",
             fontWeight: "bold",
+            "&:hover": {
+              textDecoration: "underline",
+            },
           }}
         >
           Categories
         </Typography>
-        <Box sx={{ mt: 5, width: "100vw", height: "100vh" }}>
+        <Box sx={{ mt: 5, width: "90vw", height: "100vh" }}>
           <Grid container spacing={3}>
             {categories.map((category) => (
               <Grid
