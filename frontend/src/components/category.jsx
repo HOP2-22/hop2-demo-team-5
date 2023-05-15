@@ -12,10 +12,12 @@ import {
   createTheme,
 } from "@mui/material";
 import styles from "../styles/stream.module.css";
+import { useTheme } from "@/context/ThemeProvider";
 
 export default function Categorylist() {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
+  const { theme, changeTheme } = useTheme();
 
   useEffect(() => {
     axios.get("http://localhost:5555/category").then((response) => {
@@ -39,20 +41,20 @@ export default function Categorylist() {
   return (
     <ThemeProvider theme={customTheme}>
       <Box>
-        <Typography
-          variant="h4"
-          sx={{
-            color: "#9147ff",
-            display: "flex",
-            justifyContent: "center",
-            fontWeight: "bold",
-            "&:hover": {
-              textDecoration: "underline",
-            },
-          }}
-        >
-          Categories
-        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#9147ff",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Categories
+          </Typography>
+        </Box>
         <Box sx={{ mt: 5, width: "90vw", height: "100vh" }}>
           <Grid container spacing={3}>
             {categories.map((category) => (
@@ -70,7 +72,11 @@ export default function Categorylist() {
                 key={category.id}
               >
                 <Card
-                  sx={{ bgcolor: "black" }}
+                  sx={{
+                    backgroundColor: theme === "white" ? "black" : "white",
+                    border: "none",
+                    boxShadow: "none",
+                  }}
                   onClick={() => {
                     router.push(`/category/${category.name}`);
                   }}
@@ -82,7 +88,9 @@ export default function Categorylist() {
                     />
                   </div>
 
-                  <Typography sx={{ color: "white" }}>
+                  <Typography
+                    sx={{ color: theme === "white" ? "white" : "black" }}
+                  >
                     {category.name}
                   </Typography>
                 </Card>

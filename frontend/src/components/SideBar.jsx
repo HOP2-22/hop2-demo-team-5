@@ -7,17 +7,20 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { styled } from "@mui/system";
+import { useTheme } from "@/context/ThemeProvider";
 
 export const SideBar = () => {
   const [appear, setAppear] = useState(true);
+  const { theme, changeTheme } = useTheme();
+
   const matches = useMediaQuery("(min-width:1750px)");
 
   return appear && matches ? (
     <Box
       sx={{
-        height: "100%",
-        bgcolor: "rgb(31,31,35)",
-        color: "white",
+        height: "80vh",
+        backgroundColor: theme === "white" ? "rgb(31,31,35)" : "white",
+        color: theme === "white" ? "white" : "rgb(31,31,35)",
         padding: 2,
         width: "245px",
       }}
@@ -108,8 +111,9 @@ export const SideBar = () => {
   ) : (
     <Box
       sx={{
-        bgcolor: "rgb(31,31,35)",
-        height: "100%",
+        backgroundColor:
+          theme === "white" ? "rgb(31,31,35)" : "rgb(239,239,231)",
+        height: "80vh",
         width: "50px",
         display: "flex",
         alignItems: "center",
@@ -133,6 +137,7 @@ export const SideBar = () => {
       >
         {matches ? (
           <StartIcon
+            sx={{ color: theme === "white" ? "white" : "black" }}
             fontSize="small"
             onClick={() => {
               setAppear(true);
@@ -143,7 +148,9 @@ export const SideBar = () => {
         )}
       </Box>
 
-      <FavoriteBorderIcon sx={{ mb: 1 }} />
+      <FavoriteBorderIcon
+        sx={{ color: theme === "white" ? "white" : "black", mb: 1 }}
+      />
       <Stack direction="column" spacing={1}>
         <Box
           sx={{

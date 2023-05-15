@@ -28,9 +28,13 @@ const styles = {
   textTrans: {
     textTransform: "capitalize",
     color: "white",
-    backgroundColor: "blue",
+    backgroundColor: "#9147ff",
     fontFamily: "Mulish",
     marginLeft: "10px",
+    "&:hover": {
+      bgcolor: "white",
+      color: "black",
+    },
   },
   Box: {
     display: "flex",
@@ -79,7 +83,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: "#9147ff",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -89,6 +93,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+  },
+}));
+
+const PinkSwitch = styled(Switch)(({ theme }) => ({
+  "& .MuiSwitch-switchBase.Mui-checked": {
+    color: "#9147ff",
+    "&:hover": {
+      backgroundColor: alpha("#9147ff", theme.palette.action.hoverOpacity),
+    },
+  },
+  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+    backgroundColor: "#9147ff",
   },
 }));
 
@@ -204,9 +220,21 @@ export const Header = () => {
               }}
             >
               {theme === "black" ? (
-                <img src={logoWhite} alt="pice" width={120} height={25} />
+                <img
+                  src={logoWhite}
+                  alt="pice"
+                  width={120}
+                  height={25}
+                  style={{ marginTop: 5 }}
+                />
               ) : (
-                <img src={logo} alt="pice" width={120} height={30} />
+                <img
+                  src={logo}
+                  alt="pice"
+                  width={120}
+                  height={30}
+                  style={{ marginTop: 5 }}
+                />
               )}
             </Box>
             <Typography
@@ -242,9 +270,10 @@ export const Header = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Switch
+          <PinkSwitch
             {...label}
             defaultChecked
+            color="secondary"
             onClick={() => {
               changeTheme();
             }}
@@ -260,9 +289,13 @@ export const Header = () => {
                   marginLeft: "20px ",
                 }}
               >
+<<<<<<< HEAD
                 <Typography onClick={handleClick}>
                   {userData.username}
                 </Typography>
+=======
+                <Typography sx={{ color: "#9147ff" }}>{username}</Typography>
+>>>>>>> f282314 (done)
                 <Button
                   sx={styles.textTrans}
                   variant="contained"
