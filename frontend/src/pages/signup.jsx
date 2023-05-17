@@ -6,6 +6,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { useTheme } from "@/context/ThemeProvider";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 const styles = {
   input: {
@@ -13,6 +16,8 @@ const styles = {
     height: "35px",
     borderRadius: "10px",
     fontFamily: "Mulish",
+    paddingLeft: "10px",
+    paddingRight: "10px",
   },
 };
 const pic =
@@ -20,6 +25,14 @@ const pic =
 
 export const SignUp = () => {
   const { theme } = useTheme();
+  const [isPasswordShow1, setIsPasswordShow1] = useState(false);
+  const [isPasswordShow2, setIsPasswordShow2] = useState(false);
+  function toggleShowPassword1() {
+    setIsPasswordShow1(!isPasswordShow1);
+  }
+  function toggleShowPassword2() {
+    setIsPasswordShow2(!isPasswordShow2);
+  }
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -90,7 +103,7 @@ export const SignUp = () => {
               sm: "30px",
               xs: "25px",
             },
-            fontFamily: "Mulish",
+            fontFamily: "'Roboto', sans-serif",
           }}
         >
           {`Welcome to Streamer's world!`}
@@ -124,7 +137,7 @@ export const SignUp = () => {
           <Box>
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
@@ -134,7 +147,7 @@ export const SignUp = () => {
             </Typography>
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
@@ -154,7 +167,7 @@ export const SignUp = () => {
             />
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
@@ -175,7 +188,7 @@ export const SignUp = () => {
             />
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
@@ -183,64 +196,63 @@ export const SignUp = () => {
               Нууц үг
             </Typography>
 
-            <input
-              placeholder="••••••••••"
-              required
-              type="password"
-              variant="outlined"
-              style={styles.input}
-              color="neutral"
-              value={user.password}
-              onChange={(e) => {
-                setUser({ ...user, password: e.target.value });
-              }}
-            />
+            <Box style={{ display: "flex", alignItems: "center" }}>
+              <input
+                placeholder="password"
+                required
+                type={isPasswordShow1 ? "text" : "password"}
+                variant="outlined"
+                style={styles.input}
+                color="neutral"
+                value={user.password}
+                onChange={(e) => {
+                  setUser({ ...user, password: e.target.value });
+                }}
+              />
+              <path onClick={toggleShowPassword1}>
+                {isPasswordShow1 ? <Visibility /> : <VisibilityOff />}
+              </path>
+            </Box>
+
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
             >
               Нууц үг давтах{" "}
             </Typography>
-            <input
-              placeholder="••••••••••"
-              required
-              type="password"
-              variant="outlined"
-              style={styles.input}
-              color="neutral"
-              value={check}
-              onChange={(e) => {
-                setCheck(e.target.value);
-              }}
-            />
-            <Box>
-              <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-                <input type="checkbox" name="" id="" className="checkbox" />
-                <Typography
-                  style={{
-                    fontFamily: "Mulish",
-                    marginBottom: "10px",
-                    color: theme === "white" ? "white" : "black",
-                  }}
-                >
-                  Намайг сана
-                </Typography>
-              </Box>
+
+            <Box style={{ display: "flex", alignItems: "center" }}>
+              <input
+                placeholder="password"
+                required
+                type={isPasswordShow2 ? "text" : "password"}
+                variant="outlined"
+                style={styles.input}
+                color="neutral"
+                value={check}
+                onChange={(e) => {
+                  setCheck(e.target.value);
+                }}
+              />
+              <path onClick={toggleShowPassword2}>
+                {isPasswordShow2 ? <Visibility /> : <VisibilityOff />}
+              </path>
             </Box>
+
             <button
               type="submit"
               style={{
                 width: "150px",
                 height: "40px",
-                backgroundColor: "blue",
+                backgroundColor: "#9147ff",
                 color: "white",
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 borderRadius: "10px",
                 border: "none",
-                marginBottom: "10px",
+                marginTop: "20px",
               }}
             >
               Бүртгүүлэх

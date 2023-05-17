@@ -30,7 +30,8 @@
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.9",
     "swiper": "^9.1.1",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "react-toastify": "^9.1.2"
   },
   "devDependencies": {
     "next": "^13.3.1"

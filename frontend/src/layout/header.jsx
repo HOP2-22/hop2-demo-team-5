@@ -8,10 +8,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import AddIcon from "@mui/icons-material/Add";
@@ -21,7 +18,9 @@ import { useTheme } from "@/context/ThemeProvider";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
+import { useAuth } from "@/context/AuthProvider";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -99,94 +98,47 @@ export const Header = () => {
     try {
     } catch (error) {}
   };
-  const [username, setUsername] = useState("");
-  useEffect(() => {
-    const getUsername = () => {
-      const user = Cookies.get("username");
-      setUsername(user);
-    };
-    getUsername();
-  }, []);
+  const { userData, setUserData } = useAuth();
+
+  const successfulLogout = () => {
+    toast("Амжилттай гарлаа", {
+      hideProgressBar: true,
+      autoClose: 1000,
+      type: "error",
+      theme: "light",
+    });
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const logOut = () => {
+    setUserData(null);
+    Cookies.remove("token");
+    successfulLogout();
+    handleClose();
+  };
 
   const { theme, changeTheme } = useTheme();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const logo =
     "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Screen%20Shot%202023-04-21%20at%2017.51.35.png?alt=media&token=a050a1d0-a4af-4527-af11-e0ea2474ed94";
   const logoWhite =
     "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Screen%20Shot%202023-04-21%20at%2017.53.30_auto_x2.jpg?alt=media&token=fbe70ac0-3908-43ec-a6b7-267c3200f220";
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      sx={{ backgroundColor: theme === "white" ? "black" : "white" }}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      sx={{
-        backgroundColor: theme === "white" ? "black" : "white",
-        color: theme === "white" ? "white" : "black",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
+    <Menu>
+      <MenuItem style={{ alignItems: "center" }}>
         <IconButton size="large" color="inherit">
           <SearchIcon />
         </IconButton>
         <p>Browse</p>
       </MenuItem>
-      {username ? (
+      {userData ? (
         <Box>
           <MenuItem
             onClick={() => {
@@ -195,18 +147,6 @@ export const Header = () => {
             }}
           >
             <p>Create Room</p>
-          </MenuItem>
-          <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
           </MenuItem>
         </Box>
       ) : (
@@ -310,7 +250,7 @@ export const Header = () => {
             }}
           />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {username ? (
+            {userData ? (
               <Box
                 sx={{
                   height: "64px",
@@ -320,7 +260,9 @@ export const Header = () => {
                   marginLeft: "20px ",
                 }}
               >
-                <Typography>{username}</Typography>
+                <Typography onClick={handleClick}>
+                  {userData.username}
+                </Typography>
                 <Button
                   sx={styles.textTrans}
                   variant="contained"
@@ -361,25 +303,20 @@ export const Header = () => {
                 </Button>
               </Box>
             )}
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              sx={{
-                color: theme === "black" ? "black" : "white",
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
               }}
             >
-              <MoreIcon />
-            </IconButton>
+              <MenuItem onClick={logOut}>Гарах</MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 };

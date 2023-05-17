@@ -1,50 +1,78 @@
-import { Box } from "@mui/material";
-import { Typography, TextField } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
+import { toast } from "react-toastify";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useAuth } from "@/context/AuthProvider";
+import { styled, TextField } from "@mui/material";
 
 const styles = {
   family: {
-    fontFamily: "Mulish",
+    fontFamily: "'Roboto', sans-serif",
     marginBottom: "10px",
   },
   input: {
     width: "340px",
     height: "35px",
     borderRadius: "10px",
-    fontFamily: "Mulish",
+    borderColor: "var(--color-border-input-focus)",
+    fontFamily: "'Roboto', sans-serif",
+    paddingLeft: "10px",
+    paddingRight: "10px",
   },
 };
 
 export const Login = () => {
+  const { setUserData } = useAuth();
   const { theme } = useTheme();
   const router = useRouter();
+  const [isPasswordShow, setIsPasswordShow] = useState(false);
+  function toggleShowPassword() {
+    setIsPasswordShow(!isPasswordShow);
+  }
+
+  const successfulLogin = () => {
+    toast("Амжилттай нэвтэрлээ", {
+      hideProgressBar: true,
+      autoClose: 1000,
+      type: "success",
+      theme: "colored",
+    });
+  };
+  const failureLogin = () => {
+    toast("Нууц үг эсвэл имэйл буруу байна", {
+      hideProgressBar: true,
+      autoClose: 1000,
+      type: "warning",
+      theme: "colored",
+    });
+  };
+
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
   const LoginFunc = async () => {
     try {
-      const res = await axios.post(
-        `https://live-stream-backend.onrender.com/user/login`,
-        {
-          username: user.username,
-          password: user.password,
-        }
-      );
-      console.log(res);
+      const res = await axios.post(`http://localhost:5555/user/login`, {
+        username: user.username,
+        password: user.password,
+      });
       if (res.data.match === true) {
+        successfulLogin();
         Cookies.set("token", res.data.token);
-        Cookies.set("username", res.data.username);
-        // setUser(res.data.email);
-        router.push("/");
+        setUserData(res.data.user);
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
-      alert("Password or Email is invalid");
+      failureLogin();
     }
   };
 
@@ -88,7 +116,7 @@ export const Login = () => {
               sm: "30px",
               xs: "25px",
             },
-            fontFamily: "Mulish",
+            fontFamily: "'Roboto', sans-serif",
           }}
         >
           Welcome Back Streamer!
@@ -122,7 +150,7 @@ export const Login = () => {
           <Box>
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
@@ -132,7 +160,7 @@ export const Login = () => {
             </Typography>
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
@@ -152,71 +180,95 @@ export const Login = () => {
             />
             <Typography
               sx={{
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 marginBottom: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
             >
               Нууц үг
             </Typography>
-            <input
-              placeholder="••••••••••"
-              required
-              type="password"
-              variant="outlined"
-              style={styles.input}
-              color="neutral"
-              value={user.password}
-              onChange={(e) => {
-                setUser({ ...user, password: e.target.value });
-              }}
-            />
+
+            <Box style={{ display: "flex", alignItems: "center" }}>
+              <input
+                placeholder="password"
+                required
+                type={isPasswordShow ? "text" : "password"}
+                variant="outlined"
+                style={styles.input}
+                color="neutral"
+                value={user.password}
+                onChange={(e) => {
+                  setUser({ ...user, password: e.target.value });
+                }}
+              />
+              <path onClick={toggleShowPassword}>
+                {isPasswordShow ? <Visibility /> : <VisibilityOff />}
+              </path>
+            </Box>
+
             <Box>
-              <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-                <input type="checkbox" name="" id="" className="checkbox" />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginTop: "10px",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "10px",
+                    alignItems: "center",
+                  }}
+                >
+                  <input type="checkbox" name="" id="" className="checkbox" />
+                  <Typography
+                    style={{
+                      fontFamily: "'Roboto', sans-serif",
+                      color: theme === "white" ? "white" : "black",
+                    }}
+                  >
+                    Намайг сана
+                  </Typography>
+                </Box>
                 <Typography
-                  style={{
-                    fontFamily: "Mulish",
+                  sx={{
+                    textDecoration: "underline",
+                    fontFamily: "'Roboto', sans-serif",
                     color: theme === "white" ? "white" : "black",
                   }}
                 >
-                  Намайг сана
+                  <a
+                    href="/"
+                    style={{ color: theme === "white" ? "white" : "black" }}
+                  >
+                    Нууц үгээ мартсан
+                  </a>
                 </Typography>
               </Box>
-              <Typography
-                sx={{
-                  fontFamily: "Mulish",
-                  marginBottom: "10px",
-                  color: theme === "white" ? "white" : "black",
-                }}
-              >
-                <a
-                  href="/"
-                  style={{ color: theme === "white" ? "white" : "black" }}
-                >
-                  Нууц үг мартсан
-                </a>
-              </Typography>
             </Box>
             <button
               type="submit"
               style={{
                 width: "150px",
                 height: "40px",
-                backgroundColor: "blue",
+                backgroundColor: "#9147ff",
                 color: "white",
-                fontFamily: "Mulish",
+                fontFamily: "'Roboto', sans-serif",
                 borderRadius: "10px",
                 border: "none",
-                marginBottom: "10px",
+                marginTop: "10px",
               }}
             >
               Нэвтрэх
             </button>
             <Typography
               sx={{
-                fontFamily: "Mulish",
-                marginBottom: "10px",
+                fontFamily: "'Roboto', sans-serif",
+                marginTop: "10px",
                 color: theme === "white" ? "white" : "black",
               }}
             >
@@ -227,7 +279,7 @@ export const Login = () => {
                   textDecoration: "underline",
                 }}
               >
-                Шинэ хэрэглэгч бол энд дарна уу
+                Шинэ хэрэглэгч бол энд дарна уу?
               </a>
             </Typography>
           </Box>

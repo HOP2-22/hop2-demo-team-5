@@ -38,17 +38,29 @@ exports.login = async (req, res) => {
       const token = jwt.sign(
         {
           username: user.username,
+          id: user._id,
         },
         process.env.ACCESS_TOKEN_KEY,
         { expiresIn: "30m" }
       );
-      return res
-        .status(200)
-        .json({ username: user.username, match: match, token: token });
+      return res.status(200).json({ user: user, match: match, token: token });
     } else {
       return res.status(400).json({ message: match });
     }
   } catch (error) {
     return res.status(400).json(error.message);
+  }
+};
+
+exports.getUserByToken = async (req, res) => {
+  const token = req.headers?.token;
+  if (!token) return res.status(400).json("No token provided");
+  const { id } = jwt.decode(token, process.env.ACCESS_TOKEN_KEY);
+  if (!id) return res.status(400).json("Wrong token provided");
+  try {
+    const user = await Users.findById(id).select("-password");
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json("User not found");
   }
 };
