@@ -10,6 +10,6 @@ const streamRouter = express.Router();
 streamRouter
   .get("/", getStreams)
   .post("/createRoom", createRoom)
-  .get("/enterRoom", enterRoom);
+  .put("/enterRoom", enterRoom);
 
 module.exports = streamRouter;

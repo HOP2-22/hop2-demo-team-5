@@ -62,6 +62,10 @@ export const Login = () => {
         username: user.username,
         password: user.password,
       });
+<<<<<<< HEAD
+=======
+      console.log(res);
+>>>>>>> fa8f173 (not finished)
       if (res.data.match === true) {
         successfulLogin();
         Cookies.set("token", res.data.token);

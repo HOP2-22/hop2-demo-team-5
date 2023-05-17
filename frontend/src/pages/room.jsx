@@ -4,6 +4,8 @@ import { About } from "@/components/about";
 import Chat from "@/chat/Chat";
 import ShareScreen from "@/components/sharescreen";
 import { SideBar } from "@/components/SideBar";
+import Cookies from "js-cookie";
+import { NoMeetingRoomOutlined } from "@mui/icons-material";
 
 const customTheme = createTheme({
   breakpoints: {
@@ -20,6 +22,7 @@ const customTheme = createTheme({
 });
 
 export const VideoPage = () => {
+  const roomId = Cookies.get("roomId");
   return (
     <ThemeProvider theme={customTheme}>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -44,7 +47,7 @@ export const VideoPage = () => {
               width: "80vw",
             }}
           >
-            <ShareScreen />
+            <ShareScreen id={roomId}/>
             <UserCard />
             <About />
           </Box>

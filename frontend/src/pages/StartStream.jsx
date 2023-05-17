@@ -43,20 +43,17 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-export const StartStream = () => {
+export const CreateRoom = () => {
   const router = useRouter();
   const [roomName, setRoomName] = useState("");
 
   const CreateStream = async () => {
     try {
-      const res = await axios.post(
-        "https://live-stream-backend.onrender.com/stream/createRoom",
-        {
-          roomName: roomName,
-        }
-      );
+      const res = await axios.post("http://localhost:5555/stream/createRoom", {
+        roomName: roomName,
+      });
       console.log(res);
-      Cookies.set("room", res?.data?.data?.roomName);
+      Cookies.set("room", res?.data?.data?._id);
     } catch (error) {
       console.log(error.message);
     }
@@ -167,4 +164,4 @@ export const StartStream = () => {
   );
 };
 
-export default StartStream;
+export default CreateRoom;

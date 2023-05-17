@@ -25,10 +25,12 @@ exports.createRoom = async (request, response) => {
 exports.enterRoom = async (request, response) => {
   try {
     const roomName = request.body.roomName;
-    const room = await Streams.get({ roomName });
+    console.log(roomName);
+    const room = await Streams.find({ roomName });
+    // console.log(room);
     response.status(200).json({
       message: "success",
-      data: room,
+      room,
     });
   } catch (err) {
     response.send(err.message);

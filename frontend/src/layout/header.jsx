@@ -60,18 +60,6 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const CreateRoom = async () => {
-  try {
-    const username = Cookies.get("username");
-    const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
-      username: username,
-    });
-    console.log("fdasf");
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -236,20 +224,6 @@ export const Header = () => {
                 />
               )}
             </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                fontFamily: "Mulish",
-                marginLeft: "20px",
-                marginRight: "10px",
-                color: theme === "white" ? "white" : "black",
-              }}
-            >
-              Browse
-            </Typography>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Search
@@ -300,14 +274,15 @@ export const Header = () => {
                 >
                   Create Room
                 </Button>
-                {/* <Button
+                <Button
                   sx={styles.textTrans}
                   variant="contained"
                   onClick={() => {
-                    EnterRoom();
-                    router.push("StartStream");
+                    router.push("/enterRoom");
                   }}
-                ></Button> */}
+                >
+                  Enter Room
+                </Button>
               </Box>
             ) : (
               <Box>

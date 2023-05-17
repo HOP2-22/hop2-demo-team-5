@@ -16,7 +16,7 @@ export const Carousel = () => {
           dynamicBullets: true,
         }}
         modules={[Pagination]}
-        style={{ width: "60vw", height: "40vh", backgroundColor: "aqua" }}
+        style={{ width: "65vw", height: "auto", backgroundColor: "black" }}
       >
         <SwiperSlide>
           <img
@@ -27,14 +27,14 @@ export const Carousel = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="/_next/static/media/Stream.png"
+            src="https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Pinecone.jpeg?alt=media&token=a9f93a2b-3add-4188-a8f9-4e4e29a280de"
             alt="st"
             style={{ width: "100%", height: "100%" }}
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="/_next/static/media/Live.png"
+            src="https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/gaming.jpeg?alt=media&token=6f37c49e-8e69-4d3a-aa50-4d16338711f3"
             alt="st"
             style={{ width: "100%", height: "100%" }}
           />
