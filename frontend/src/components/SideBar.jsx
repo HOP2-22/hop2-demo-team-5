@@ -4,16 +4,45 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import { Card } from "./card";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { styled } from "@mui/system";
 import { useTheme } from "@/context/ThemeProvider";
+import axios from "axios";
 
 export const SideBar = () => {
   const [appear, setAppear] = useState(true);
   const { theme, changeTheme } = useTheme();
 
   const matches = useMediaQuery("(min-width:1750px)");
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5555/user");
+        setUsers(response.data.data);
+        console.log(users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  let al = "",
+    rl = "",
+    sd = "",
+    rd = "",
+    bl = "";
+  if (users.length > 0) {
+    al = users[0].username;
+    rl = users[1].username;
+    sd = users[5].username;
+    rd = users[12].username;
+    bl = users[26].username;
+  }
 
   return appear && matches ? (
     <Box
@@ -66,46 +95,19 @@ export const SideBar = () => {
             alignItems: "center",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: "13px",
-              fontWeight: "bold",
-              color: "rgb(135,135,138)",
-            }}
-          >
-            FOLLOWED CHANNELS
-          </Typography>
-          <Box
-            sx={{
-              width: 35,
-              height: 35,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: "4px",
-            }}
-          >
-            <ImportExportIcon
-              sx={{ fontSize: "23px", color: "rgb(135,135,138)" }}
-            />
+          <Box sx={{ mt: 5 }}>
+            <Typography sx={{ fontSize: "12px", fontWeight: "bold" }}>
+              RECOMMENDED CHANNELS
+            </Typography>
           </Box>
         </Box>
         <Stack spacing={1}>
-          <Card />
-          <Card />
+          <Card al={al} game="Valorant" viewers="12" />
+          <Card al={rl} game="Dota 2" viewers="1002" />
+          <Card al={sd} game="PUBG" viewers="15" />
+          <Card al={rd} game="Fortnite" viewers="1232" />
+          <Card al={bl} game="GTA V" viewers="32" />
         </Stack>
-      </Stack>
-
-      <Box sx={{ mt: 5 }}>
-        <Typography sx={{ fontSize: "12px", fontWeight: "bold" }}>
-          RECOMMENDED CHANNELS
-        </Typography>
-      </Box>
-
-      <Stack sx={{ mt: 1 }} spacing={1}>
-        <Card />
-        <Card />
-        <Card />
       </Stack>
     </Box>
   ) : (
