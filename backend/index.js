@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const streamRouter = require("./routes/StreamRoutes");
 const userRouter = require("./routes/UserRoutes");
+const categoryRouter = require("./routes/CategoryRoutes");
 require("dotenv").config();
 const port = process.env.PORT;
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/user", userRouter);
 app.use("/stream", streamRouter);
+app.use("/category", categoryRouter);
 
 mongoose.connect(process.env.MONGODB);
 mongoose.set("strictQuery", true);
