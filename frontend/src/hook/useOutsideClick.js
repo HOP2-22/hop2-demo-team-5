@@ -5,7 +5,6 @@ export const useOutsideClick = (callback) => {
 
   useEffect(() => {
     const handleClick = (event) => {
-      console.log(ref.current);
       if (ref.current && !ref.current.contains(event.target)) {
         callback()();
       }

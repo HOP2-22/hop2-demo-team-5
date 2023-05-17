@@ -1,5 +1,6 @@
 import { Box, Typography, Stack } from "@mui/material";
-export const Card = () => {
+export const Card = (props) => {
+  const { al, game, viewers } = props;
   return (
     <Box
       sx={{
@@ -16,17 +17,17 @@ export const Card = () => {
           sx={{
             borderRadius: "50%",
             bgcolor: "white",
-            height: "30px",
-            width: "30px",
+            height: "35px",
+            width: "35px",
           }}
         />
 
         <Stack spacing={-0.3}>
           <Typography sx={{ fontSize: "15px", fontWeight: "bold" }}>
-            Channel
+            {al}
           </Typography>
           <Typography sx={{ fontSize: "13px", color: "rgb(163,163,183)" }}>
-            Game
+            {game}
           </Typography>
         </Stack>
       </Stack>
@@ -48,7 +49,7 @@ export const Card = () => {
             borderRadius: "50%",
           }}
         />
-        <Typography sx={{ fontSize: "13px" }}>312</Typography>
+        <Typography sx={{ fontSize: "13px" }}>{viewers}</Typography>
       </Stack>
     </Box>
   );

@@ -60,17 +60,17 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-// const CreateRoom = async () => {
-//   try {
-//     const username = Cookies.get("username");
-//     const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
-//       username: username,
-//     });
-//     console.log(res);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+const CreateRoom = async () => {
+  try {
+    const username = Cookies.get("username");
+    const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
+      username: username,
+    });
+    console.log("fdasf");
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -110,11 +110,8 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 
 export const Header = () => {
   const router = useRouter();
-  const EnterRoom = async () => {
-    try {
-    } catch (error) {}
-  };
   const { userData, setUserData } = useAuth();
+  console.log(userData);
 
   const successfulLogout = () => {
     toast("Амжилттай гарлаа", {
@@ -127,12 +124,14 @@ export const Header = () => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const logOut = () => {
     setUserData(null);
     Cookies.remove("token");
@@ -289,13 +288,9 @@ export const Header = () => {
                   marginLeft: "20px ",
                 }}
               >
-<<<<<<< HEAD
-                <Typography onClick={handleClick}>
+                <Typography sx={{ color: "#9147ff" }} onClick={handleClick}>
                   {userData.username}
                 </Typography>
-=======
-                <Typography sx={{ color: "#9147ff" }}>{username}</Typography>
->>>>>>> f282314 (done)
                 <Button
                   sx={styles.textTrans}
                   variant="contained"
