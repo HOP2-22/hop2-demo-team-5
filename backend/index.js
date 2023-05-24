@@ -5,11 +5,13 @@ const app = express();
 const streamRouter = require("./routes/StreamRoutes");
 const userRouter = require("./routes/UserRoutes");
 const categoryRouter = require("./routes/CategoryRoutes");
+const videoSDKRouter = require("./routes/videoSDKRoutes");
 require("dotenv").config();
 const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
+app.use("/videosdk", videoSDKRouter);
 app.use("/user", userRouter);
 app.use("/stream", streamRouter);
 app.use("/category", categoryRouter);
