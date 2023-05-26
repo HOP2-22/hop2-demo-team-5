@@ -21,6 +21,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useAuth } from "@/context/AuthProvider";
+import { nestream } from "../assets/svg/nestream.svg";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -140,10 +141,8 @@ export const Header = () => {
   };
 
   const { theme, changeTheme } = useTheme();
-  const logo =
-    "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Screen%20Shot%202023-04-21%20at%2017.51.35.png?alt=media&token=a050a1d0-a4af-4527-af11-e0ea2474ed94";
-  const logoWhite =
-    "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/Screen%20Shot%202023-04-21%20at%2017.53.30_auto_x2.jpg?alt=media&token=fbe70ac0-3908-43ec-a6b7-267c3200f220";
+  const nestream =
+    "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/nestream.svg?alt=media&token=ccd153e7-f3e1-47f9-a756-6956562310c8";
 
   const renderMobileMenu = (
     <Menu>
@@ -217,24 +216,25 @@ export const Header = () => {
               onClick={() => {
                 router.push("/");
               }}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
             >
-              {theme === "black" ? (
-                <img
-                  src={logoWhite}
-                  alt="pice"
-                  width={120}
-                  height={25}
-                  style={{ marginTop: 5 }}
-                />
-              ) : (
-                <img
-                  src={logo}
-                  alt="pice"
-                  width={120}
-                  height={30}
-                  style={{ marginTop: 5 }}
-                />
-              )}
+              <img src={nestream} alt="nestream" />
+              <Typography
+                sx={{
+                  fontFamily: "Monomaniac One, sans-serif",
+                  background:
+                    "linear-gradient(90deg, #6D61F7 4.43%, #60F4F4 100%)",
+                  backgroundClip: "text",
+                  textFillColor: "transparent",
+                  fontSize: "20px",
+                }}
+              >
+                NESTREAM
+              </Typography>
             </Box>
             <Typography
               variant="h6"
