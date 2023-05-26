@@ -6,6 +6,10 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
+  const [participantName, setParticipantName] = useState("");
+  const [token, setToken] = useState("");
+  const [meetingId, setMeetingId] = useState("");
+  const [meetingMode, setMeetingMode] = useState();
   axios.interceptors.request.use(
     (config) => {
       const userToken = Cookies.get("token");
@@ -34,6 +38,14 @@ export const AuthProvider = ({ children }) => {
       value={{
         userData,
         setUserData,
+        participantName,
+        setParticipantName,
+        token,
+        setToken,
+        meetingId,
+        setMeetingId,
+        meetingMode,
+        setMeetingMode,
       }}
     >
       {children}

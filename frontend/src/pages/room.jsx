@@ -4,6 +4,11 @@ import { About } from "@/components/about";
 import Chat from "@/chat/Chat";
 import ShareScreen from "@/components/sharescreen";
 import { SideBar } from "@/components/SideBar";
+import dynamic from "next/dynamic";
+
+const Container = dynamic(() => import("../components/Container"), {
+  ssr: false,
+});
 
 const customTheme = createTheme({
   breakpoints: {
@@ -42,9 +47,10 @@ export const VideoPage = () => {
               justifyContent: "center",
               flexDirection: "column",
               width: "80vw",
+              position: "relative",
             }}
           >
-            <ShareScreen />
+            <Container />
             <UserCard />
             <About />
           </Box>

@@ -295,10 +295,10 @@ export const Header = () => {
                   sx={styles.textTrans}
                   variant="contained"
                   onClick={() => {
-                    router.push("/StartStream");
+                    router.push("/enterRoom");
                   }}
                 >
-                  Create Room
+                  Create & Enter Room
                 </Button>
                 {/* <Button
                   sx={styles.textTrans}

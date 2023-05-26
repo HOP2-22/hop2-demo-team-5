@@ -4,11 +4,9 @@ import { LeaveScreen } from "./screens/LeaveScreen";
 import { JoiningScreen } from "./screens/JoiningScreen";
 import { ILSContainer } from "../interactive-live-streaming/ILSContainer";
 import { MeetingAppProvider } from "../MeetingAppContextDef";
+import { useAuth } from "@/context/AuthProvider";
 
 const Container = () => {
-  const [token, setToken] = useState("");
-  const [meetingId, setMeetingId] = useState("");
-  const [participantName, setParticipantName] = useState("");
   const [micOn, setMicOn] = useState(false);
   const [webcamOn, setWebcamOn] = useState(true);
   const [selectedMic, setSelectedMic] = useState({ id: null });
@@ -16,10 +14,19 @@ const Container = () => {
   const [selectWebcamDeviceId, setSelectWebcamDeviceId] = useState(
     selectedWebcam.id
   );
-  const [meetingMode, setMeetingMode] = useState(Constants.modes.CONFERENCE);
   const [selectMicDeviceId, setSelectMicDeviceId] = useState(selectedMic.id);
   const [isMeetingStarted, setMeetingStarted] = useState(false);
   const [isMeetingLeft, setIsMeetingLeft] = useState(false);
+  const {
+    participantName,
+    setParticipantName,
+    setToken,
+    token,
+    meetingMode,
+    setMeetingMode,
+    setMeetingId,
+    meetingId,
+  } = useAuth();
 
   const isMobile = window.matchMedia("only screen and (max-width: 768px)")
     .matches;
@@ -34,66 +41,48 @@ const Container = () => {
 
   return (
     <>
-      {isMeetingStarted ? (
-        <MeetingAppProvider
-          selectedMic={selectedMic}
-          selectedWebcam={selectedWebcam}
-          initialMicOn={micOn}
-          initialWebcamOn={webcamOn}
-        >
-          <MeetingProvider
-            config={{
-              meetingId,
-              micEnabled: micOn,
-              webcamEnabled: webcamOn,
-              name: participantName ? participantName : "TestUser",
-              mode: meetingMode,
-              multiStream: false,
-            }}
-            token={token}
-            reinitialiseMeetingOnConfigChange={true}
-            joinWithoutUserInteraction={true}
-          >
-            <ILSContainer
-              onMeetingLeave={() => {
-                setToken("");
-                setMeetingId("");
-                setParticipantName("");
-                setWebcamOn(false);
-                setMicOn(false);
-                setMeetingStarted(false);
-              }}
-              setIsMeetingLeft={setIsMeetingLeft}
-              selectedMic={selectedMic}
-              selectedWebcam={selectedWebcam}
-              selectWebcamDeviceId={selectWebcamDeviceId}
-              setSelectWebcamDeviceId={setSelectWebcamDeviceId}
-              selectMicDeviceId={selectMicDeviceId}
-              setSelectMicDeviceId={setSelectMicDeviceId}
-              micEnabled={micOn}
-              webcamEnabled={webcamOn}
-              meetingMode={meetingMode}
-              setMeetingMode={setMeetingMode}
-            />
-          </MeetingProvider>
-        </MeetingAppProvider>
-      ) : isMeetingLeft ? (
-        <LeaveScreen setIsMeetingLeft={setIsMeetingLeft} />
-      ) : (
-        <JoiningScreen
-          participantName={participantName}
-          setParticipantName={setParticipantName}
-          setMeetingId={setMeetingId}
-          setToken={setToken}
-          onClickStartMeeting={() => {
-            setMeetingStarted(true);
+      <MeetingAppProvider
+        selectedMic={selectedMic}
+        selectedWebcam={selectedWebcam}
+        initialMicOn={micOn}
+        initialWebcamOn={webcamOn}
+      >
+        <MeetingProvider
+          config={{
+            meetingId,
+            micEnabled: micOn,
+            webcamEnabled: webcamOn,
+            name: participantName ? participantName : "TestUser",
+            mode: meetingMode,
+            multiStream: false,
           }}
-          startMeeting={isMeetingStarted}
-          setIsMeetingLeft={setIsMeetingLeft}
-          meetingMode={meetingMode}
-          setMeetingMode={setMeetingMode}
-        />
-      )}
+          token={token}
+          reinitialiseMeetingOnConfigChange={true}
+          joinWithoutUserInteraction={true}
+        >
+          <ILSContainer
+            onMeetingLeave={() => {
+              setToken("");
+              setMeetingId("");
+              setParticipantName("");
+              setWebcamOn(false);
+              setMicOn(false);
+              setMeetingStarted(false);
+            }}
+            setIsMeetingLeft={setIsMeetingLeft}
+            selectedMic={selectedMic}
+            selectedWebcam={selectedWebcam}
+            selectWebcamDeviceId={selectWebcamDeviceId}
+            setSelectWebcamDeviceId={setSelectWebcamDeviceId}
+            selectMicDeviceId={selectMicDeviceId}
+            setSelectMicDeviceId={setSelectMicDeviceId}
+            micEnabled={micOn}
+            webcamEnabled={webcamOn}
+            meetingMode={meetingMode}
+            setMeetingMode={setMeetingMode}
+          />
+        </MeetingProvider>
+      </MeetingAppProvider>
     </>
   );
 };
