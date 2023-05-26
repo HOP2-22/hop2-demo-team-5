@@ -21,7 +21,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useAuth } from "@/context/AuthProvider";
-import { nestream } from "../assets/svg/nestream.svg";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -60,18 +60,6 @@ const Search = styled("div")(({ theme }) => ({
     width: "auto",
   },
 }));
-
-const CreateRoom = async () => {
-  try {
-    const username = Cookies.get("username");
-    const res = await axios.post(`http://localhost:5555/stream/createRoom`, {
-      username: username,
-    });
-    console.log("fdasf");
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -112,6 +100,7 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 export const Header = () => {
   const router = useRouter();
   const { userData, setUserData } = useAuth();
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   console.log(userData);
 
   const successfulLogout = () => {
@@ -125,6 +114,25 @@ export const Header = () => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -144,23 +152,78 @@ export const Header = () => {
   const nestream =
     "https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/nestream.svg?alt=media&token=ccd153e7-f3e1-47f9-a756-6956562310c8";
 
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      sx={{ backgroundColor: theme === "white" ? "black" : "white" }}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
-    <Menu>
-      <MenuItem style={{ alignItems: "center" }}>
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      sx={{
+        backgroundColor: theme === "white" ? "black" : "white",
+        color: theme === "white" ? "white" : "black",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
         <IconButton size="large" color="inherit">
           <SearchIcon />
         </IconButton>
-        <p>Browse</p>
+        <p onClick={() => {
+          router.push("/browse")
+        }}>Browse</p>
       </MenuItem>
       {userData ? (
         <Box>
           <MenuItem
             onClick={() => {
               // CreateRoom();
-              router.push("/StartStream");
+              router.push("/enterRoom");
             }}
           >
             <p>Create Room</p>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              // CreateRoom();
+              router.push("/enterRoom");
+            }}
+          >
+            <p>Enter Room</p>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <p>Profile</p>
           </MenuItem>
         </Box>
       ) : (
@@ -230,7 +293,7 @@ export const Header = () => {
                     "linear-gradient(90deg, #6D61F7 4.43%, #60F4F4 100%)",
                   backgroundClip: "text",
                   textFillColor: "transparent",
-                  fontSize: "20px",
+                  fontSize: "15px",
                 }}
               >
                 NESTREAM
@@ -246,6 +309,9 @@ export const Header = () => {
                 marginLeft: "20px",
                 marginRight: "10px",
                 color: theme === "white" ? "white" : "black",
+              }}
+              onClick={() => {
+                router.push("/browse")
               }}
             >
               Browse
@@ -343,8 +409,24 @@ export const Header = () => {
               <MenuItem onClick={logOut}>Гарах</MenuItem>
             </Menu>
           </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              sx={{
+                color: theme === "black" ? "black" : "white",
+              }}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
     </Box>
   );
 };

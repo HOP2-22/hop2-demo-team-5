@@ -74,9 +74,7 @@ export function MeetingDetailsScreen({
           <Link href="/room">
             <button
               disabled={participantName.length < 3}
-              className={`w-full ${
-                participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
-              }  text-white px-2 py-3 rounded-xl mt-5`}
+              className={`w-full bg-indigo-500  text-white px-2 py-3 rounded-xl mt-5`}
               onClick={(e) => {
                 if (iscreateMeetingClicked) {
                   if (videoTrack) {
@@ -106,7 +104,7 @@ export function MeetingDetailsScreen({
         <div className="w-full md:mt-0 mt-4 flex flex-col">
           <div className="flex items-center justify-center flex-col w-full">
             <button
-              className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
+              className="w-full bg-purple-400 text-white px-2 py-3 rounded-xl"
               onClick={async (e) => {
                 const studioCode = await _handleOnCreateMeeting();
                 setStudioCode(studioCode);
@@ -117,7 +115,7 @@ export function MeetingDetailsScreen({
               Create a Streaming
             </button>
             <button
-              className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
+              className="w-full bg-purple-400 text-white px-2 py-3 rounded-xl mt-5"
               onClick={(e) => {
                 setIsJoinMeetingClicked(true);
                 setMeetingMode(Constants.modes.VIEWER);

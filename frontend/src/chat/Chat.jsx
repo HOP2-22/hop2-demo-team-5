@@ -102,7 +102,7 @@ export const Chat = () => {
       {/* <Typography sx={NameOfRoom}>{room}</Typography> */}
 
       {exist ? (
-        <Box sx={{ maxWidth: 350 }}>
+        <Box>
           <Paper
             elevation={3}
             sx={{ bgcolor: "rgb(24,24,27)", color: "white" }}
@@ -128,7 +128,7 @@ export const Chat = () => {
               </Typography>
             </Box>
             <Box
-              sx={{ width: "100%", height: "2px", bgcolor: "rgb(38,38,43)" }}
+              sx={{ width: "100vw", height: "2px", bgcolor: "rgb(38,38,43)" }}
             />
 
             <Box ref={containerRef} sx={ChatMessage}>
