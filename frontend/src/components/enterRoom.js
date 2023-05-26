@@ -1,15 +1,20 @@
-import { JoiningScreen } from "./screens/JoiningScreen"
+import { JoiningScreen } from "./screens/JoiningScreen";
 import { useState, useEffect } from "react";
 import { Constants, MeetingProvider } from "@videosdk.live/react-sdk";
+import { useAuth } from "@/context/AuthProvider";
 
 const EnterRoom = () => {
-    const [participantName, setParticipantName] = useState("");
-    const [token, setToken] = useState("");
-    const [meetingId, setMeetingId] = useState("");
-    const [meetingMode, setMeetingMode] = useState(Constants.modes.CONFERENCE);
-    const [isMeetingStarted, setMeetingStarted] = useState(false);
+  const [isMeetingStarted, setMeetingStarted] = useState(false);
+  const {
+    participantName,
+    setParticipantName,
+    setToken,
+    meetingMode,
+    setMeetingMode,
+    setMeetingId,
+  } = useAuth();
 
-    const isMobile = window.matchMedia("only screen and (max-width: 768px)")
+  const isMobile = window.matchMedia("only screen and (max-width: 768px)")
     .matches;
 
   useEffect(() => {
@@ -21,7 +26,7 @@ const EnterRoom = () => {
   }, [isMobile]);
   return (
     <>
-        <JoiningScreen 
+      <JoiningScreen
         participantName={participantName}
         setParticipantName={setParticipantName}
         setMeetingId={setMeetingId}
@@ -31,10 +36,10 @@ const EnterRoom = () => {
         }}
         startMeeting={isMeetingStarted}
         meetingMode={meetingMode}
-        setMeetingMode={setMeetingMode}/>
+        setMeetingMode={setMeetingMode}
+      />
     </>
-  )
-
-}
+  );
+};
 
 export default EnterRoom;

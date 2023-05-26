@@ -2,6 +2,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import { Constants } from "@videosdk.live/react-sdk";
 import React, { useState } from "react";
+import Link from "next/link";
 
 export function MeetingDetailsScreen({
   onClickJoin,
@@ -70,32 +71,34 @@ export function MeetingDetailsScreen({
             placeholder="Enter your name"
             className="px-4 py-3 mt-5 bg-gray-650 rounded-xl text-white w-full text-center"
           />
-          <button
-            disabled={participantName.length < 3}
-            className={`w-full ${
-              participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
-            }  text-white px-2 py-3 rounded-xl mt-5`}
-            onClick={(e) => {
-              if (iscreateMeetingClicked) {
-                if (videoTrack) {
-                  videoTrack.stop();
-                  setVideoTrack(null);
+          <Link href="/room">
+            <button
+              disabled={participantName.length < 3}
+              className={`w-full ${
+                participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
+              }  text-white px-2 py-3 rounded-xl mt-5`}
+              onClick={(e) => {
+                if (iscreateMeetingClicked) {
+                  if (videoTrack) {
+                    videoTrack.stop();
+                    setVideoTrack(null);
+                  }
+                  onClickStartMeeting();
+                } else {
+                  if (studioCode.match("\\w{4}\\-\\w{4}\\-\\w{4}")) {
+                    onClickJoin(studioCode);
+                  } else setStudioCodeError(true);
                 }
-                onClickStartMeeting();
-              } else {
-                if (studioCode.match("\\w{4}\\-\\w{4}\\-\\w{4}")) {
-                  onClickJoin(studioCode);
-                } else setStudioCodeError(true);
-              }
-            }}
-          >
-            {iscreateMeetingClicked
-              ? "Start a meeting"
-              : isJoinMeetingClicked &&
-                meetingMode === Constants.modes.CONFERENCE
-              ? "Join Studio"
-              : "Join Streaming Room"}
-          </button>
+              }}
+            >
+              {iscreateMeetingClicked
+                ? "Start a meeting"
+                : isJoinMeetingClicked &&
+                  meetingMode === Constants.modes.CONFERENCE
+                ? "Join Studio"
+                : "Join Streaming Room"}
+            </button>
+          </Link>
         </>
       )}
 

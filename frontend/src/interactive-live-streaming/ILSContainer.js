@@ -331,7 +331,7 @@ export function ILSContainer({
   });
 
   return (
-    <div className="fixed inset-0">
+    <div className="absolute inset-0">
       <div ref={containerRef} className="h-full flex flex-col bg-gray-800">
         <FlyingEmojisOverlay />
         {typeof localParticipantAllowedJoin === "boolean" ? (
