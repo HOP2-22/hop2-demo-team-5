@@ -1,4 +1,3 @@
-
 import { Box, Button, Typography } from "@mui/material";
 import { useTheme } from "@/context/ThemeProvider";
 import { SideBar } from "@/components/SideBar";
@@ -28,6 +27,6 @@ export const Browse = () => {
       </Box>
     </Box>
   );
-}
+};
 
-export default Browse
+export default Browse;
