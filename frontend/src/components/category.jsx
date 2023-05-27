@@ -83,7 +83,7 @@ export default function Categorylist() {
                   }}
                 >
                   <div className={styles.stream}>
-                    <Image
+                    <img
                       src={category.image}
                       className={styles.stream__thumbnail}
                     />

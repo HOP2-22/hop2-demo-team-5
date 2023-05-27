@@ -103,7 +103,7 @@ export const StyledSlide = styled.div`
           .info {
             width: 200px;
             height: 300px;
-            background-color: ${(props) => props.theme.headerDesktop};
+            background-color: white;
 
             .info-top {
               width: 100%;
@@ -127,7 +127,7 @@ export const StyledSlide = styled.div`
                   display: block;
                   padding: 0 10px;
                   font-size: 14px;
-                  color: ${(props) => props.theme.color};
+                  color: black;
 
                   .username {
                     font-weight: 600;
@@ -139,7 +139,7 @@ export const StyledSlide = styled.div`
                   }
                   .viewers {
                     font-size: 13px;
-                    color: ${(props) => props.theme.textColor};
+                    color: black;
                   }
                 }
               }

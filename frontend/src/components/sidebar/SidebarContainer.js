@@ -2,13 +2,8 @@ import { Constants, useMeeting } from "@videosdk.live/react-sdk";
 import React, { Fragment } from "react";
 import useIsMobile from "../../hook/useIsMobile";
 import useIsTab from "../../hook/useIsTab";
-import ECommercePanel from "../../interactive-live-streaming/components/ECommercePanel";
-import CreatePoll from "../../interactive-live-streaming/components/pollContainer/CreatePoll";
-import PollList from "../../interactive-live-streaming/components/pollContainer/PollList";
-import SubmitPollList from "../../interactive-live-streaming/components/pollContainer/SubmitPollList";
 import { sideBarModes } from "../../utils/common";
 // import { XIcon } from "@heroicons/react/outline";
-import { ChatPanel } from "./ChatPanel";
 import { ParticipantPanel } from "./ParticipantPanel";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMediaQuery } from "react-responsive";
@@ -92,20 +87,6 @@ const SideBarTabView = ({
             )}
             {sideBarMode === "PARTICIPANTS" ? (
               <ParticipantPanel panelHeight={panelHeight} />
-            ) : sideBarMode === "CHAT" ? (
-              <ChatPanel panelHeight={panelHeight} />
-            ) : sideBarMode === "POLLS" && meetingMode !== "VIEWER" ? (
-              polls.length === 0 && draftPolls.length === 0 ? (
-                <CreatePoll {...{ panelHeight }} />
-              ) : (
-                <PollList {...{ panelHeight }} />
-              )
-            ) : sideBarMode === "POLLS" && meetingMode === "VIEWER" ? (
-              <SubmitPollList {...{ panelHeight }} />
-            ) : sideBarMode === "CREATE_POLL" ? (
-              <CreatePoll {...{ panelHeight }} />
-            ) : sideBarMode === "ECOMMERCE" ? (
-              <ECommercePanel {...{ panelHeight }} />
             ) : null}
           </>
         </div>
