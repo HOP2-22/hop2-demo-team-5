@@ -1,5 +1,5 @@
 import { StyledBigChannel } from "./BigChannel.styled";
-
+import Image from "next/image";
 import { useLocation } from "react-router-dom";
 
 import { FaEllipsisV } from "react-icons/fa";
@@ -10,16 +10,14 @@ const BigChannel = ({ user, imageId }) => {
   return (
     <StyledBigChannel>
       <div className="channel-box">
-        <div
-          className={`live-screen `}
-        >
-          <img src={user.liveScreen} alt="" />
+        <div className={`live-screen `}>
+          <Image src={user.liveScreen} alt="" />
           <span className="live">Live</span>
           <span className="viewers">{user.viewers} Viewers</span>
         </div>
         <div className="live-info">
           <div className="pp">
-            <img src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+            <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
           </div>
           <div className="titles">
             <div className="username-box">

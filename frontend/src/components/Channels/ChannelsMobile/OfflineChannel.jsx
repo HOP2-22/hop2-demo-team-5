@@ -1,4 +1,5 @@
 import { StyledOfflineChannel } from "./OfflineChannel.styled";
+import Image from "next/image";
 
 const OfflineChannel = ({ user, imageId }) => {
   return (
@@ -6,7 +7,7 @@ const OfflineChannel = ({ user, imageId }) => {
       <div className="offline-box">
         <div className="left">
           <div className="pp">
-            <img src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+            <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
           </div>
         </div>
         <div className="right">

@@ -1,5 +1,5 @@
 import { StyledSmallCategory } from "./SmallCategory.styled";
-
+import Image from "next/image";
 import { FaCircle } from "react-icons/fa";
 
 const SmallCategory = ({ game }) => {
@@ -11,7 +11,7 @@ const SmallCategory = ({ game }) => {
     <StyledSmallCategory>
       <div className="game-box">
         <div className="game-img">
-          <img src={game.image} />
+          <Image src={game.image} />
         </div>
         <div className="game-name">{titleTrim(game.name)}</div>
         <div className="game-viewer">

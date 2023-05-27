@@ -1,5 +1,5 @@
 import { StyledChannelDesktop } from "./ChannelDesktop.styled";
-
+import Image from "next/image";
 import { FaEllipsisV } from "react-icons/fa";
 
 const ChannelDesktop = ({ user, imageId, video }) => {
@@ -7,7 +7,7 @@ const ChannelDesktop = ({ user, imageId, video }) => {
     <StyledChannelDesktop>
       <div className="channel-box">
         <div className="live-screen">
-          <img src={user.liveScreen} alt="" />
+          <Image src={user.liveScreen} alt="" />
           <div className={`live ${video ? "invisible" : ""}`}>live</div>
           <div className={`viewers ${video ? "invisible" : ""}`}>
             333 viewers
@@ -21,7 +21,7 @@ const ChannelDesktop = ({ user, imageId, video }) => {
         <div className="channel-info">
           <div className="left">
             <div className="pp">
-              <img src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+              <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
             </div>
             <div className="profile-info">
               <div className="title">{user.title}</div>
