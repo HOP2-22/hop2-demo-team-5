@@ -17,6 +17,7 @@ import { useTheme } from "@/context/ThemeProvider";
 export default function Categorylist() {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
+  const [name, setName] = useState("")
   const { theme, changeTheme } = useTheme();
 
   useEffect(() => {
@@ -70,7 +71,9 @@ export default function Categorylist() {
                   justifyContent: "center",
                 }}
                 key={category.id}
+                
               >
+                <Link href={name}>
                 <Card
                   sx={{
                     backgroundColor: theme === "white" ? "black" : "white",
@@ -80,20 +83,21 @@ export default function Categorylist() {
                   onClick={() => {
                     router.push(`/category/${category.name}`);
                   }}
-                >
+                  >
                   <div className={styles.stream}>
                     <img
                       src={category.image}
                       className={styles.stream__thumbnail}
-                    />
+                      />
                   </div>
 
                   <Typography
                     sx={{ color: theme === "white" ? "white" : "black" }}
-                  >
+                    >
                     {category.name}
                   </Typography>
                 </Card>
+                    </Link>
               </Grid>
             ))}
           </Grid>

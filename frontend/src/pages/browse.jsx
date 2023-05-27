@@ -26,6 +26,7 @@ export const Browse = () => {
           <Categorylist />
         </Box>
       </Box>
+      
     </Box>
   );
 }
