@@ -51,8 +51,9 @@ export const VideoPage = () => {
             }}
           >
             <Container />
-            <UserCard />
-            <About />
+            {/* <ShareScreen /> */}
+            {/* <UserCard />
+            <About /> */}
           </Box>
           <Box>
             <Chat />

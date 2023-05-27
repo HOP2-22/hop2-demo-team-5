@@ -62,6 +62,7 @@ export const ShareScreen = () => {
     <Box
       sx={{
         width: "70vw",
+        height: 'auto',
         backgroundColor: theme === "black" ? "white" : "black",
         display: "flex",
         flexDirection: "row",

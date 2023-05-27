@@ -52,7 +52,8 @@ export function PresenterView({ height }) {
         ) {
           console.error("audio" + err.message);
         }
-      });a
+      });
+      a;
     } else {
       audioPlayer.current.srcObject = null;
     }
@@ -60,9 +61,7 @@ export function PresenterView({ height }) {
 
   return (
     <div
-      className={` bg-gray-750 rounded m-2 relative overflow-hidden w-full h-[${
-        height - "xl:p-6 lg:p-[52px] md:p-[26px] p-1"
-      }] `}
+      className={` bg-gray-750 rounded m-2 relative overflow-hidden w-full h-auto `}
     >
       <audio autoPlay playsInline controls={false} ref={audioPlayer} />
       <div className={"video-contain absolute h-full w-full"}>

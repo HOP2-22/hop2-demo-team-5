@@ -118,6 +118,7 @@ export const SideBar = () => {
         height: "80vh",
         width: "50px",
         display: "flex",
+        display: "none",
         alignItems: "center",
         flexDirection: "column  ",
         borderRadius: "4px",
