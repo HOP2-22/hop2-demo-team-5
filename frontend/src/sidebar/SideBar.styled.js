@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledSideBar = styled.div`
   .sidebar-box {
-    position: fixed;
     left: 0;
     top: 0;
     width: 55px;
@@ -10,7 +9,7 @@ export const StyledSideBar = styled.div`
     background-color: ${(props) => props.theme.sideBar};
     z-index: 9;
     box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
-    padding-top: 60px;
+
     transition: 0.3s;
 
     .list-title {

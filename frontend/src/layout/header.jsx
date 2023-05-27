@@ -200,9 +200,13 @@ export const Header = () => {
         <IconButton size="large" color="inherit">
           <SearchIcon />
         </IconButton>
-        <p onClick={() => {
-          router.push("/browse")
-        }}>Browse</p>
+        <p
+          onClick={() => {
+            router.push("/browse");
+          }}
+        >
+          Browse
+        </p>
       </MenuItem>
       {userData ? (
         <Box>
@@ -262,6 +266,7 @@ export const Header = () => {
       sx={{
         flexGrow: 1,
         backgroundColor: theme === "white" ? "black" : "white",
+        zIndex: 2,
       }}
     >
       <AppBar
@@ -311,7 +316,7 @@ export const Header = () => {
                 color: theme === "white" ? "white" : "black",
               }}
               onClick={() => {
-                router.push("/browse")
+                router.push("/browse");
               }}
             >
               Browse
