@@ -216,12 +216,13 @@ export function ILSBottomBar({
                                   {mics.map(({ deviceId, label }, index) => (
                                     <div
                                       className={`px-3 py-1 my-1 pl-6 text-white text-left ${deviceId ===
-                                        selectMicDeviceId && "bg-gray-150"}`}
+                                       selectMicDeviceId}`}
+                                       key={index}
                                     >
                                       <button
                                         className={`flex flex-1 w-full ${deviceId ===
-                                          selectMicDeviceId && "bg-gray-150"}`}
-                                        key={`mics_${deviceId}`}
+                                          selectMicDeviceId}`}
+                                        // key={deviceId}
                                         onClick={() => {
                                           setSelectMicDeviceId(deviceId);
                                           changeMic(deviceId);
@@ -360,6 +361,7 @@ export function ILSBottomBar({
                                     <div
                                       className={`px-3 py-1 my-1 pl-6 text-white text-left ${deviceId ===
                                         selectWebcamDeviceId && "bg-gray-150"}`}
+                                        key={index}
                                     >
                                       <button
                                         className={`flex flex-1 w-full ${deviceId ===
@@ -921,6 +923,7 @@ export function ILSBottomBar({
                                 ? "col-span-7 sm:col-span-5 md:col-span-3"
                                 : "col-span-4 sm:col-span-3 md:col-span-2"
                             }`}
+                            key={index}
                           >
                             {icon === BottomBarButtonTypes.SCREEN_SHARE ? (
                               <ScreenShareBTN
