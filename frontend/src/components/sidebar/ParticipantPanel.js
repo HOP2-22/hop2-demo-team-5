@@ -105,6 +105,7 @@ export function ParticipantPanel({ panelHeight }) {
           const { raisedHand, participantId: peerId } = part[index];
           return (
             <ParticipantListItem
+              key={index}
               participantId={peerId}
               raisedHand={raisedHand}
             />

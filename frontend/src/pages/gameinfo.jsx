@@ -8,7 +8,7 @@ import { dota2 } from "../assets/images/dota.jpeg";
 import { Header } from "@/layout/header";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { SideBar } from "../components/SideBar";
-
+import {Media} from "@mui/material";
 const styles = {
   family: {
     fontFamily: "Mulish",
@@ -30,7 +30,7 @@ export const Gameinfo = () => {
     <ThemeProvider>
       <Box sx={{ display: "flex" }}>
         <SideBar></SideBar>
-        <img
+        <Media
           src="https://firebasestorage.googleapis.com/v0/b/chatapp-e944a.appspot.com/o/livestream.jpeg?alt=media&token=b263dcff-208c-48a7-bd48-edc549e5899b"
           alt="hahah"
           width={220}

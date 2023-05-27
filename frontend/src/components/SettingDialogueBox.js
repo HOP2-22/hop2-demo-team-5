@@ -206,6 +206,7 @@ export default function SettingDialogueBox({
                           ].map(({ value, label }) =>
                             label === "Audio" || label === "Video" ? (
                               <button
+                              key={index}
                                 className={`inline-flex items-center justify-center px-4 py-2 border ${
                                   setting === value
                                     ? "bg-blue-500 border-transparent"
