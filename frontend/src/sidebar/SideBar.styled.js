@@ -10,6 +10,14 @@ export const StyledSideBar = styled.div`
     z-index: 9;
     box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
 
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 55px;
+    height: 100vh
+    z-index: 9;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
+    padding-top: 60px;
     transition: 0.3s;
 
     .list-title {

@@ -13,17 +13,17 @@ const Slide = () => {
     <StyledSlide>
       <div className="slide">
         <div className="three">
-          <Image src={users[7].liveScreen} />
-          <Image src={users[2].liveScreen} />
-          <Image src={users[6].liveScreen} />
+          <img src={users[7].liveScreen} />
+          <img src={users[2].liveScreen} />
+          <img src={users[6].liveScreen} />
 
           <div className="two">
-            <Image src={users[4].liveScreen} />
-            <Image src={users[5].liveScreen} />
+            <img src={users[4].liveScreen} />
+            <img src={users[5].liveScreen} />
 
             <div className="one">
               <div className="img">
-                <Image src={users[1].liveScreen} />
+                <img src={users[1].liveScreen} />
                 <div className="screen-icons">
                   <div className="left">
                     <GiPauseButton className="icon-screen" />
@@ -43,7 +43,7 @@ const Slide = () => {
                 <div className="info-top">
                   <div className="profile">
                     <div className="pp">
-                      <Image src="https://i.pravatar.cc/50" />
+                      <img src="https://i.pravatar.cc/50" />
                     </div>
                     <div className="profile-info">
                       <div className="username">JonSnow</div>

@@ -11,7 +11,6 @@ import { nameTructed, trimSnackBarText } from "../utils/helper";
 import { ILSBottomBar } from "./components/ILSBottomBar";
 import { TopBar } from "./components/TopBar";
 import useIsTab from "../hook/useIsTab";
-import PollsListner from "./components/pollContainer/PollListner";
 import HLSContainer from "./components/hlsViewContainer/HLSContainer";
 import FlyingEmojisOverlay from "./components/FlyingEmojisOverlay";
 // import MemorizedILSParticipantView from "./components/ILSParticipantView";
@@ -341,7 +340,6 @@ export function ILSContainer({
                 setMeetingMode={setMeetingMode}
                 meetingMode={meetingMode}
               />
-              <PollsListner />
 
               {mMeeting?.localParticipant?.id && (
                 <LocalParticipantListner

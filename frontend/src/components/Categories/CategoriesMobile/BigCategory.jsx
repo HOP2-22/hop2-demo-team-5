@@ -6,7 +6,7 @@ const BigCategory = ({ game }) => {
     <StyledBigCategory>
       <div className="big-category-box">
         <div className="game-image">
-          <Image src={game.image} alt="" />
+          <img src={game.image} alt="" />
         </div>
         <div className="game-info">
           <div className="name">{game.name}</div>
