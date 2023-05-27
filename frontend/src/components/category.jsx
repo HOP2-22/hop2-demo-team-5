@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import styles from "../styles/stream.module.css";
 import { useTheme } from "@/context/ThemeProvider";
+import Image from "next/image";
 
 export default function Categorylist() {
   const router = useRouter();
@@ -82,7 +83,7 @@ export default function Categorylist() {
                   }}
                 >
                   <div className={styles.stream}>
-                    <img
+                    <Image
                       src={category.image}
                       className={styles.stream__thumbnail}
                     />

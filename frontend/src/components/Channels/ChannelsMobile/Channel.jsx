@@ -1,12 +1,13 @@
 import { StyledChannel } from "./Channel.styled";
 import { FaCircle } from "react-icons/fa";
+import Image from "next/image";
 
 const Channel = ({ user, imageId }) => {
   return (
     <StyledChannel>
       <div className="channel-box">
         <div className="live-screen">
-          <img src={user.liveScreen} alt="" />
+          <Image src={user.liveScreen} alt="" />
           <span>
             <FaCircle className="live-icon" /> {user.viewers}
           </span>
@@ -14,7 +15,7 @@ const Channel = ({ user, imageId }) => {
         <div className="live-info">
           <div className="user">
             <div className="user-pp">
-              <img src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+              <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
             </div>
             <div className="user-name">{user.username}</div>
           </div>

@@ -1,7 +1,7 @@
 import { StyledSlide } from "./Slide.styled";
 
 import { useSelector } from "react-redux";
-
+import Image from "next/image";
 import { GiPauseButton } from "react-icons/gi";
 import { HiVolumeUp } from "react-icons/hi";
 import { BiFullscreen } from "react-icons/bi";
@@ -13,17 +13,17 @@ const Slide = () => {
     <StyledSlide>
       <div className="slide">
         <div className="three">
-          <img src={users[7].liveScreen} />
-          <img src={users[2].liveScreen} />
-          <img src={users[6].liveScreen} />
+          <Image src={users[7].liveScreen} />
+          <Image src={users[2].liveScreen} />
+          <Image src={users[6].liveScreen} />
 
           <div className="two">
-            <img src={users[4].liveScreen} />
-            <img src={users[5].liveScreen} />
+            <Image src={users[4].liveScreen} />
+            <Image src={users[5].liveScreen} />
 
             <div className="one">
               <div className="img">
-                <img src={users[1].liveScreen} />
+                <Image src={users[1].liveScreen} />
                 <div className="screen-icons">
                   <div className="left">
                     <GiPauseButton className="icon-screen" />
@@ -43,7 +43,7 @@ const Slide = () => {
                 <div className="info-top">
                   <div className="profile">
                     <div className="pp">
-                      <img src="https://i.pravatar.cc/50" />
+                      <Image src="https://i.pravatar.cc/50" />
                     </div>
                     <div className="profile-info">
                       <div className="username">JonSnow</div>

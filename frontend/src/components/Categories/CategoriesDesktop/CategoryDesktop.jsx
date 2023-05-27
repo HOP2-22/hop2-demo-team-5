@@ -1,5 +1,5 @@
 import { StyledCategoryDesktop } from "./CategoryDesktop.styled";
-
+import Image from "next/image";
 import { FaEllipsisV } from "react-icons/fa";
 
 const CategoryDesktop = ({ game }) => {
@@ -7,7 +7,7 @@ const CategoryDesktop = ({ game }) => {
     <StyledCategoryDesktop>
       <div className="game-box">
         <div className="game-picture">
-          <img src={game.image} alt="" />
+          <Image src={game.image} alt="" />
         </div>
         <div className="game-name">
           <div className="name">{game.name}</div>

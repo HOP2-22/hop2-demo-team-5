@@ -1,11 +1,12 @@
 import { StyledBigCategory } from "./BigCategory.styled";
+import Image from "next/image";
 
 const BigCategory = ({ game }) => {
   return (
     <StyledBigCategory>
       <div className="big-category-box">
         <div className="game-image">
-          <img src={game.image} alt="" />
+          <Image src={game.image} alt="" />
         </div>
         <div className="game-info">
           <div className="name">{game.name}</div>
