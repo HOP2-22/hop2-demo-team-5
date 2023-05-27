@@ -4,7 +4,6 @@ import useIsMobile from "../../hook/useIsMobile";
 import useIsTab from "../../hook/useIsTab";
 import { sideBarModes } from "../../utils/common";
 // import { XIcon } from "@heroicons/react/outline";
-import { ChatPanel } from "./ChatPanel";
 import { ParticipantPanel } from "./ParticipantPanel";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMediaQuery } from "react-responsive";
@@ -88,20 +87,6 @@ const SideBarTabView = ({
             )}
             {sideBarMode === "PARTICIPANTS" ? (
               <ParticipantPanel panelHeight={panelHeight} />
-            ) : sideBarMode === "CHAT" ? (
-              <ChatPanel panelHeight={panelHeight} />
-            ) : sideBarMode === "POLLS" && meetingMode !== "VIEWER" ? (
-              polls.length === 0 && draftPolls.length === 0 ? (
-                <CreatePoll {...{ panelHeight }} />
-              ) : (
-                <PollList {...{ panelHeight }} />
-              )
-            ) : sideBarMode === "POLLS" && meetingMode === "VIEWER" ? (
-              <SubmitPollList {...{ panelHeight }} />
-            ) : sideBarMode === "CREATE_POLL" ? (
-              <CreatePoll {...{ panelHeight }} />
-            ) : sideBarMode === "ECOMMERCE" ? (
-              <ECommercePanel {...{ panelHeight }} />
             ) : null}
           </>
         </div>
