@@ -11,7 +11,7 @@ const SmallCategory = ({ game }) => {
     <StyledSmallCategory>
       <div className="game-box">
         <div className="game-img">
-          <Image src={game.image} />
+          <img src={game.image} />
         </div>
         <div className="game-name">{titleTrim(game.name)}</div>
         <div className="game-viewer">

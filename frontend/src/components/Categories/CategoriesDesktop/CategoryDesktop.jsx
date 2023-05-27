@@ -7,7 +7,7 @@ const CategoryDesktop = ({ game }) => {
     <StyledCategoryDesktop>
       <div className="game-box">
         <div className="game-picture">
-          <Image src={game.image} alt="" />
+          <img src={game.image} alt="" />
         </div>
         <div className="game-name">
           <div className="name">{game.name}</div>
