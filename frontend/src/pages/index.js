@@ -26,8 +26,8 @@ import Tags from "../components/Share/Tags";
 import ShowMore from "../components/Share/ShowMore";
 
 export default function Index() {
+  const matches = useMediaQuery("(min-width:768px)");
   const { theme, changeTheme } = useTheme();
-  const matches = useMediaQuery("(min-width:1250px)");
 
   return (
     <Box sx={{ backgroundColor: theme === "white" ? "black" : "white" }}>
@@ -37,89 +37,226 @@ export default function Index() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StyledHome>
-        <div className="home-mobile">
-          <div className="home-box">
-            <h1>Discover</h1>
-            <div className="categories">
-              <div className="category-item">
-                Music <IoMusicalNotesOutline className="category-icon" />
-              </div>
-              <div className="category-item">
-                Games <IoGameControllerOutline className="category-icon" />
-              </div>
-              <div className="category-item">
-                Esports <IoTrophyOutline className="category-icon" />
-              </div>
-              <div className="category-item">
-                IRL <IoMicOutline className="category-icon" />
-              </div>
-            </div>
+      {/* mobile view */}
+      <Box
+        sx={{
+          display: matches === true ? "none" : "block",
+        }}
+      >
+        <Box
+          sx={{
+            padding: "55px 10px",
+            backgroundColor: theme === "white" ? "black" : "white",
+            color: theme === "white" ? "white" : "black",
+            position: "relative",
+            zIndex: 3,
+            animation: "pageAnim 0.3s ease-in-out",
+          }}
+        >
+          <h1>Discover</h1>
+          <Box
+            sx={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "15px",
+              margin: "30px 0",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 15px",
+                backgroundColor: "pink",
+                color: "#fff",
+                borderRadius: "5px",
+                fontWeight: 600,
+                cursor: "pointer",
+              }}
+            >
+              Music <IoMusicalNotesOutline className="category-icon" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 15px",
+                backgroundColor: "pink",
+                color: "#fff",
+                borderRadius: "5px",
+                fontWeight: 600,
+                cursor: "pointer",
+              }}
+            >
+              Games <IoGameControllerOutline className="category-icon" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 15px",
+                backgroundColor: "pink",
+                color: "#fff",
+                borderRadius: "5px",
+                fontWeight: 600,
+                cursor: "pointer",
+              }}
+            >
+              Esports <IoTrophyOutline className="category-icon" />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 15px",
+                backgroundColor: "pink",
+                color: "#fff",
+                borderRadius: "5px",
+                fontWeight: 600,
+                cursor: "pointer",
+              }}
+            >
+              IRL <IoMicOutline className="category-icon" />
+            </Box>
+          </Box>
 
-            <h3 className="home-title">Live channels we think you will like</h3>
-            <div className="live-channels">
-              <BigChannels channel="js-youLike" />
-            </div>
+          <h3
+            style={{
+              fontSize: "18px",
+              width: "100%",
+              padding: "8px 0",
+              color: theme === "white" ? "white" : "black",
+              position: "sticky",
+              top: "50px",
+            }}
+          >
+            Live channels we think you will like
+          </h3>
+          <Box className="live-channels">
+            {/* <BigChannels channel="js-youLike" /> */}
+          </Box>
 
-            <h3 className="home-title">
-              <span>Categories</span> we think you will like
-            </h3>
-            <div className="game-categories">
-              <SmallCategories />
-            </div>
+          <h3
+            style={{
+              fontSize: "18px",
+              width: "100%",
+              padding: "8px 0",
+              color: theme === "white" ? "white" : "black",
+              position: "sticky",
+              top: "50px",
+            }}
+          >
+            <span
+              style={{
+                color: theme === "white" ? "white" : "black",
+                cursor: "pointer",
+              }}
+            >
+              Categories
+            </span>{" "}
+            we think you will like
+          </h3>
+          <Box className="game-categories">{/* <SmallCategories /> */}</Box>
 
-            <h3 className="home-title">Recommended communities</h3>
-            <div className="live-channels">
-              <BigChannels channel="js-smaller" />
-            </div>
+          <h3
+            style={{
+              fontSize: "18px",
+              width: "100%",
+              padding: "8px 0",
+              color: theme === "white" ? "white" : "black",
+              position: "sticky",
+              top: "50px",
+            }}
+          >
+            Recommended communities
+          </h3>
+          <Box className="live-channels">
+            {/* <BigChannels channel="js-smaller" /> */}
+          </Box>
 
-            <h3 className="home-title">
-              Recommended <span>Dota 2</span> channels
-            </h3>
-            <div className="live-channels">
-              <BigChannels channel="js-dota2" />
-            </div>
+          <h3
+            style={{
+              fontSize: "18px",
+              width: "100%",
+              padding: "8px 0",
+              color: theme === "white" ? "white" : "black",
+              position: "sticky",
+              top: "50px",
+            }}
+          >
+            Recommended <span>Dota 2</span> channels
+          </h3>
+          <Box className="live-channels">
+            {/* <BigChannels channel="js-dota2" /> */}
+          </Box>
 
-            <h3 className="home-title">
-              Recommended <span>Chees</span> channels
-            </h3>
-            <div className="live-channels">
-              <BigChannels channel="js-chees" />
-            </div>
+          <h3
+            style={{
+              fontSize: "18px",
+              width: "100%",
+              padding: "8px 0",
+              color: theme === "white" ? "white" : "black",
+              position: "sticky",
+              top: "50px",
+            }}
+          >
+            Recommended <span>Chees</span> channels
+          </h3>
+          <Box className="live-channels">
+            {/* <BigChannels channel="js-chees" /> */}
+          </Box>
 
-            <h3 className="home-title">
-              Recommended <span>Crypto</span> channels
-            </h3>
-            <div className="live-channels">
-              <BigChannels channel="js-crypto" />
-            </div>
-          </div>
-        </div>
-        <div className="home-desktop">
-          <div className="home-box">
-            <Slide />
-            <ChannelsDesktop channelTitle="Live channels we think you’ll like" />
-            <ShowMore title="Show more" />
-            <CategoriesDesktop
-              title="we think you’ll like"
-              boldTitle="Categories"
-            />
-            <ShowMore />
-            <Tags />
-            <ChannelsDesktop channelTitle="Recommended smaller communities" />
-            <ShowMore title="Show more" />
-            <ChannelsDesktop channelTitle="All aboard the Hype Train!" />
-            <ShowMore title="Show more" />
-            <ChannelsDesktop channelTitle="Women's History Month" />
-            <ShowMore title="Show more" />
-            <ChannelsDesktop channelTitle="Recommended smaller communities" />
-            <ShowMore title="Show more" />
-            <ChannelsDesktop channelTitle="All aboard the Hype Train!" />
-            <ShowMore title="Show more" />
-            <ChannelsDesktop channelTitle="Women's History Month" />
-          </div>
-        </div>
-      </StyledHome>
+          <h3
+            style={{
+              fontSize: "18px",
+              width: "100%",
+              padding: "8px 0",
+              color: theme === "white" ? "white" : "black",
+              position: "sticky",
+              top: "50px",
+            }}
+          >
+            Recommended <span>Crypto</span> channels
+          </h3>
+          <Box className="live-channels">
+            {/* <BigChannels channel="js-crypto" /> */}
+          </Box>
+        </Box>
+      </Box>
+      {/* Desktop view */}
+      <Box
+        sx={{
+          display: matches === true ? "block" : "none",
+        }}
+      >
+        <Box>
+          {/* <Slide /> */}
+          {/* <ChannelsDesktop channelTitle="Live channels we think you’ll like" /> */}
+          <ShowMore title="Show more" />
+          {/* <CategoriesDesktop
+                title="we think you’ll like"
+                boldTitle="Categories"
+              /> */}
+          <ShowMore />
+          {/* <Tags /> */}
+          {/* <ChannelsDesktop channelTitle="Recommended smaller communities" /> */}
+          <ShowMore title="Show more" />
+          {/* <ChannelsDesktop channelTitle="All aboard the Hype Train!" /> */}
+          <ShowMore title="Show more" />
+          {/* <ChannelsDesktop channelTitle="Women's History Month" /> */}
+          <ShowMore title="Show more" />
+          {/* <ChannelsDesktop channelTitle="Recommended smaller communities" /> */}
+          <ShowMore title="Show more" />
+          {/* <ChannelsDesktop channelTitle="All aboard the Hype Train!" /> */}
+          <ShowMore title="Show more" />
+          {/* <ChannelsDesktop channelTitle="Women's History Month" /> */}
+        </Box>
+      </Box>
     </Box>
   );
 }

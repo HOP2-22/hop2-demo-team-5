@@ -10,7 +10,7 @@ export const StyledChannelDesktop = styled.div`
       transition: 0.2s;
       position: relative;
 
-      img {
+      image {
         transition: 0.2s;
       }
 
@@ -77,7 +77,7 @@ export const StyledChannelDesktop = styled.div`
       }
 
       &:hover {
-        background-color:rgb(145, 71, 255);
+        background-color: rgb(145, 71, 255);
 
         img,
         .live,

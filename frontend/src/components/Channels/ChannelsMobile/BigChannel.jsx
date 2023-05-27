@@ -10,14 +10,14 @@ const BigChannel = ({ user, imageId }) => {
   return (
     <StyledBigChannel>
       <div className="channel-box">
-        <div className={`live-screen `}>
-          <Image src={user.liveScreen} alt="" />
+        <div className={`live-screen`} style={{ position: "relative" }}>
+          <Image src={user.liveScreen} alt="" fill />
           <span className="live">Live</span>
           <span className="viewers">{user.viewers} Viewers</span>
         </div>
         <div className="live-info">
-          <div className="pp">
-            <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+          <div className="pp" style={{ position: "relative" }}>
+            <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" fill />
           </div>
           <div className="titles">
             <div className="username-box">

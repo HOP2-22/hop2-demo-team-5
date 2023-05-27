@@ -37,6 +37,7 @@ export const StyledSlide = styled.div`
         justify-content: center;
         gap: 100px;
         z-index: 5;
+        position: relative;
 
         img {
           width: 450px;

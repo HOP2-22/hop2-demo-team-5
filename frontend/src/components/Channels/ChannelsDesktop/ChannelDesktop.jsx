@@ -6,8 +6,8 @@ const ChannelDesktop = ({ user, imageId, video }) => {
   return (
     <StyledChannelDesktop>
       <div className="channel-box">
-        <div className="live-screen">
-          <Image src={user.liveScreen} alt="" />
+        <div className="live-screen" style={{ position: "relative" }}>
+          <Image src={user.liveScreen} alt="" fill />
           <div className={`live ${video ? "invisible" : ""}`}>live</div>
           <div className={`viewers ${video ? "invisible" : ""}`}>
             333 viewers
@@ -20,8 +20,8 @@ const ChannelDesktop = ({ user, imageId, video }) => {
         </div>
         <div className="channel-info">
           <div className="left">
-            <div className="pp">
-              <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+            <div className="pp" style={{ position: "relative" }}>
+              <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" fill />
             </div>
             <div className="profile-info">
               <div className="title">{user.title}</div>
