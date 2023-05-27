@@ -7,7 +7,7 @@ const OfflineChannel = ({ user, imageId }) => {
       <div className="offline-box">
         <div className="left">
           <div className="pp">
-            <Image src={`https://i.pravatar.cc/5${imageId}`} alt="" />
+            <img src={`https://i.pravatar.cc/5${imageId}`} alt="" />
           </div>
         </div>
         <div className="right">
