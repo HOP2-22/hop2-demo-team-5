@@ -35,6 +35,7 @@ import { sideBarModes } from "../../utils/common";
 import ECommerceIcon from "../../icons/Bottombar/ECommerceIcon";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { useMeetingAppContext } from "../../MeetingAppContextDef";
+import Link from "next/link";
 
 export function ILSBottomBar({
   bottomBarHeight,
@@ -215,13 +216,15 @@ export function ILSBottomBar({
                                 <div className="flex flex-col">
                                   {mics.map(({ deviceId, label }, index) => (
                                     <div
-                                      className={`px-3 py-1 my-1 pl-6 text-white text-left ${deviceId ===
-                                       selectMicDeviceId}`}
-                                       key={index}
+                                      className={`px-3 py-1 my-1 pl-6 text-white text-left ${
+                                        deviceId === selectMicDeviceId
+                                      }`}
+                                      key={index}
                                     >
                                       <button
-                                        className={`flex flex-1 w-full ${deviceId ===
-                                          selectMicDeviceId}`}
+                                        className={`flex flex-1 w-full ${
+                                          deviceId === selectMicDeviceId
+                                        }`}
                                         // key={deviceId}
                                         onClick={() => {
                                           setSelectMicDeviceId(deviceId);
@@ -359,26 +362,28 @@ export function ILSBottomBar({
                                 <div className="flex flex-col">
                                   {webcams.map(({ deviceId, label }, index) => (
                                     <div
-                                      className={`px-3 py-1 my-1 pl-6 text-white text-left ${deviceId ===
-                                        selectWebcamDeviceId && "bg-gray-150"}`}
-                                        key={index}
+                                      className={`px-3 py-1 my-1 pl-6 text-white text-left ${
+                                        deviceId === selectWebcamDeviceId &&
+                                        "bg-gray-150"
+                                      }`}
+                                      key={index}
                                     >
                                       <button
-                                        className={`flex flex-1 w-full ${deviceId ===
-                                          selectWebcamDeviceId &&
-                                          "bg-gray-150"}`}
+                                        className={`flex flex-1 w-full ${
+                                          deviceId === selectWebcamDeviceId &&
+                                          "bg-gray-150"
+                                        }`}
                                         key={`output_webcams_${deviceId}`}
                                         onClick={async () => {
                                           setSelectWebcamDeviceId(deviceId);
-                                          const track = await createCameraVideoTrack(
-                                            {
+                                          const track =
+                                            await createCameraVideoTrack({
                                               optimizationMode: "motion",
                                               encoderConfig: "h540p_w960p",
                                               facingMode: "environment",
                                               multiStream: false,
                                               cameraId: deviceId,
-                                            }
-                                          );
+                                            });
                                           changeWebcam(track);
                                           close();
                                         }}
@@ -473,42 +478,17 @@ export function ILSBottomBar({
     const { leave } = useMeeting();
 
     return (
-      <OutlinedButton
-        Icon={EndIcon}
-        bgColor="bg-red-150"
-        onClick={() => {
-          leave();
-          setIsMeetingLeft(true);
-        }}
-        tooltip="Leave Meeting"
-      />
-    );
-  };
-
-  const ChatBTN = ({ isMobile, isTab }) => {
-    return isMobile || isTab ? (
-      <MobileIconButton
-        tooltipTitle={"Chat"}
-        buttonText={"Chat"}
-        Icon={ChatIcon}
-        isFocused={sideBarMode === sideBarModes.CHAT}
-        onClick={() => {
-          setSideBarMode((s) =>
-            s === sideBarModes.CHAT ? null : sideBarModes.CHAT
-          );
-        }}
-      />
-    ) : (
-      <OutlinedButton
-        Icon={ChatIcon}
-        onClick={() => {
-          setSideBarMode((s) =>
-            s === sideBarModes.CHAT ? null : sideBarModes.CHAT
-          );
-        }}
-        isFocused={sideBarMode === "CHAT"}
-        tooltip="View Chat"
-      />
+      <Link href="/">
+        <OutlinedButton
+          Icon={EndIcon}
+          bgColor="bg-red-150"
+          onClick={() => {
+            leave();
+            setIsMeetingLeft(true);
+          }}
+          tooltip="Leave Meeting"
+        />
+      </Link>
     );
   };
 
@@ -541,34 +521,6 @@ export function ILSBottomBar({
         tooltip={"View Participants"}
         badge={`${new Map(participants)?.size}`}
         disabled={meetingMode === Constants.modes.VIEWER}
-      />
-    );
-  };
-
-  const PollBTN = ({ isMobile, isTab }) => {
-    return isMobile || isTab ? (
-      <MobileIconButton
-        id="poll-btn"
-        tooltipTitle={"Poll"}
-        buttonText={"Poll"}
-        isFocused={sideBarMode === sideBarModes.POLLS}
-        Icon={PollIcon}
-        onClick={() => {
-          setSideBarMode((s) =>
-            s === sideBarModes.POLLS ? null : sideBarModes.POLLS
-          );
-        }}
-      />
-    ) : (
-      <OutlinedButton
-        Icon={PollIcon}
-        onClick={() => {
-          setSideBarMode((s) =>
-            s === sideBarModes.POLLS ? null : sideBarModes.POLLS
-          );
-        }}
-        isFocused={sideBarMode === sideBarModes.POLLS}
-        tooltip={"Poll"}
       />
     );
   };
@@ -943,9 +895,6 @@ export function ILSBottomBar({
                               />
                             ) : icon === BottomBarButtonTypes.HLS ? (
                               <HLSBTN isMobile={isMobile} isTab={isTab} />
-                            ) : icon === BottomBarButtonTypes.REACTION &&
-                              meetingMode === Constants.modes.VIEWER ? (
-                              <ReactionBTN isMobile={isMobile} isTab={isTab} />
                             ) : null}
                           </div>
                         );
@@ -968,9 +917,6 @@ export function ILSBottomBar({
           <ScreenShareBTN isMobile={isMobile} isTab={isTab} />
         )}
         {/* <RaiseHandBTN isMobile={isMobile} isTab={isTab} /> */}
-        {meetingMode === Constants.modes.VIEWER && (
-          <ReactionBTN isMobile={isMobile} isTab={isTab} />
-        )}
         {meetingMode === Constants.modes.CONFERENCE && (
           <>
             <MicBTN />
@@ -980,11 +926,6 @@ export function ILSBottomBar({
         <LeaveBTN />
       </div>
       <div className="flex items-center justify-center">
-        {/* {meetingMode === Constants.modes.VIEWER && (
-          <ECommerceBTN isMobile={isMobile} isTab={isTab} />
-        )} */}
-        {/* <PollBTN isMobile={isMobile} isTab={isTab} />
-        <ChatBTN isMobile={isMobile} isTab={isTab} /> */}
         <ParticipantsBTN isMobile={isMobile} />
       </div>
     </div>

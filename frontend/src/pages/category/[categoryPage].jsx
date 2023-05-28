@@ -5,7 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function cr() {
+export default function CatecoryCard() {
   const router = useRouter();
   const { query } = router;
   const game = query.categoryPage;
